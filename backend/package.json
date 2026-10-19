@@ -1,0 +1,16 @@
+{
+  "name": "gwadar-ambulance-backend",
+  "version": "1.0.0",
+  "description": "Backend API and WebSocket Server for Gwadar Ambulance Service System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "clean-db": "node clean_db.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.0.3"
+  }
+}
