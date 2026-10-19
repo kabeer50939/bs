@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Articles, Publications, and Research from Dhoria Academy Gwadar. Interactive Scribd viewer for Campus Band and computing history.">
+    <title>Student & Academy Articles | Dhoria Academy Gwadar</title>
+    <!-- Use FontAwesome from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styles_v13.css">
+    <script>(function(){const t=localStorage.getItem('dhoria-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+    <style>
+        /* ─── Section Header ─────────────────────────────────────── */
+        .articles-section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+        .articles-section-header .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--secondary);
+            background: rgba(255,179,0,0.1);
+            border: 1px solid rgba(255,179,0,0.25);
+            border-radius: 99px;
+            padding: 4px 14px;
+            margin-bottom: 0.85rem;
+        }
+        .articles-section-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            font-family: var(--font-heading);
+            margin: 0 0 0.55rem;
+            line-height: 1.25;
+        }
+        .articles-section-header p {
+            color: var(--text-muted);
+            font-size: 0.93rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* ─── Grid ───────────────────────────────────────────────── */
+        .article-container {
+            max-width: 1160px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.6rem;
+            align-items: start;
+        }
+
+        /* ─── Card ───────────────────────────────────────────────── */
+        .article-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+            transition: transform 0.28s cubic-bezier(.2,.8,.4,1),
+                        box-shadow 0.28s cubic-bezier(.2,.8,.4,1),
+                        border-color 0.28s ease;
+            position: relative;
+        }
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 18px 0 0 18px;
+            z-index: 1;
+        }
+        .article-card.card-computing::before { background: #10b981; }
+        .article-card.card-heritage::before  { background: #f59e0b; }
+        .article-card.card-library::before   { background: #8b5cf6; }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+            border-color: var(--primary-light);
+        }
+
+        /* ─── Category Badge ─────────────────────────────────────── */
+        .article-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.67rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            padding: 4px 11px;
+            border-radius: 99px;
+            background: rgba(0,33,71,0.08);
+            color: var(--primary);
+            border: 1px solid rgba(0,33,71,0.15);
+            align-self: flex-start;
+        }
+        .badge-computing { background: rgba(16,185,129,0.08); color: #059669; border-color: rgba(16,185,129,0.18); }
+        .badge-heritage  { background: rgba(245,158,11,0.08); color: #d97706; border-color: rgba(245,158,11,0.18); }
+        .badge-library   { background: rgba(139,92,246,0.08); color: #7c3aed; border-color: rgba(139,92,246,0.18); }
+
+        /* ─── Card Body ──────────────────────────────────────────── */
+        .article-preview-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            padding: 1.35rem 1.4rem 1.1rem 1.6rem;
+            flex: 1;
+        }
+
+        .article-title {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1.38;
+            font-family: var(--font-heading);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-excerpt {
+            font-size: 0.875rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        /* ─── Author + Button Footer Row ─────────────────────────── */
+        .article-author-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.85rem 1.4rem 1rem 1.6rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+
+        /* Author info: circular photo + name + date */
+        .article-author-info {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .author-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2.5px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            background: var(--bg-secondary);
+        }
+        .article-card:hover .author-avatar {
+            transform: scale(1.07);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+
+        .author-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+        .author-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .author-date {
+            font-size: 0.71rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ─── Read Button ────────────────────────────────────────── */
+        .article-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0.42rem 1.05rem;
+            font-size: 0.77rem;
+            font-weight: 700;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: var(--primary);
+            border: none;
+            color: #fff;
+            letter-spacing: 0.02em;
+            box-shadow: 0 2px 8px rgba(0,33,71,0.18);
+            flex-shrink: 0;
+        }
+        [data-theme="dark"] .article-toggle-btn,
+        [data-theme="midnight"] .article-toggle-btn {
+            background: var(--secondary);
+            color: #0a1128;
+            box-shadow: 0 2px 8px rgba(255,204,0,0.2);
+        }
+        .article-toggle-btn:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0,33,71,0.22);
+        }
+        .article-card.expanded .article-toggle-btn {
+            background: var(--card-bg);
+            color: var(--text-muted);
+            border: 1.5px solid var(--border-color);
+            box-shadow: none;
+        }
+
+        /* ─── Expanded Details ───────────────────────────────────── */
+        .article-details {
+            display: none;
+            flex-direction: column;
+            gap: 1.25rem;
+            padding: 1.35rem 1.4rem 1.4rem 1.6rem;
+            border-top: 2px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+        .article-card.expanded .article-details {
+            display: flex;
+            animation: articleExpandFade 0.35s ease;
+        }
+        @keyframes articleExpandFade {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .scribd-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 480px;
+            border-radius: 12px;
+            border: 1.5px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            background: #ffffff;
+        }
+        .scribd-iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+        .article-text {
+            font-size: 0.93rem;
+            line-height: 1.75;
+            color: var(--text-dark);
+        }
+        .btn-group {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* ─── Responsive ─────────────────────────────────────────── */
+        @media (max-width: 860px) {
+            .article-container {
+                grid-template-columns: 1fr;
+                max-width: 560px;
+            }
+            .scribd-wrapper { height: 360px; }
+        }
+        @media (max-width: 480px) {
+            .article-preview-content { padding: 1.1rem 1rem 0.85rem 1.2rem; }
+            .article-author-row { padding: 0.75rem 1rem 0.9rem 1.2rem; flex-wrap: wrap; }
+            .article-details { padding: 1.1rem 1rem 1.1rem 1.2rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    
+
+    <!-- Header Top Bar (PCTVI Visual Feature) -->
+    <div class="header-top-bar">
+        <div class="header-top-left">
+            <span><i class="fa fa-phone"></i> <a href="tel:+923315396518">0331 5396518</a></span>
+            <span><i class="fa fa-envelope"></i> <a href="mailto:kabeer50930@gmail.com">kabeer50930@gmail.com</a></span>
+        </div>
+        <ul class="header-top-right">
+            <li><a href="events.html"><i class="fa fa-images"></i> Gallery</a></li>
+            <li><a href="student-corner.html"><i class="fa fa-graduation-cap"></i> Student Corner</a></li>
+            <li><a href="student-articles.html"><i class="fa fa-book"></i> Articles</a></li>
+            <li><a href="admissions.html" class="header-top-apply-btn">Apply Now</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="../index.html" class="brand">
+            <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy Logo" class="nav-logo">
+            <div class="brand-text">
+                <span class="dhoria-text">Dhoria</span>
+                <span class="academy-text">Academy Gwadar</span>
+            </div>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html" >About Us</a></li>
+            <li><a href="academics.html" >Academics</a></li>
+            <li><a href="events.html" >Events &amp; Gallery</a></li>
+            <li><a href="student-corner.html" >Student Corner</a></li>
+            <li><a href="visitors.html" >Visitors</a></li>
+            <li><a href="staff.html" >Staff</a></li>
+            <li><a href="admissions.html" >Admissions</a></li>
+            <li><a href="contact.html" >Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Articles Section -->
+    <section class="section reveal">
+
+        <!-- Section Header -->
+        <div class="articles-section-header">
+            <span class="section-tag"><i class="fas fa-book-open"></i> Publications</span>
+            <h2>Student &amp; Academy Articles</h2>
+            <p>Research, heritage stories, and student publications written by our talented writers and educators at Dhoria Academy Gwadar.</p>
+        </div>
+
+        <div class="article-container">
+
+            <!-- Article 1: Campus Band -->
+            <article class="article-card" id="article-campus-band">
+                <div class="article-preview-content">
+                    <span class="article-badge"><i class="fas fa-star"></i> Featured Student Magazine</span>
+                    <h2 class="article-title">Campus Band: Student Voices of Gwadar</h2>
+                    <div class="article-excerpt">
+                        <strong>Campus Band</strong> is Dhoria Academy's premier student publication, providing a vibrant platform for the youth of Gwadar to express their thoughts, local folklore, research ideas, and creative poetry. A testament to the language competency and creativity of our students.
+                    </div>
+                </div>
+
+                <!-- Author Footer: circular writer photo + name + date + button -->
+                <div class="article-author-row">
+                    <div class="article-author-info">
+                        <img src="../assets/images/weebly/mainpage-3.jpg" alt="Dhoria Academy Students" class="author-avatar">
+                        <div class="author-text">
+                            <span class="author-name">Dhoria Academy Students</span>
+                            <span class="author-date"><i class="fas fa-calendar-alt"></i> Historical Archive</span>
+                        </div>
+                    </div>
+                    <button class="article-toggle-btn" aria-expanded="false">
+                        <span class="toggle-text">Read Article</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <!-- Collapsible Details -->
+                <div class="article-details">
+                    <div class="article-text">
+                        <p style="margin-bottom: 1rem;">
+                            <strong>Campus Band</strong> is Dhoria Academy's premier student publication, providing a beautiful platform for the youth of Gwadar to express their thoughts, local folklore, research ideas, and creative poetry. The publication stands as a testament to the language competency and communication skills fostered in our English and computer programs.
+                        </p>
+                        <p style="margin-bottom: 1.5rem;">
+                            Below is the official interactive document archive of <strong>Campus Band</strong> hosted on Scribd. You can scroll through the entire student magazine directly in your browser, zoom in, or download it for offline reading.
+                        </p>
+                    </div>
+                    <div class="scribd-wrapper">
+                        <iframe class="scribd-iframe"
+                            src="https://www.scribd.com/embeds/299403933/content?start_page=1&view_mode=scroll&access_key=key-1PUafjT62pAgc97tppFR"
+                            data-aspect-ratio="0.7729220222793488"
+                            scrolling="no" id="doc_299403933"
+                            width="100%" height="100%" frameborder="0">
+                        </iframe>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://www.scribd.com/document/299403933/Campus-Band" target="_blank" class="btn btn-primary" rel="noopener noreferrer">
+                            <i class="fas fa-arrow-up-right-from-square" style="margin-right:5px;"></i> View on Scribd
+                        </a>
+                        <a href="https://www.scribd.com/document/299403933/Campus-Band" download class="btn btn-outline">
+                            <i class="fas fa-download" style="margin-right:5px;"></i> Download Offline
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 2: Dhoria Computer Center -->
+            <article class="article-card card-computing" id="article-computer-center">
+                <div class="article-preview-content">
+                    <span class="article-badge badge-computing"><i class="fas fa-microchip"></i> Computing &amp; Digital Literacy</span>
+                    <h2 class="article-title">Dhoria Computer Center: Empowering Gwadar's Digital Frontier</h2>
+                    <div class="article-excerpt">
+                        From its humble inception, the <strong>Dhoria Computer Center</strong> has been a central pillar of developmental progress in Gwadar, solving a critical gap in digital literacy among local youth through fully sponsored training programs in IT and office automation.
+                    </div>
+                </div>
+
+                <div class="article-author-row">
+                    <div class="article-author-info">
+                        <img src="../assets/images/weebly/mainpage-7.jpg" alt="Tech Faculty" class="author-avatar">
+                        <div class="author-text">
+                            <span class="author-name">Tech Faculty</span>
+                            <span class="author-date"><i class="fas fa-calendar-alt"></i> Established 2006</span>
+                        </div>
+                    </div>
+                    <button class="article-toggle-btn" aria-expanded="false">
+                        <span class="toggle-text">Read Article</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <div class="article-details">
+                    <div class="article-text" style="display:flex;flex-direction:column;gap:1rem;">
+                        <p>From its humble inception, the <strong>Dhoria Computer Center</strong> has been a central pillar of developmental progress in Gwadar. Established to solve a critical gap in digital literacy among local youth, the center has provided fully sponsored training programs covering core systems and automation tools.</p>
+                        <p>Our specialized modules in MS-Windows operations, professional MS-Word formatting, and highly valuable MS-Excel analytical sheets equip students with immediate office readiness. For advance scholars, our <strong>Webpage Design</strong> programs introduce HTML, CSS, and database fundamentals.</p>
+                        <p>By providing top-notch computer labs completely free of cost, we have empowered hundreds of young men and women across Gwadar—bridging the digital divide and lighting the path of technical literacy.</p>
+                    </div>
+                    <div style="border-top:1px solid var(--border-color);padding-top:1.25rem;display:flex;align-items:center;gap:15px;flex-wrap:wrap;">
+                        <i class="fas fa-laptop" style="font-size:1.75rem;color:#10b981;"></i>
+                        <p style="color:var(--text-muted);font-size:0.9rem;margin:0;">
+                            Submit your own digital article via our <a href="student-corner.html#interactive" style="color:var(--primary);font-weight:600;">Student Corner Portal</a>.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 3: Balochi Hand Embroidery -->
+            <article class="article-card card-heritage" id="article-embroidery">
+                <div class="article-preview-content">
+                    <span class="article-badge badge-heritage"><i class="fas fa-palette"></i> Heritage &amp; Vocational Craft</span>
+                    <h2 class="article-title">Preserving the Golden Threads of Balochi Hand Embroidery</h2>
+                    <div class="article-excerpt">
+                        An in-depth exploration of the intricate needlework patterns, maternal heritage, and economic self-reliance fostered through Dhoria Academy's morning vocational shifts for local women of Gwadar and Makran.
+                    </div>
+                </div>
+
+                <div class="article-author-row">
+                    <div class="article-author-info">
+                        <img src="../assets/images/weebly/mainpage-5.jpg" alt="Madam Ruqayya Baloch" class="author-avatar">
+                        <div class="author-text">
+                            <span class="author-name">Madam Ruqayya Baloch</span>
+                            <span class="author-date"><i class="fas fa-calendar-alt"></i> April 2026</span>
+                        </div>
+                    </div>
+                    <button class="article-toggle-btn" aria-expanded="false">
+                        <span class="toggle-text">Read Article</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <div class="article-details">
+                    <div class="article-text" style="display:flex;flex-direction:column;gap:1rem;">
+                        <p>Every stitch in traditional Balochi needlework carries centuries of heritage, patient craftsmanship, and regional identity. At Dhoria Academy Gwadar, our dedicated morning vocational sessions provide tuition-free instruction in traditional and modern tailoring, enabling local women to develop valuable vocational skills.</p>
+                        <p>Through community exhibitions and collaborative student projects, these exquisite handicrafts are preserved and promoted, celebrating the cultural ingenuity of Makran's artisans.</p>
+                    </div>
+                    <div style="border-top:1px solid var(--border-color);padding-top:1.25rem;display:flex;align-items:center;gap:15px;flex-wrap:wrap;">
+                        <i class="fas fa-heart" style="font-size:1.75rem;color:#f59e0b;"></i>
+                        <p style="color:var(--text-muted);font-size:0.9rem;margin:0;">
+                            Learn more on the <a href="academics.html" style="color:var(--primary);font-weight:600;">Academics &amp; Shifts Page</a>.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 4: Mir Abdul Ghafoor Kalmati Library -->
+            <article class="article-card card-library" id="article-library">
+                <div class="article-preview-content">
+                    <span class="article-badge badge-library"><i class="fas fa-book"></i> Library &amp; Literature</span>
+                    <h2 class="article-title">Mir Abdul Ghafoor Kalmati Library: Fostering Reading in Gwadar</h2>
+                    <div class="article-excerpt">
+                        Discovering how the Mir Abdul Ghafoor Kalmati Library became Gwadar's sanctuary for intellectual curiosity, competitive exam preparation, and research publications for students of all levels.
+                    </div>
+                </div>
+
+                <div class="article-author-row">
+                    <div class="article-author-info">
+                        <img src="../assets/images/weebly/mainpage-14.jpg" alt="Academy Librarian" class="author-avatar">
+                        <div class="author-text">
+                            <span class="author-name">Academy Librarian</span>
+                            <span class="author-date"><i class="fas fa-calendar-alt"></i> May 2026</span>
+                        </div>
+                    </div>
+                    <button class="article-toggle-btn" aria-expanded="false">
+                        <span class="toggle-text">Read Article</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <div class="article-details">
+                    <div class="article-text" style="display:flex;flex-direction:column;gap:1rem;">
+                        <p>Named in honor of community visionary Mir Abdul Ghafoor Kalmati, the academy library houses reference texts, historical archives, and competitive examination study guides. Open during both morning and evening shifts, the library serves students and researchers alike.</p>
+                        <p>Through open-door study hours, digital catalogs, and quiet reading areas, the library continues to cultivate analytical thinkers and lifelong learners across Gwadar.</p>
+                    </div>
+                    <div style="border-top:1px solid var(--border-color);padding-top:1.25rem;display:flex;align-items:center;gap:15px;flex-wrap:wrap;">
+                        <i class="fas fa-book-open" style="font-size:1.75rem;color:#8b5cf6;"></i>
+                        <p style="color:var(--text-muted);font-size:0.9rem;margin:0;">
+                            Explore the <a href="academics.html#library" style="color:var(--primary);font-weight:600;">Library Portal Section</a>.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="../index.html" class="brand"
+                    style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy Logo"
+                        style="height: 40px; border-radius: 50%;">
+                    <div class="brand-text">
+                        <span class="dhoria-text" style="color: var(--secondary);">Dhoria</span>
+                        <span class="academy-text" style="color: #fff;">Academy Gwadar</span>
+                    </div>
+                </a>
+                <p>Empowering the next generation of global leaders through modern, holistic education.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="student-corner.html">Student Corner</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Fish Harbor Road, Near Mir Ghous Bakhsh Bizenjo Football Stadium, Gwadar, Pakistan</p>
+                
+                <p><i class="fas fa-mobile-alt"></i> +92 331 5396518 / +92 322 2185069</p>
+                <p><i class="fas fa-envelope"></i> kabeer50930@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Dhoria Academy Gwadar. All Rights Reserved. Designed by Kabeer Ahmed.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/db.js"></script>
+    <script src="../assets/js/site-sync.js"></script>
+    <script src="../assets/js/main_v28.js"></script>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+</body>
+
+</html>
+

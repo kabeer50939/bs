@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="VIP Guestbook and Visitor Testimonials at Dhoria Academy Gwadar. Comments from delegations, administration, and researchers.">
+    <title>Visitors & Guestbook | Dhoria Academy Gwadar</title>
+    <!-- Use FontAwesome from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styles_v13.css">
+    <script>(function(){const t=localStorage.getItem('dhoria-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+    <style>
+        .visitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .visitor-card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visitor-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+
+        .visitor-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            font-size: 7rem;
+            color: var(--primary);
+            opacity: 0.08;
+            font-family: serif;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .visitor-badge {
+            align-self: flex-start;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--primary);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+        }
+
+        .badge-govt {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--accent);
+            border-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .badge-intl {
+            background: rgba(245, 158, 11, 0.08);
+            color: var(--secondary);
+            border-color: rgba(245, 158, 11, 0.15);
+        }
+
+        .visitor-comment {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            font-style: italic;
+            flex-grow: 1;
+        }
+
+        .visitor-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .visitor-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .visitor-meta {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.3;
+        }
+
+        .visitor-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .visitor-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .scan-container {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scan-container:hover {
+            transform: scale(1.02);
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .visitor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    
+
+    <!-- Header Top Bar (PCTVI Visual Feature) -->
+    <div class="header-top-bar">
+        <div class="header-top-left">
+            <span><i class="fa fa-phone"></i> <a href="tel:+923315396518">0331 5396518</a></span>
+            <span><i class="fa fa-envelope"></i> <a href="mailto:kabeer50930@gmail.com">kabeer50930@gmail.com</a></span>
+        </div>
+        <ul class="header-top-right">
+            <li><a href="events.html"><i class="fa fa-images"></i> Gallery</a></li>
+            <li><a href="student-corner.html"><i class="fa fa-graduation-cap"></i> Student Corner</a></li>
+            <li><a href="student-articles.html"><i class="fa fa-book"></i> Articles</a></li>
+            <li><a href="admissions.html" class="header-top-apply-btn">Apply Now</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="../index.html" class="brand">
+            <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy Logo" class="nav-logo">
+            <div class="brand-text">
+                <span class="dhoria-text">Dhoria</span>
+                <span class="academy-text">Academy Gwadar</span>
+            </div>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html" >About Us</a></li>
+            <li><a href="academics.html" >Academics</a></li>
+            <li><a href="events.html" >Events &amp; Gallery</a></li>
+            <li><a href="student-corner.html" >Student Corner</a></li>
+            <li><a href="visitors.html" class="active">Visitors</a></li>
+            <li><a href="staff.html" >Staff</a></li>
+            <li><a href="admissions.html" >Admissions</a></li>
+            <li><a href="contact.html" >Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Guestbook Grid Section -->
+    <section class="section reveal">
+        <div class="visitor-grid">
+
+<!-- Chinese Delegation -->
+            <div class="visitor-card">
+                <span class="visitor-badge badge-intl">International delegation</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar" style="color: var(--secondary); border-color: var(--secondary);">CD</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Chinese Representative Delegation</span>
+                <span class="visitor-title">Cultural & Technical Exchange Visit</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="chinese">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/2246025.jpg', 'Chinese Delegation: Sharing Experiences with Students')">
+                <img loading="lazy" src="../assets/images/weebly/2246025.jpg" alt="Chinese Delegation Sharing Experiences with Students">
+                <div class="mini-carousel-overlay">Sharing Experiences with Students</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/rv-1.jpg', 'Chinese Delegation Visit to Dhoria Academy')">
+                <img loading="lazy" src="../assets/images/weebly/rv-1.jpg" alt="Chinese Delegation Visit to Dhoria Academy">
+                <div class="mini-carousel-overlay">Delegation Visit to Dhoria Academy</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/rv-2.jpg', 'Chinese Delegation Visiting Different Section of Dhoria Academy')">
+                <img loading="lazy" src="../assets/images/weebly/rv-2.jpg" alt="Chinese Delegation Visiting Different Section of Dhoria Academy">
+                <div class="mini-carousel-overlay">Visiting Different Section of Dhoria Academy</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/rv-3.jpg', 'Chinese Delegation Visiting Dhoria Academy')">
+                <img loading="lazy" src="../assets/images/weebly/rv-3.jpg" alt="Chinese Delegation Visiting Dhoria Academy">
+                <div class="mini-carousel-overlay">Visiting Dhoria Academy</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/rv-4.jpg', 'Chinese Delegation Visiting Embroidery Section of Dhoria Academy')">
+                <img loading="lazy" src="../assets/images/weebly/rv-4.jpg" alt="Chinese Delegation Visiting Embroidery Section of Dhoria Academy">
+                <div class="mini-carousel-overlay">Visiting Embroidery Section</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('chinese', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('chinese', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "An enriching experience sharing ideas with the talented students. We were highly impressed visiting the computer lab, the English classes, and the beautiful traditional embroidery and stitching sections, all running with such passion."
+                </p>
+            </div>
+
+<!-- Fateh Khan Bangul -->
+            <div class="visitor-card">
+                <span class="visitor-badge badge-govt">Government Official</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar">FB</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Fateh Khan Bangul</span>
+                <span class="visitor-title">Commissioner Mekran Division</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="fateh">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/9126163.jpg', 'Fateh Khan Bangul: Visiting Dhoria Academy')">
+                <img loading="lazy" src="../assets/images/weebly/9126163.jpg" alt="Fateh Khan Bangul Visit 1">
+                <div class="mini-carousel-overlay">Commissioner Mekran Visiting Dhoria</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/8315975.jpg', 'Fateh Khan Bangul Inspecting Classrooms')">
+                <img loading="lazy" src="../assets/images/weebly/8315975.jpg" alt="Fateh Khan Bangul Visit 2">
+                <div class="mini-carousel-overlay">Inspecting Classes and Library</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/365012.jpg', 'Fateh Khan Bangul Addressing Students')">
+                <img loading="lazy" src="../assets/images/weebly/365012.jpg" alt="Fateh Khan Bangul Visit 3">
+                <div class="mini-carousel-overlay">Encouraging local learners</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/5552487.jpg', 'Fateh Khan Bangul with Academy Management')">
+                <img loading="lazy" src="../assets/images/weebly/5552487.jpg" alt="Fateh Khan Bangul Visit 4">
+                <div class="mini-carousel-overlay">Meeting Academy Organizers</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/817045_orig.jpg', 'Fateh Khan Bangul (Commissioner Mekran) Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/817045_orig.jpg" alt="Fateh Khan Bangul Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('fateh', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('fateh', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "I found the environment of Dhoria Academy absolutely excellent. They are rendering a great educational service to the people of Gwadar. The generous financial support from Mir Abdul Ghafoor Kalmati in building this establishment is highly commendable."
+                </p>
+            </div>
+
+<!-- Dostain K. Jamaldini -->
+            <div class="visitor-card">
+                <span class="visitor-badge">GPA Administration</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar" style="color: var(--accent); border-color: var(--accent);">DJ</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Dostain K. Jamaldini</span>
+                <span class="visitor-title">Chairman Gwadar Port Authority (GPA)</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="dostain">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/1303746.jpg', 'Dostain K. Jamaldini: Visiting Classrooms')">
+                <img loading="lazy" src="../assets/images/weebly/1303746.jpg" alt="Dostain K. Jamaldini Visit">
+                <div class="mini-carousel-overlay">GPA Chairman Visiting Classrooms</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/4721975_orig.jpg', 'Dostain K. Jamaldini (Chairman GPA) Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/4721975_orig.jpg" alt="Dostain K. Jamaldini Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('dostain', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('dostain', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "I am extremely glad to see this true beacon of literacy in Gwadar. The dedication of the team in teaching English and computers free of cost is incredible. The environment impressed me so much that I immediately decided to become a library member myself."
+                </p>
+            </div>
+
+<!-- Asfand Yar -->
+            <div class="visitor-card">
+                <span class="visitor-badge badge-govt">Education Directorate</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar">
+                <img loading="lazy" src="../assets/images/weebly/aspand-yar-1.jpg" alt="Asfand Yar Portrait" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Asfand Yar</span>
+                <span class="visitor-title">Additional Secretary Education</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="asfand">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/aspand-yar-1.jpg', 'Asfand Yar (Addl. Secretary Education) Visit')">
+                <img loading="lazy" src="../assets/images/weebly/aspand-yar-1.jpg" alt="Asfand Yar Visit">
+                <div class="mini-carousel-overlay">Exposure Visit with College Students</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/aspand-yar-2.jpg', 'Asfand Yar Visit to Computer Lab')">
+                <img loading="lazy" src="../assets/images/weebly/aspand-yar-2.jpg" alt="Asfand Yar in Computer Lab">
+                <div class="mini-carousel-overlay">Visiting the Digital Lab</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/aspand-yar-3.jpg', 'Asfand Yar Visit to Embroidery Class')">
+                <img loading="lazy" src="../assets/images/weebly/aspand-yar-3.jpg" alt="Asfand Yar in Embroidery Class">
+                <div class="mini-carousel-overlay">Visiting Embroidery Section</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/aspand-yar-comments_orig.jpg', 'Asfand Yar (Addl. Secretary Education) Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/aspand-yar-comments_orig.jpg" alt="Asfand Yar Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('asfand', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('asfand', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "A wonderful initiative. We facilitated a comprehensive educational exposure visit for GGDC (Government Girls Degree College) students to Dhoria Academy, bridging local academic circles and offering high-quality resource sharing."
+                </p>
+            </div>
+
+<!-- Aslam Tegrani -->
+            <div class="visitor-card">
+                <span class="visitor-badge">Academic Research</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar">
+                <img loading="lazy" src="../assets/images/weebly/aslam-tagran-1.jpg" alt="Aslam Tegrani Portrait" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Aslam Tegrani</span>
+                <span class="visitor-title">MPhil Researcher & Balochi Writer</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="aslam">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/aslam-tagran-1.jpg', 'Aslam Tegrani (MPhil Researcher) Visit')">
+                <img loading="lazy" src="../assets/images/weebly/aslam-tagran-1.jpg" alt="Aslam Tegrani Visit">
+                <div class="mini-carousel-overlay">Researching in Mir Abdul Ghafoor Kalmati Library</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/aslam-tagran-2.jpg', 'Aslam Tegrani Consulting Librarian')">
+                <img loading="lazy" src="../assets/images/weebly/aslam-tagran-2.jpg" alt="Aslam Tegrani in Library">
+                <div class="mini-carousel-overlay">Consulting Librarian Mr. Shabeen</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/aslam-tagran-3.jpg', 'Aslam Tegrani Reviewing Books')">
+                <img loading="lazy" src="../assets/images/weebly/aslam-tagran-3.jpg" alt="Aslam Tegrani Study Session">
+                <div class="mini-carousel-overlay">ðŸ“„ Accumulating MPhil Literature</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/aslam-tagrani-comments_2_orig.jpg', 'Aslam Tegrani (MPhil Researcher) Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/aslam-tagrani-comments_2_orig.jpg" alt="Aslam Tegrani Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('aslam', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('aslam', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "During my MPhil thesis research on local Balochi literature and history, Dhoria Academy and its library were indispensable. I am deeply grateful to the academy, particularly the librarian Mr. Shabeen, whose guidance and support made my academic research successful."
+                </p>
+            </div>
+
+<!-- Dr. Parvez Umrani -->
+            <div class="visitor-card">
+                <span class="visitor-badge badge-govt">Police Administration</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar">PU</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Dr. Parvez Umrani</span>
+                <span class="visitor-title">District Police Officer (DPO) Gwadar</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="parvez">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/2483830.jpg', 'Dr. Parvez Umrani (DPO Gwadar) Visit')">
+                <img loading="lazy" src="../assets/images/weebly/2483830.jpg" alt="Dr. Parvez Umrani Visit">
+                <div class="mini-carousel-overlay">DPO Gwadar visiting Dhoria Classes</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/2313849_orig.jpg', 'Dr. Parvez Umrani (DPO Gwadar) Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/2313849_orig.jpg" alt="Dr. Parvez Umrani Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('parvez', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('parvez', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "It is a matter of great pleasure to visit this outstanding center which is contributing so much to the youth of Gwadar free of cost. The efforts of Mr. Hassan Ali Moosa and the donors deserve the highest appreciation."
+                </p>
+            </div>
+
+<!-- Kahuda Babar -->
+            <div class="visitor-card">
+                <span class="visitor-badge badge-govt">Executive Advisory</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar" style="color: var(--accent); border-color: var(--accent);">KB</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Kahuda Babar</span>
+                <span class="visitor-title">Adviser to the Chief Minister of Balochistan</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="kahuda">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/kahuda-babar-1.jpg', 'Kahuda Babar (Adviser to CM) Visit')">
+                <img loading="lazy" src="../assets/images/weebly/kahuda-babar-1.jpg" alt="Kahuda Babar Visit">
+                <div class="mini-carousel-overlay">Adviser to CM inspecting computer lab</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/kahuda-babar-2.jpg', 'Kahuda Babar Visiting English Classes')">
+                <img loading="lazy" src="../assets/images/weebly/kahuda-babar-2.jpg" alt="Kahuda Babar in English Class">
+                <div class="mini-carousel-overlay">Encouraging language students</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/kahuda-babar-3.jpg', 'Kahuda Babar Inspecting Library')">
+                <img loading="lazy" src="../assets/images/weebly/kahuda-babar-3.jpg" alt="Kahuda Babar in Library">
+                <div class="mini-carousel-overlay">Visiting Mir Abdul Ghafoor Kalmati Library</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/kahuda-babar-4.jpg', 'Kahuda Babar Interacting with Educators')">
+                <img loading="lazy" src="../assets/images/weebly/kahuda-babar-4.jpg" alt="Kahuda Babar with Staff">
+                <div class="mini-carousel-overlay">Interacting with academy educators</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/kahuda-babar-comments_orig.jpg', 'Kahuda Babar (Adviser to CM) Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/kahuda-babar-comments_orig.jpg" alt="Kahuda Babar Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('kahuda', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('kahuda', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "An excellent effort by the local management team and teachers. Dhoria Academy provides our students with a clean, well-equipped facility that inspires them to excel in computers and professional languages."
+                </p>
+            </div>
+
+<!-- Tufail Baloch -->
+            <div class="visitor-card">
+                <span class="visitor-badge badge-govt">District Administration</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar">TB</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Tufail Baloch</span>
+                <span class="visitor-title">Deputy Commissioner Gwadar</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="tufail">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/7936653.jpg', 'Tufail Baloch (Deputy Commissioner Gwadar) Visit')">
+                <img loading="lazy" src="../assets/images/weebly/7936653.jpg" alt="Tufail Baloch Visit">
+                <div class="mini-carousel-overlay">DC Gwadar visiting Dhoria Classes</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/4184400_orig.jpg', 'Tufail Baloch (Deputy Commissioner Gwadar) Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/4184400_orig.jpg" alt="Tufail Baloch Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('tufail', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('tufail', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "An outstanding educational setup. I strongly advised the students here to concentrate on written English expression and regular reading of daily English newspapers to prepare themselves for future opportunities in Gwadar."
+                </p>
+            </div>
+
+<!-- Sabeen Baloch -->
+            <div class="visitor-card">
+                <span class="visitor-badge">Academic Visitor</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar" style="color: var(--secondary); border-color: var(--secondary);">SB</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Sabeen Baloch</span>
+                <span class="visitor-title">Principal, Government Girls Degree College (GGDC) Gwadar</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="sabeen">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/madm-sabeena-1.jpg', 'Sabeen Baloch (Principal GGDC) Visit')">
+                <img loading="lazy" src="../assets/images/weebly/madm-sabeena-1.jpg" alt="Sabeen Baloch Visit">
+                <div class="mini-carousel-overlay">Exposure visit from GGDC College</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/madm-sabeen-2.jpg', 'Sabeen Baloch Inspecting Computer Lab')">
+                <img loading="lazy" src="../assets/images/weebly/madm-sabeen-2.jpg" alt="Sabeen Baloch in Lab">
+                <div class="mini-carousel-overlay">College students visiting computer lab</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/madm-sabeen-3.jpg', 'Sabeen Baloch Visiting Embroidery Section')">
+                <img loading="lazy" src="../assets/images/weebly/madm-sabeen-3.jpg" alt="Sabeen Baloch in Embroidery Section">
+                <div class="mini-carousel-overlay">Visiting Embroidery class</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/madm-sabeen-comments_orig.jpg', 'Sabeen Baloch (Principal GGDC) Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/madm-sabeen-comments_orig.jpg" alt="Sabeen Baloch Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('sabeen', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('sabeen', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "Led an educational exposure visit from GGDC Gwadar. Seeing the structured courses and the dedication of the learners was inspiring. A great community asset that deserves all-out support."
+                </p>
+            </div>
+
+<!-- Ali Essa -->
+            <div class="visitor-card">
+                <span class="visitor-badge">Community Endorsement</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar">AE</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Ali Essa</span>
+                <span class="visitor-title">President of Syed Z. Hashmi Academy Gwadar</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="ali-essa">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/4971952.jpg', 'Ali Essa visiting Dhoria Academy Library')">
+                <img loading="lazy" src="../assets/images/weebly/4971952.jpg" alt="Ali Essa Visit">
+                <div class="mini-carousel-overlay">Ali Essa at Mir Abdul Ghafoor Kalmati Library</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/3177044.jpg', 'Ali Essa panel exposure review')">
+                <img loading="lazy" src="../assets/images/weebly/3177044.jpg" alt="Ali Essa Panel">
+                <div class="mini-carousel-overlay">Educational leaders exchange review</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/2021_orig.jpg', 'Ali Essa Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/2021_orig.jpg" alt="Ali Essa Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('ali-essa', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('ali-essa', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "Mir Abdul Ghafoor Kalmati Library is the best library in Gwadar. The library is actively spreading knowledge. It is the responsibility of every citizen to help and support this library."
+                </p>
+            </div>
+
+<!-- Mumtaz Yousaf -->
+            <div class="visitor-card">
+                <span class="visitor-badge">Community Endorsement</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar">MY</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Mumtaz Yousaf</span>
+                <span class="visitor-title">Chairman Baloch Academy Quetta</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="mumtaz">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/mumtaz-ayoub-1.jpg', 'Mumtaz Yousaf (Chairman Baloch Academy) Visit')">
+                <img loading="lazy" src="../assets/images/weebly/mumtaz-ayoub-1.jpg" alt="Mumtaz Yousaf Visit 1">
+                <div class="mini-carousel-overlay">Mumtaz Yousaf reviewing library collections</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/mumtaz-ayoub-2.jpg', 'Mumtaz Yousaf with Academy Students')">
+                <img loading="lazy" src="../assets/images/weebly/mumtaz-ayoub-2.jpg" alt="Mumtaz Yousaf Visit 2">
+                <div class="mini-carousel-overlay">Mumtaz Yousaf addressing local learners</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/mumtaz-ayoub-comments_orig.jpg', 'Mumtaz Yousaf Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/mumtaz-ayoub-comments_orig.jpg" alt="Mumtaz Yousaf Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('mumtaz', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('mumtaz', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "Dhoria Academy serves as a prestigious center of learning. The library holds an excellent collection of regional and national literature which is incredibly beneficial for students in Gwadar."
+                </p>
+            </div>
+
+<!-- Master A. Majeed Gwadari -->
+            <div class="visitor-card">
+                <span class="visitor-badge">Community Endorsement</span>
+                <div class="visitor-author">
+                <div class="visitor-avatar">MM</div>
+                <div class="visitor-meta">
+                <span class="visitor-name">Master A. Majeed Gwadari</span>
+                <span class="visitor-title">Baloch Poet & Social Leader</span>
+                </div>
+                </div>
+                <div class="visitor-mini-carousel" data-carousel="majeed">
+                <div class="mini-carousel-slide active" onclick="openScanModal('../assets/images/weebly/9371975.jpg', 'Master A. Majeed Gwadari visiting Dhoria Library')">
+                <img loading="lazy" src="../assets/images/weebly/9371975.jpg" alt="Master A. Majeed Gwadari Visit 1">
+                <div class="mini-carousel-overlay">Poet Master A. Majeed visiting library</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/6962514.jpg', 'Master A. Majeed Gwadari reading reference books')">
+                <img loading="lazy" src="../assets/images/weebly/6962514.jpg" alt="Master A. Majeed Gwadari Visit 2">
+                <div class="mini-carousel-overlay">Master A. Majeed reading Balochi reference works</div>
+                </div>
+                <div class="mini-carousel-slide" onclick="openScanModal('../assets/images/weebly/3779624_orig.jpg', 'Master A. Majeed Gwadari Signed Guestbook Letter')">
+                <img loading="lazy" src="../assets/images/weebly/3779624_orig.jpg" alt="Master A. Majeed Gwadari Signed Letter">
+                <div class="mini-carousel-overlay">ðŸ“„ Click to View Signed Guestbook Letter</div>
+                </div>
+                <div class="mini-carousel-controls">
+                <button class="mini-arrow prev" onclick="event.stopPropagation(); moveMiniSlide('majeed', -1);"><i class="fas fa-chevron-left"></i></button>
+                <button class="mini-arrow next" onclick="event.stopPropagation(); moveMiniSlide('majeed', 1);"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                </div>
+
+                <p class="visitor-comment">
+                "Today I have visited Mir Abdul Ghafoor Kalmati Library. This is a good effort. I am really glad. I advise them to get good education."
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Image Modal for Scanned Letters -->
+    <div id="scanModal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
+        <span style="position: absolute; top: 2rem; right: 2rem; color: #f8fafc; font-size: 2.5rem; font-weight: 700; cursor: pointer; transition: color 0.2s;" onclick="closeScanModal()">&times;</span>
+        <div style="max-width: 90%; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+            <img loading="lazy" id="modalImage" style="max-height: 80vh; max-width: 100%; border-radius: 1rem; box-shadow: var(--shadow-xl); border: 2px solid rgba(255, 255, 255, 0.1);" src="" alt="Scanned Guestbook Sheet">
+            <div id="modalCaption" style="text-align: center; color: #cbd5e1; font-weight: 600; font-size: 1.1rem; padding: 0 1rem;"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="../index.html" class="brand"
+                    style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy Logo"
+                        style="height: 40px; border-radius: 50%;">
+                    <div class="brand-text">
+                        <span class="dhoria-text" style="color: var(--secondary);">Dhoria</span>
+                        <span class="academy-text" style="color: #fff;">Academy Gwadar</span>
+                    </div>
+                </a>
+                <p>Empowering the next generation of global leaders through modern, holistic education.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="student-corner.html">Student Corner</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Fish Harbor Road, Near Mir Ghous Bakhsh Bizenjo Football Stadium, Gwadar, Pakistan</p>
+                
+                <p><i class="fas fa-mobile-alt"></i> +92 331 5396518 / +92 322 2185069</p>
+                <p><i class="fas fa-envelope"></i> kabeer50930@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Dhoria Academy Gwadar. All Rights Reserved. Designed by Kabeer Ahmed.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/db.js"></script>
+    <script src="../assets/js/site-sync.js"></script>
+    <script src="../assets/js/main_v28.js"></script>
+    <script>
+        function openScanModal(src, caption) {
+            const modal = document.getElementById('scanModal');
+            const modalImg = document.getElementById('modalImage');
+            const captionText = document.getElementById('modalCaption');
+            
+            modal.style.display = 'flex';
+            // Trigger reflow for transition
+            void modal.offsetWidth;
+            modal.style.opacity = '1';
+            
+            modalImg.src = src;
+            captionText.innerHTML = caption;
+        }
+        
+        function closeScanModal() {
+            const modal = document.getElementById('scanModal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+        
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeScanModal();
+        });
+    </script>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+</body>
+
+</html>
+

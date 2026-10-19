@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Admin Control Panel | Dhoria Academy Gwadar</title>
+  <!-- Google Font & FontAwesome CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <script>
+    // Theme initialization & Auth guard
+    (function() {
+      const token = localStorage.getItem('dhoria_admin_token') || sessionStorage.getItem('dhoria_admin_token');
+      if (!token) {
+        window.location.href = 'login.html';
+      }
+      const t = localStorage.getItem('dhoria-admin-theme') || 'light';
+      document.documentElement.setAttribute('data-admin-theme', t);
+    })();
+  </script>
+</head>
+<body class="admin-body">
+
+  <div class="admin-layout">
+
+    <!-- ============================================================
+         SIDEBAR NAVIGATION
+         ============================================================ -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy" class="sidebar-logo">
+        <div class="sidebar-title">
+          <h2>Dhoria Control</h2>
+          <span><span class="sidebar-status-dot"></span> Online &bull; 2026</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Core</div>
+        <a class="sidebar-link active" data-section="dashboard">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a class="sidebar-link" data-section="settings">
+          <i class="fas fa-sliders-h"></i>
+          <span>Site Settings</span>
+        </a>
+        <a class="sidebar-link" data-section="hero">
+          <i class="fas fa-images"></i>
+          <span>Hero & Banners</span>
+        </a>
+
+        <div class="nav-category">Content & Academics</div>
+        <a class="sidebar-link" data-section="announcements">
+          <i class="fas fa-bullhorn"></i>
+          <span>Announcements</span>
+        </a>
+        <a class="sidebar-link" data-section="admissions">
+          <i class="fas fa-user-graduate"></i>
+          <span>Admissions</span>
+          <span class="badge badge-pending" id="sidebarAdmissionsBadge">0</span>
+        </a>
+        <a class="sidebar-link" data-section="academics">
+          <i class="fas fa-book-open"></i>
+          <span>Courses & Shifts</span>
+        </a>
+        <a class="sidebar-link" data-section="staff">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <span>Staff Directory</span>
+        </a>
+        <a class="sidebar-link" data-section="events">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Events & Gallery</span>
+        </a>
+        <a class="sidebar-link" data-section="articles">
+          <i class="fas fa-feather-alt"></i>
+          <span>Student Articles</span>
+        </a>
+        <a class="sidebar-link" data-section="visitors">
+          <i class="fas fa-award"></i>
+          <span>VIP Visitors</span>
+        </a>
+        <a class="sidebar-link" data-section="partners">
+          <i class="fas fa-handshake"></i>
+          <span>Partners</span>
+        </a>
+
+        <div class="nav-category">System & Inbox</div>
+        <a class="sidebar-link" data-section="messages">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Inbox</span>
+          <span class="badge badge-unread" id="sidebarMessagesBadge">0</span>
+        </a>
+        <a class="sidebar-link" data-section="users">
+          <i class="fas fa-users-cog"></i>
+          <span>Users & Roles</span>
+        </a>
+        <a class="sidebar-link" data-section="logs">
+          <i class="fas fa-history"></i>
+          <span>Audit Log & Backup</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-avatar-mini" id="sidebarUserAvatar">A</div>
+        <div class="user-info-mini">
+          <div class="user-name-mini" id="sidebarUserName">Administrator</div>
+          <div class="user-role-mini" id="sidebarUserRole">Super Admin</div>
+        </div>
+        <button class="btn-sidebar-logout" id="logoutBtn" title="Log Out">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         MAIN CONTENT AREA
+         ============================================================ -->
+    <main class="admin-main">
+      
+      <!-- Topbar Header -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="sidebarToggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="javascript:void(0)" onclick="switchSection('dashboard')">Admin</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.65rem;"></i>
+            <span class="active" id="topbarCurrentSection">Dashboard</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <span id="topbarMaintBadge" style="display: none; background: rgba(239, 68, 68, 0.12); color: var(--adm-danger); border: 1px solid rgba(239, 68, 68, 0.3); padding: 3px 8px; border-radius: var(--adm-radius-full); font-size: 0.72rem; font-weight: 700; align-items: center; gap: 5px;">
+            <i class="fas fa-tools"></i> Maintenance ON
+          </span>
+          <a href="../index.html" target="_blank" class="topbar-btn" title="Open Public Website">
+            <i class="fas fa-external-link-alt"></i> Live Site
+          </a>
+          <button class="topbar-icon-btn" id="adminThemeToggle" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="adminThemeIcon"></i>
+          </button>
+          <button class="topbar-icon-btn" onclick="switchSection('messages')" title="Messages">
+            <i class="fas fa-bell"></i>
+            <span class="notify-dot" id="topbarNotifyDot" style="display: none;"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dynamic Sections Container -->
+      <div class="admin-content">
+
+        <!-- ============================================================
+             SECTION 1: DASHBOARD
+             ============================================================ -->
+        <section class="admin-section active" id="sec-dashboard">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Dashboard</h1>
+              <p>Performance metrics, admission requests, and recent inquiries.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addAnnouncementModal')">
+                <i class="fas fa-plus"></i> Announcement
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="exportFullDatabase()">
+                <i class="fas fa-download"></i> Backup
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Stat Cards -->
+          <div class="stats-grid">
+            <div class="stat-card" onclick="switchSection('admissions')" style="cursor: pointer;">
+              <div class="stat-icon-wrapper icon-blue"><i class="fas fa-user-graduate"></i></div>
+              <div class="stat-details">
+                <div class="stat-label">Applications</div>
+                <div class="stat-value" id="dashTotalAdmissions">0</div>
+                <div class="stat-subtext" id="dashPendingAdmissionsSub">0 pending</div>
+              </div>
+            </div>
+
+            <div class="stat-card" onclick="switchSection('messages')" style="cursor: pointer;">
+              <div class="stat-icon-wrapper icon-rose"><i class="fas fa-envelope-open-text"></i></div>
+              <div class="stat-details">
+                <div class="stat-label">Inquiries</div>
+                <div class="stat-value" id="dashTotalMessages">0</div>
+                <div class="stat-subtext" id="dashUnreadMessagesSub">0 unread</div>
+              </div>
+            </div>
+
+            <div class="stat-card" onclick="switchSection('staff')" style="cursor: pointer;">
+              <div class="stat-icon-wrapper icon-green"><i class="fas fa-chalkboard-teacher"></i></div>
+              <div class="stat-details">
+                <div class="stat-label">Faculty</div>
+                <div class="stat-value" id="dashTotalStaff">0</div>
+                <div class="stat-subtext">Active educators</div>
+              </div>
+            </div>
+
+            <div class="stat-card" onclick="switchSection('articles')" style="cursor: pointer;">
+              <div class="stat-icon-wrapper icon-purple"><i class="fas fa-book-reader"></i></div>
+              <div class="stat-details">
+                <div class="stat-label">Articles</div>
+                <div class="stat-value" id="dashTotalArticles">0</div>
+                <div class="stat-subtext">Published</div>
+              </div>
+            </div>
+
+            <div class="stat-card" onclick="switchSection('events')" style="cursor: pointer;">
+              <div class="stat-icon-wrapper icon-amber"><i class="fas fa-calendar-check"></i></div>
+              <div class="stat-details">
+                <div class="stat-label">Events</div>
+                <div class="stat-value" id="dashTotalEvents">0</div>
+                <div class="stat-subtext">Activities</div>
+              </div>
+            </div>
+
+            <div class="stat-card" onclick="switchSection('visitors')" style="cursor: pointer;">
+              <div class="stat-icon-wrapper icon-cyan"><i class="fas fa-award"></i></div>
+              <div class="stat-details">
+                <div class="stat-label">VIP Guests</div>
+                <div class="stat-value" id="dashTotalVisitors">0</div>
+                <div class="stat-subtext">Remarks recorded</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Bar -->
+          <div class="quick-action-bar">
+            <span class="quick-action-label"><i class="fas fa-bolt" style="color: var(--adm-warning);"></i> Quick Launch:</span>
+            <button class="quick-action-btn" onclick="openModal('addAdmissionModal')"><i class="fas fa-user-plus"></i> Walk-In Student</button>
+            <button class="quick-action-btn" onclick="openModal('addStaffModal')"><i class="fas fa-user-tie"></i> Add Faculty</button>
+            <button class="quick-action-btn" onclick="openModal('addEventModal')"><i class="fas fa-calendar-plus"></i> New Event</button>
+            <button class="quick-action-btn" onclick="openModal('addArticleModal')"><i class="fas fa-feather-alt"></i> Post Article</button>
+            <button class="quick-action-btn" onclick="openModal('addVisitorModal')"><i class="fas fa-quote-left"></i> VIP Guest</button>
+            <button class="quick-action-btn" onclick="switchSection('settings')"><i class="fas fa-cog"></i> Settings</button>
+          </div>
+
+          <!-- Recent Applications & Inquiries Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.25rem;">
+            
+            <!-- Recent Admissions -->
+            <div class="admin-card" style="margin-bottom: 0;">
+              <div class="admin-card-header">
+                <div class="admin-card-title"><i class="fas fa-user-graduate"></i> Recent Applications</div>
+                <button class="btn btn-secondary btn-sm" onclick="switchSection('admissions')">View All</button>
+              </div>
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Student</th>
+                      <th>Class & Shift</th>
+                      <th>Status</th>
+                      <th style="width: 40px; text-align: center;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashRecentAdmissionsTbody">
+                    <!-- Dynamic Rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Recent Messages -->
+            <div class="admin-card" style="margin-bottom: 0;">
+              <div class="admin-card-header">
+                <div class="admin-card-title"><i class="fas fa-envelope"></i> Recent Inquiries</div>
+                <button class="btn btn-secondary btn-sm" onclick="switchSection('messages')">View All</button>
+              </div>
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Sender</th>
+                      <th>Subject</th>
+                      <th>Status</th>
+                      <th style="width: 40px; text-align: center;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashRecentMessagesTbody">
+                    <!-- Dynamic Rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 2: GENERAL & SITE SETTINGS
+             ============================================================ -->
+        <section class="admin-section" id="sec-settings">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Site Settings</h1>
+              <p>Manage identity, maintenance controls, admissions, and contacts.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary" onclick="saveGeneralSettings()">
+                <i class="fas fa-save"></i> Save Changes
+              </button>
+            </div>
+          </div>
+
+          <form id="settingsForm" onsubmit="event.preventDefault(); saveGeneralSettings();">
+            
+            <!-- Maintenance & Access Control -->
+            <div class="admin-card">
+              <div class="admin-card-header" style="background: var(--adm-surface-2);">
+                <div class="admin-card-title">
+                  <i class="fas fa-shield-alt" style="color: var(--adm-warning);"></i> Maintenance & Access Control
+                </div>
+                <label class="switch-label" for="setMaintGlobalEnabled">
+                  <span style="font-size: 0.82rem; font-weight: 700; color: var(--adm-warning); margin-right: 8px;">GLOBAL MAINTENANCE</span>
+                  <div class="switch-toggle">
+                    <input type="checkbox" id="setMaintGlobalEnabled" onchange="saveLockToggle(this)">
+                    <span class="slider"></span>
+                  </div>
+                </label>
+              </div>
+              <div class="admin-card-body">
+                <div id="maintActiveAlertBanner" style="display: none; background: var(--adm-danger-light); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--adm-danger); border-radius: var(--adm-radius-md); padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.84rem; font-weight: 600; align-items: center; gap: 8px;">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <span>Public site offline to visitors. Maintenance screen is active.</span>
+                </div>
+
+                <div class="form-grid" style="margin-bottom: 1.25rem;">
+                  <div class="form-group">
+                    <label class="form-label">Maintenance Title</label>
+                    <input type="text" class="form-input" id="setMaintTitle" placeholder="e.g. Scheduled Maintenance in Progress">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Estimated Return</label>
+                    <input type="text" class="form-input" id="setMaintEstimatedTime" placeholder="e.g. 2 Hours">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Emergency Phone</label>
+                    <input type="text" class="form-input" id="setMaintPhone" placeholder="0331 5396518">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Emergency Email</label>
+                    <input type="email" class="form-input" id="setMaintEmail" placeholder="kabeer50930@gmail.com">
+                  </div>
+                  <div class="form-group col-span-full">
+                    <label class="form-label">Notice Message</label>
+                    <textarea class="form-textarea" id="setMaintMessage" rows="2" placeholder="Message shown during maintenance..."></textarea>
+                  </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--adm-border); padding-top: 1rem;">
+                  <div style="font-size: 0.88rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--adm-text);">
+                    <i class="fas fa-lock" style="color: var(--adm-primary);"></i> Page-Level Access Locks
+                  </div>
+                  
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.65rem; margin-bottom: 1.25rem;">
+                    
+                    <label class="lock-item-card" for="lockPageAbout">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-info-circle"></i> About Us</div>
+                        <div class="lock-item-sub">about.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageAbout" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockPageAcademics">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-book-open"></i> Academics</div>
+                        <div class="lock-item-sub">academics.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageAcademics" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockPageAdmissions">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-user-graduate"></i> Admissions</div>
+                        <div class="lock-item-sub">admissions.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageAdmissions" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockPageStaff">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-chalkboard-teacher"></i> Faculty & Staff</div>
+                        <div class="lock-item-sub">staff.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageStaff" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockPageEvents">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-calendar-alt"></i> Events & Gallery</div>
+                        <div class="lock-item-sub">events.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageEvents" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockPageVisitors">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-award"></i> VIP Visitors</div>
+                        <div class="lock-item-sub">visitors.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageVisitors" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockPageStudentCorner">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-palette"></i> Student Corner</div>
+                        <div class="lock-item-sub">student-corner.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageStudentCorner" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockPageStudentArticles">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-feather-alt"></i> Articles</div>
+                        <div class="lock-item-sub">student-articles.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageStudentArticles" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockPageContact">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-envelope"></i> Contact Us</div>
+                        <div class="lock-item-sub">contact.html</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockPageContact" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                  </div>
+
+                  <div style="font-size: 0.88rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--adm-text);">
+                    <i class="fas fa-eye-slash" style="color: var(--adm-secondary);"></i> Homepage Component Visibility
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.65rem;">
+                    <label class="lock-item-card" for="lockSecHeroSlider">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-images"></i> Hero Carousel</div>
+                        <div class="lock-item-sub">Slider banner</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockSecHeroSlider" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockSecAnnouncements">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-bullhorn"></i> Announcements</div>
+                        <div class="lock-item-sub">Bulletin strip</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockSecAnnouncements" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+
+                    <label class="lock-item-card" for="lockSecPartners">
+                      <div>
+                        <div class="lock-item-title"><i class="fas fa-handshake"></i> Partners Marquee</div>
+                        <div class="lock-item-sub">Supporter logos</div>
+                      </div>
+                      <div class="switch-toggle">
+                        <input type="checkbox" id="lockSecPartners" onchange="saveLockToggle(this)">
+                        <span class="slider"></span>
+                      </div>
+                    </label>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Academy Identity -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title"><i class="fas fa-school"></i> Academy Identity</div>
+              </div>
+              <div class="admin-card-body">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label">Academy Name</label>
+                    <input type="text" class="form-input" id="setSiteName" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Established Year</label>
+                    <input type="text" class="form-input" id="setEstablishedYear">
+                  </div>
+                  <div class="form-group col-span-2">
+                    <label class="form-label">Tagline / Motto</label>
+                    <input type="text" class="form-input" id="setSiteTagline">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Director Name</label>
+                    <input type="text" class="form-input" id="setPrincipalName">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Director Title</label>
+                    <input type="text" class="form-input" id="setPrincipalTitle">
+                  </div>
+                  <div class="form-group col-span-full">
+                    <label class="form-label">Director Welcome Message</label>
+                    <textarea class="form-textarea" id="setPrincipalMessage" rows="2"></textarea>
+                  </div>
+                  <div class="form-group col-span-full">
+                    <label class="form-label">Official Academy Logo</label>
+                    <input type="hidden" id="setLogoUrl" value="assets/images/logo.png?v=3">
+                    <input type="file" id="logoFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'setLogoUrl', 'logoPreview', 'logoCompressionBadge', {maxWidth:400, maxHeight:400, folder:'branding', filename:'logo'})">
+                    <div class="img-upload-widget" onclick="document.getElementById('logoFileInput').click()">
+                      <div class="img-upload-preview-container">
+                        <img src="../assets/images/logo.png?v=3" id="logoPreview" class="img-upload-preview-thumb avatar" alt="Logo" onerror="this.src='../assets/images/logo.png'">
+                        <div class="img-upload-info">
+                          <div class="img-upload-title">Academy Logo Emblem</div>
+                          <div class="img-upload-subtitle">Click to replace or drag &amp; drop</div>
+                          <div id="logoCompressionBadge"></div>
+                          <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('logoFileInput').click()"><i class="fas fa-upload"></i> Upload</button>
+                            <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('setLogoUrl', 'logoPreview', 'logoCompressionBadge', 'assets/images/logo.png?v=3')"><i class="fas fa-undo"></i> Reset</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Alert Banner -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title"><i class="fas fa-bullhorn" style="color: var(--adm-warning);"></i> Top Marquee Banner</div>
+                <label class="switch-label" for="setEmergencyEnabled">
+                  <span style="font-size: 0.8rem; font-weight: 600; margin-right: 8px;">Show Marquee</span>
+                  <div class="switch-toggle">
+                    <input type="checkbox" id="setEmergencyEnabled" onchange="saveLockToggle(this)">
+                    <span class="slider"></span>
+                  </div>
+                </label>
+              </div>
+              <div class="admin-card-body">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label">Badge Text</label>
+                    <input type="text" class="form-input" id="setEmergencyBadge" placeholder="e.g. Admissions 2026">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Action Link URL</label>
+                    <input type="text" class="form-input" id="setEmergencyLink" placeholder="e.g. pages/admissions.html">
+                  </div>
+                  <div class="form-group col-span-full">
+                    <label class="form-label">Banner Text</label>
+                    <input type="text" class="form-input" id="setEmergencyText" placeholder="e.g. Admissions Open for Academic & Vocational Shifts">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact & Campus Info -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title"><i class="fas fa-address-book"></i> Campus & Contact Information</div>
+              </div>
+              <div class="admin-card-body">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label">Primary Phone</label>
+                    <input type="text" class="form-input" id="setPrimaryPhone">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Secondary Mobile</label>
+                    <input type="text" class="form-input" id="setSecondaryPhone">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">WhatsApp Number</label>
+                    <input type="text" class="form-input" id="setSocialWhatsapp">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Official Email</label>
+                    <input type="email" class="form-input" id="setOfficialEmail">
+                  </div>
+                  <div class="form-group col-span-2">
+                    <label class="form-label">Campus Physical Address</label>
+                    <input type="text" class="form-input" id="setAddress">
+                  </div>
+                  <div class="form-group col-span-2">
+                    <label class="form-label">Working & Shift Hours</label>
+                    <input type="text" class="form-input" id="setWorkingHours">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Admission Portal Settings -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title"><i class="fas fa-user-graduate"></i> Admissions Configuration</div>
+                <label class="switch-label" for="setAdmissionsOpen">
+                  <span style="font-size: 0.8rem; font-weight: 600; margin-right: 8px;">Accept Applications</span>
+                  <div class="switch-toggle">
+                    <input type="checkbox" id="setAdmissionsOpen" onchange="saveLockToggle(this)">
+                    <span class="slider"></span>
+                  </div>
+                </label>
+              </div>
+              <div class="admin-card-body">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label">Academic Session</label>
+                    <input type="text" class="form-input" id="setAdmissionSession">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Application Deadline</label>
+                    <input type="date" class="form-input" id="setAdmissionDeadline">
+                  </div>
+                  <div class="form-group col-span-2">
+                    <label class="form-label">Fee Policy Notice</label>
+                    <input type="text" class="form-input" id="setAdmissionFeePolicy">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Links & SEO -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title"><i class="fas fa-globe"></i> SEO & Social Channels</div>
+              </div>
+              <div class="admin-card-body">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label">Facebook URL</label>
+                    <input type="url" class="form-input" id="setSocialFacebook">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Instagram URL</label>
+                    <input type="url" class="form-input" id="setSocialInstagram">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">YouTube URL</label>
+                    <input type="url" class="form-input" id="setSocialYoutube">
+                  </div>
+                  <div class="form-group col-span-2">
+                    <label class="form-label">Search Keywords</label>
+                    <input type="text" class="form-input" id="setSeoKeywords" placeholder="Comma separated...">
+                  </div>
+                  <div class="form-group col-span-full">
+                    <label class="form-label">SEO Meta Description</label>
+                    <textarea class="form-textarea" id="setSeoDescription" rows="2"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Save Bar -->
+            <div style="display: flex; justify-content: flex-end; margin: 1rem 0 1.5rem;">
+              <button type="button" class="btn btn-primary btn-lg" onclick="saveGeneralSettings()">
+                <i class="fas fa-save"></i> Save All Settings
+              </button>
+            </div>
+
+          </form>
+        </section>
+
+        <!-- ============================================================
+             SECTION 3: HERO & BANNERS
+             ============================================================ -->
+        <section class="admin-section" id="sec-hero">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Hero & Banners</h1>
+              <p>Customize homepage carousel slides and subpage header titles.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addHeroSlideModal')">
+                <i class="fas fa-plus"></i> Add Slide
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div class="admin-card-title"><i class="fas fa-images"></i> Homepage Hero Slides</div>
+            </div>
+            <div class="admin-card-body">
+              <div class="item-cards-grid" id="heroSlidesGrid">
+                <!-- Dynamic Hero Slides -->
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div class="admin-card-title"><i class="fas fa-heading"></i> Subpage Headers</div>
+            </div>
+            <div class="admin-card-body">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;" id="pageHeadersContainer">
+                <!-- Dynamic Page Headers list -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 4: ANNOUNCEMENTS & NEWS
+             ============================================================ -->
+        <section class="admin-section" id="sec-announcements">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Announcements</h1>
+              <p>Publish news updates, circulars, and notices.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addAnnouncementModal')">
+                <i class="fas fa-plus"></i> Add Announcement
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-toolbar">
+              <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchAnnouncementsInput" placeholder="Search announcements..." oninput="renderAnnouncementsTable()">
+              </div>
+              <div class="table-filter-group">
+                <select class="filter-select" id="filterAnnouncementsCat" onchange="renderAnnouncementsTable()">
+                  <option value="all">All Categories</option>
+                  <option value="Milestone">Milestone</option>
+                  <option value="Library">Library</option>
+                  <option value="Admissions">Admissions</option>
+                  <option value="Events">Events</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Title & Excerpt</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Pinned</th>
+                    <th>Status</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="announcementsTbody">
+                  <!-- Dynamic Announcement Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 5: ADMISSIONS & APPLICATIONS
+             ============================================================ -->
+        <section class="admin-section" id="sec-admissions">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Admissions</h1>
+              <p>Review, approve, and manage student registration records.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-secondary btn-sm" onclick="exportAdmissionsCSV()">
+                <i class="fas fa-file-csv"></i> Export CSV
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="openModal('addAdmissionModal')">
+                <i class="fas fa-user-plus"></i> Walk-In Student
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-toolbar">
+              <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchAdmissionsInput" placeholder="Search student name, B-Form, phone..." oninput="renderAdmissionsTable()">
+              </div>
+              <div class="table-filter-group">
+                <select class="filter-select" id="filterAdmissionStatus" onchange="renderAdmissionsTable()">
+                  <option value="all">All Statuses</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Under Review">Under Review</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+                <select class="filter-select" id="filterAdmissionShift" onchange="renderAdmissionsTable()">
+                  <option value="all">All Shifts</option>
+                  <option value="Morning">Morning Shift</option>
+                  <option value="Evening">Evening Shift</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Father Name</th>
+                    <th>Class</th>
+                    <th>Shift</th>
+                    <th>Mobile</th>
+                    <th>Submitted</th>
+                    <th>Status</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admissionsTbody">
+                  <!-- Dynamic Admissions Table Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 6: COURSES & SHIFTS
+             ============================================================ -->
+        <section class="admin-section" id="sec-academics">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Courses & Shifts</h1>
+              <p>Manage curriculum, shift schedules, and vocational programs.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addCourseModal')">
+                <i class="fas fa-plus"></i> Add Course
+              </button>
+            </div>
+          </div>
+
+          <!-- Shifts Configuration -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div class="admin-card-title"><i class="fas fa-clock"></i> Shift Timetables</div>
+            </div>
+            <div class="admin-card-body">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;" id="shiftsContainer">
+                <!-- Dynamic Shifts -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Courses Table -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div class="admin-card-title"><i class="fas fa-book"></i> Active Courses & Programs</div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Course Title</th>
+                    <th>Category</th>
+                    <th>Shift</th>
+                    <th>Duration</th>
+                    <th>Instructor</th>
+                    <th>Enrollment</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="coursesTbody">
+                  <!-- Dynamic Course Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 7: STAFF DIRECTORY
+             ============================================================ -->
+        <section class="admin-section" id="sec-staff">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Staff Directory</h1>
+              <p>Faculty members, instructors, and leadership team.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addStaffModal')">
+                <i class="fas fa-user-plus"></i> Add Faculty
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-toolbar">
+              <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchStaffInput" placeholder="Search staff name or role..." oninput="renderStaffList()">
+              </div>
+              <div class="table-filter-group">
+                <select class="filter-select" id="filterStaffCat" onchange="renderStaffList()">
+                  <option value="all">All Roles</option>
+                  <option value="Leadership">Leadership</option>
+                  <option value="Academic Faculty">Academic Faculty</option>
+                  <option value="Vocational Faculty">Vocational Faculty</option>
+                  <option value="Administration">Administration</option>
+                </select>
+              </div>
+            </div>
+            <div class="admin-card-body">
+              <div class="item-cards-grid" id="staffCardsGrid">
+                <!-- Dynamic Staff Cards -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 8: EVENTS & GALLERY
+             ============================================================ -->
+        <section class="admin-section" id="sec-events">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Events & Gallery</h1>
+              <p>Campus activities, photo albums, and ceremonies.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addEventModal')">
+                <i class="fas fa-calendar-plus"></i> Add Event
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="openModal('addGalleryModal')">
+                <i class="fas fa-camera"></i> Upload Photo
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div class="admin-card-title"><i class="fas fa-calendar-alt"></i> Scheduled Events</div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Event</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="eventsTbody">
+                  <!-- Dynamic Event Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div class="admin-card-title"><i class="fas fa-photo-video"></i> Campus Photo Gallery</div>
+              <button class="btn btn-secondary btn-sm" onclick="openModal('addGalleryModal')">
+                <i class="fas fa-camera"></i> Upload
+              </button>
+            </div>
+            <div class="admin-card-body">
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.85rem;" id="galleryGrid">
+                <!-- Dynamic Gallery Items -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 9: STUDENT ARTICLES
+             ============================================================ -->
+        <section class="admin-section" id="sec-articles">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Student Articles</h1>
+              <p>Moderate and publish student essays and research pieces.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addArticleModal')">
+                <i class="fas fa-feather-alt"></i> Post Article
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-toolbar">
+              <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchArticlesInput" placeholder="Search articles..." oninput="renderArticlesTable()">
+              </div>
+              <div class="table-filter-group">
+                <select class="filter-select" id="filterArticleStatus" onchange="renderArticlesTable()">
+                  <option value="all">All Statuses</option>
+                  <option value="Published">Published</option>
+                  <option value="Under Review">Under Review</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Article Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Views</th>
+                    <th>Status</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="articlesTbody">
+                  <!-- Dynamic Article Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 10: VIP VISITORS
+             ============================================================ -->
+        <section class="admin-section" id="sec-visitors">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>VIP Visitors</h1>
+              <p>Guestbook remarks, dignitaries, and visitor testimonials.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addVisitorModal')">
+                <i class="fas fa-plus"></i> Add Testimonial
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-body">
+              <div class="item-cards-grid" id="visitorsCardsGrid">
+                <!-- Dynamic Visitor Cards -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 11: PARTNERS & SUPPORTERS
+             ============================================================ -->
+        <section class="admin-section" id="sec-partners">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Partners</h1>
+              <p>Partner institutions and community affiliations.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addPartnerModal')">
+                <i class="fas fa-plus"></i> Add Partner
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Organization Name</th>
+                    <th>Icon</th>
+                    <th>Website Link</th>
+                    <th>Status</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="partnersTbody">
+                  <!-- Dynamic Partner Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 12: CONTACT MESSAGES
+             ============================================================ -->
+        <section class="admin-section" id="sec-messages">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Contact Inbox</h1>
+              <p>Messages and inquiries submitted by visitors.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-secondary btn-sm" onclick="exportMessagesCSV()">
+                <i class="fas fa-file-csv"></i> Export Inquiries
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-toolbar">
+              <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchMessagesInput" placeholder="Search inquiries..." oninput="renderMessagesTable()">
+              </div>
+              <div class="table-filter-group">
+                <select class="filter-select" id="filterMessagesStatus" onchange="renderMessagesTable()">
+                  <option value="all">All Inquiries</option>
+                  <option value="Unread">Unread</option>
+                  <option value="Read">Read</option>
+                  <option value="Replied">Replied</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Sender</th>
+                    <th>Contact</th>
+                    <th>Subject & Message</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="messagesTbody">
+                  <!-- Dynamic Message Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 13: USERS & ROLES
+             ============================================================ -->
+        <section class="admin-section" id="sec-users">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Users & Roles</h1>
+              <p>Admin accounts and permission management.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="openModal('addUserModal')">
+                <i class="fas fa-user-plus"></i> Add User
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTbody">
+                  <!-- Dynamic Users Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 14: AUDIT LOGS & BACKUP
+             ============================================================ -->
+        <section class="admin-section" id="sec-logs">
+          <div class="section-header-row">
+            <div class="section-heading-group">
+              <h1>Audit & Backup</h1>
+              <p>System activity log, database backup, and restore.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary btn-sm" onclick="exportFullDatabase()">
+                <i class="fas fa-download"></i> Backup JSON
+              </button>
+            </div>
+          </div>
+
+          <!-- Backup & Restore -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div class="admin-card-title"><i class="fas fa-database"></i> Backup & Restore</div>
+            </div>
+            <div class="admin-card-body">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+                <div style="padding: 1rem; background: var(--adm-surface-2); border-radius: var(--adm-radius-md); border: 1px solid var(--adm-border);">
+                  <div style="font-weight: 700; font-size: 0.88rem; color: var(--adm-text);"><i class="fas fa-upload"></i> Restore Backup</div>
+                  <p style="font-size: 0.78rem; color: var(--adm-text-muted); margin: 0.35rem 0 0.75rem;">Upload a JSON file to restore website content.</p>
+                  <input type="file" id="restoreFileInput" accept=".json" style="display: none;" onchange="handleRestoreFile(this)">
+                  <button class="btn btn-secondary btn-sm" onclick="document.getElementById('restoreFileInput').click()">Choose File</button>
+                </div>
+                <div style="padding: 1rem; background: var(--adm-danger-light); border-radius: var(--adm-radius-md); border: 1px solid rgba(239, 68, 68, 0.2);">
+                  <div style="font-weight: 700; font-size: 0.88rem; color: var(--adm-danger);"><i class="fas fa-exclamation-triangle"></i> Factory Reset</div>
+                  <p style="font-size: 0.78rem; color: var(--adm-text-muted); margin: 0.35rem 0 0.75rem;">Reset content back to academy defaults.</p>
+                  <button class="btn btn-danger btn-sm" onclick="confirmFactoryReset()">Reset Defaults</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Log -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div class="admin-card-title"><i class="fas fa-history"></i> Recent Activity Log</div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody id="logsTbody">
+                  <!-- Dynamic Log Rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ============================================================
+       MODALS
+       ============================================================ -->
+
+  <!-- Modal: Student Dossier Inspector -->
+  <div class="admin-modal-backdrop" id="dossierModal">
+    <div class="admin-modal modal-lg">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-id-card"></i> Student Admission Dossier</div>
+        <button class="modal-close-btn" onclick="closeModal('dossierModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="dossierModalBody">
+        <!-- Dynamic Student Details -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="printDossier()"><i class="fas fa-print"></i> Print Slip</button>
+        <button class="btn btn-primary btn-sm" onclick="saveDossierStatus()"><i class="fas fa-save"></i> Save Status</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Read Message -->
+  <div class="admin-modal-backdrop" id="readMessageModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-envelope-open"></i> View Contact Inquiry</div>
+        <button class="modal-close-btn" onclick="closeModal('readMessageModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="readMessageModalBody">
+        <!-- Dynamic Message Content -->
+      </div>
+      <div class="modal-footer" id="readMessageModalFooter">
+        <!-- Action buttons -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Announcement -->
+  <div class="admin-modal-backdrop" id="addAnnouncementModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="announcementModalTitle"><i class="fas fa-bullhorn"></i> New Announcement</div>
+        <button class="modal-close-btn" onclick="closeModal('addAnnouncementModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="announcementForm" onsubmit="event.preventDefault(); submitAnnouncementForm();">
+          <input type="hidden" id="annFormId">
+          <div class="form-group">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-input" id="annFormTitle" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="annFormCategory">
+                <option value="Milestone">Milestone</option>
+                <option value="Library">Library</option>
+                <option value="Admissions">Admissions</option>
+                <option value="Events">Events</option>
+                <option value="General">General</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date</label>
+              <input type="date" class="form-input" id="annFormDate" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Excerpt / Content</label>
+            <textarea class="form-textarea" id="annFormExcerpt" rows="3" required></textarea>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Button Action Link (optional)</label>
+              <input type="text" class="form-input" id="annFormLinkUrl" placeholder="e.g. pages/admissions.html">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Button Text</label>
+              <input type="text" class="form-input" id="annFormLinkText" placeholder="e.g. Learn More">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="switch-label" for="annFormPinned">
+              <span style="font-size: 0.82rem; font-weight: 600;">Pin to top of homepage</span>
+              <div class="switch-toggle">
+                <input type="checkbox" id="annFormPinned">
+                <span class="slider"></span>
+              </div>
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addAnnouncementModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitAnnouncementForm()"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Staff -->
+  <div class="admin-modal-backdrop" id="addStaffModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="staffModalTitle"><i class="fas fa-user-tie"></i> Faculty & Staff Member</div>
+        <button class="modal-close-btn" onclick="closeModal('addStaffModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="staffForm" onsubmit="event.preventDefault(); submitStaffForm();">
+          <input type="hidden" id="staffFormId">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" id="staffFormName" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Role / Designation</label>
+              <input type="text" class="form-input" id="staffFormRole" placeholder="e.g. Senior Educator" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="staffFormCategory">
+                <option value="Leadership">Leadership</option>
+                <option value="Academic Faculty">Academic Faculty</option>
+                <option value="Vocational Faculty">Vocational Faculty</option>
+                <option value="Administration">Administration</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Qualifications</label>
+              <input type="text" class="form-input" id="staffFormQualification" placeholder="e.g. M.Sc, B.Ed">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" id="staffFormEmail">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-input" id="staffFormPhone">
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Photo</label>
+              <input type="hidden" id="staffFormPhoto" value="assets/images/logo.png">
+              <input type="file" id="staffPhotoFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'staffFormPhoto', 'staffPhotoPreview', 'staffCompressionBadge', {maxWidth:600, maxHeight:600, folder:'staff', filename:'staff'})">
+              <div class="img-upload-widget" onclick="document.getElementById('staffPhotoFileInput').click()">
+                <div class="img-upload-preview-container">
+                  <img src="../assets/images/logo.png" id="staffPhotoPreview" class="img-upload-preview-thumb avatar" alt="Preview" onerror="this.src='../assets/images/logo.png'">
+                  <div class="img-upload-info">
+                    <div class="img-upload-title">Faculty Member Photo</div>
+                    <div class="img-upload-subtitle">Auto-compressed JPG/PNG</div>
+                    <div id="staffCompressionBadge"></div>
+                    <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('staffPhotoFileInput').click()"><i class="fas fa-upload"></i> Choose</button>
+                      <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('staffFormPhoto', 'staffPhotoPreview', 'staffCompressionBadge', 'assets/images/logo.png')"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-span-full">
+              <label class="form-label">Short Biography</label>
+              <textarea class="form-textarea" id="staffFormBio" rows="2"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addStaffModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitStaffForm()"><i class="fas fa-save"></i> Save Member</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Hero Slide -->
+  <div class="admin-modal-backdrop" id="addHeroSlideModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="heroModalTitle"><i class="fas fa-image"></i> Hero Slider Slide</div>
+        <button class="modal-close-btn" onclick="closeModal('addHeroSlideModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="heroSlideForm" onsubmit="event.preventDefault(); submitHeroSlideForm();">
+          <input type="hidden" id="heroFormId">
+          <div class="form-group">
+            <label class="form-label">Badge Text</label>
+            <input type="text" class="form-input" id="heroFormBadge" placeholder="e.g. Welcome to Dhoria Academy">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Main Heading</label>
+            <input type="text" class="form-input" id="heroFormTitle" placeholder="THE PLACE OF LEARNING" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Slide Description</label>
+            <textarea class="form-textarea" id="heroFormDesc" rows="2" required></textarea>
+          </div>
+          <div class="form-group col-span-full">
+            <label class="form-label">Background Image</label>
+            <input type="hidden" id="heroFormImage" value="assets/images/hero.png">
+            <input type="file" id="heroPhotoFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'heroFormImage', 'heroPhotoPreview', 'heroCompressionBadge', {maxWidth:1400, maxHeight:800, folder:'hero', filename:'slide'})">
+            <div class="img-upload-widget" onclick="document.getElementById('heroPhotoFileInput').click()">
+              <div class="img-upload-preview-container">
+                <img src="../assets/images/hero.png" id="heroPhotoPreview" class="img-upload-preview-thumb" style="width:90px; height:55px;" alt="Preview" onerror="this.src='../assets/images/hero.png'">
+                <div class="img-upload-info">
+                  <div class="img-upload-title">Slide Background Image</div>
+                  <div class="img-upload-subtitle">Auto-compressed JPG/PNG</div>
+                  <div id="heroCompressionBadge"></div>
+                  <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('heroPhotoFileInput').click()"><i class="fas fa-image"></i> Select</button>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('heroFormImage', 'heroPhotoPreview', 'heroCompressionBadge', 'assets/images/hero.png')"><i class="fas fa-undo"></i> Reset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Primary Button Text</label>
+              <input type="text" class="form-input" id="heroFormBtn1Text">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Primary Button Link</label>
+              <input type="text" class="form-input" id="heroFormBtn1Link">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Secondary Button Text</label>
+              <input type="text" class="form-input" id="heroFormBtn2Text">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Secondary Button Link</label>
+              <input type="text" class="form-input" id="heroFormBtn2Link">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addHeroSlideModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitHeroSlideForm()"><i class="fas fa-save"></i> Save Slide</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Walk-in Admission -->
+  <div class="admin-modal-backdrop" id="addAdmissionModal">
+    <div class="admin-modal modal-lg">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-user-plus"></i> Walk-In Student Admission</div>
+        <button class="modal-close-btn" onclick="closeModal('addAdmissionModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="manualAdmissionForm" onsubmit="event.preventDefault(); submitManualAdmission();">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Student Full Name</label>
+              <input type="text" class="form-input" id="manAdmName" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Father / Guardian Name</label>
+              <input type="text" class="form-input" id="manAdmFather" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date of Birth</label>
+              <input type="date" class="form-input" id="manAdmDob" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">B-Form / CNIC Number</label>
+              <input type="text" class="form-input" id="manAdmBform" placeholder="51201-1234567-1" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Class</label>
+              <select class="form-select" id="manAdmClass">
+                <option value="Class 1st">Class 1st</option>
+                <option value="Class 2nd">Class 2nd</option>
+                <option value="Class 3rd">Class 3rd</option>
+                <option value="Class 4th">Class 4th</option>
+                <option value="Class 5th">Class 5th</option>
+                <option value="Class 6th">Class 6th</option>
+                <option value="Class 7th">Class 7th</option>
+                <option value="Class 8th">Class 8th</option>
+                <option value="Class 9th (Matric Science)">Class 9th (Matric Science)</option>
+                <option value="Class 9th (Matric Arts)">Class 9th (Matric Arts)</option>
+                <option value="Class 10th (Matric Science)">Class 10th (Matric Science)</option>
+                <option value="Class 10th (Matric Arts)">Class 10th (Matric Arts)</option>
+                <option value="Vocational (Balochi Embroidery & IT)">Vocational (Balochi Embroidery & IT)</option>
+                <option value="English Language Immersion">English Language Immersion</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Shift Timing</label>
+              <select class="form-select" id="manAdmShift">
+                <option value="Evening">Evening Shift (3:30 PM - 8:30 PM)</option>
+                <option value="Morning">Morning Shift (8:00 AM - 12:00 PM)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mobile Number</label>
+              <input type="text" class="form-input" id="manAdmMobile" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Guardian Mobile</label>
+              <input type="text" class="form-input" id="manAdmGuardian">
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Residential Address</label>
+              <input type="text" class="form-input" id="manAdmAddress" placeholder="Ward / Street, Gwadar" required>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Previous Qualifications</label>
+              <input type="text" class="form-input" id="manAdmQual">
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Student Passport Photo</label>
+              <input type="hidden" id="manAdmPhoto" value="assets/images/students.png">
+              <input type="file" id="admPhotoFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'manAdmPhoto', 'admPhotoPreview', 'admCompressionBadge', {maxWidth:600, maxHeight:600, folder:'students', filename:'student'})">
+              <div class="img-upload-widget" onclick="document.getElementById('admPhotoFileInput').click()">
+                <div class="img-upload-preview-container">
+                  <img src="../assets/images/students.png" id="admPhotoPreview" class="img-upload-preview-thumb" alt="Preview" onerror="this.src='../assets/images/students.png'">
+                  <div class="img-upload-info">
+                    <div class="img-upload-title">Upload Student Picture</div>
+                    <div class="img-upload-subtitle">Auto-compressed JPG/PNG</div>
+                    <div id="admCompressionBadge"></div>
+                    <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('admPhotoFileInput').click()"><i class="fas fa-portrait"></i> Choose</button>
+                      <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('manAdmPhoto', 'admPhotoPreview', 'admCompressionBadge', 'assets/images/students.png')"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addAdmissionModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitManualAdmission()"><i class="fas fa-check"></i> Admit Student</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Event -->
+  <div class="admin-modal-backdrop" id="addEventModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="eventModalTitle"><i class="fas fa-calendar-alt"></i> Academy Event</div>
+        <button class="modal-close-btn" onclick="closeModal('addEventModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="eventForm" onsubmit="event.preventDefault(); submitEventForm();">
+          <input type="hidden" id="eventFormId">
+          <div class="form-group">
+            <label class="form-label">Event Title</label>
+            <input type="text" class="form-input" id="eventFormTitle" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="eventFormCat">
+                <option value="Festival">Festival</option>
+                <option value="Anniversary">Anniversary</option>
+                <option value="Co-Curricular">Co-Curricular</option>
+                <option value="Academics">Academics</option>
+                <option value="Sports">Sports</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Event Date</label>
+              <input type="date" class="form-input" id="eventFormDate" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-input" id="eventFormLocation" placeholder="Campus Auditorium">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="eventFormStatus">
+                <option value="Upcoming">Upcoming</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Event Cover Picture</label>
+              <input type="hidden" id="eventFormImage" value="assets/images/weebly/3061265.jpg">
+              <input type="file" id="eventPhotoFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'eventFormImage', 'eventPhotoPreview', 'eventCompressionBadge', {maxWidth:1200, maxHeight:800, folder:'events', filename:'event'})">
+              <div class="img-upload-widget" onclick="document.getElementById('eventPhotoFileInput').click()">
+                <div class="img-upload-preview-container">
+                  <img src="../assets/images/weebly/3061265.jpg" id="eventPhotoPreview" class="img-upload-preview-thumb" style="width:80px; height:55px;" alt="Preview" onerror="this.src='../assets/images/gathering.jpg'">
+                  <div class="img-upload-info">
+                    <div class="img-upload-title">Cover Photo</div>
+                    <div class="img-upload-subtitle">Auto-compressed JPG/PNG</div>
+                    <div id="eventCompressionBadge"></div>
+                    <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('eventPhotoFileInput').click()"><i class="fas fa-camera"></i> Select</button>
+                      <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('eventFormImage', 'eventPhotoPreview', 'eventCompressionBadge', 'assets/images/weebly/3061265.jpg')"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-span-full">
+              <label class="form-label">Event Description</label>
+              <textarea class="form-textarea" id="eventFormDesc" rows="3" required></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addEventModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitEventForm()"><i class="fas fa-save"></i> Save Event</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Gallery Photo -->
+  <div class="admin-modal-backdrop" id="addGalleryModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="galleryModalTitle"><i class="fas fa-camera"></i> Upload Photo to Gallery</div>
+        <button class="modal-close-btn" onclick="closeModal('addGalleryModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="galleryForm" onsubmit="event.preventDefault(); submitGalleryForm();">
+          <div class="form-group">
+            <label class="form-label">Photo Caption / Title</label>
+            <input type="text" class="form-input" id="galFormTitle" placeholder="e.g. Annual Sports Ceremony" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-select" id="galFormCat">
+              <option value="Campus">Campus &amp; Infrastructure</option>
+              <option value="Culture">Cultural Arts &amp; Drama</option>
+              <option value="Sports">Sports &amp; Games</option>
+              <option value="Celebrations">Celebrations &amp; Festivals</option>
+            </select>
+          </div>
+          <div class="form-group col-span-2">
+            <label class="form-label">Gallery Picture</label>
+            <input type="hidden" id="galFormImage" value="assets/images/gathering.jpg">
+            <input type="file" id="galPhotoFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'galFormImage', 'galPhotoPreview', 'galCompressionBadge', {maxWidth:1200, maxHeight:800, folder:'gallery', filename:'gallery'})">
+            <div class="img-upload-widget" onclick="document.getElementById('galPhotoFileInput').click()">
+              <div class="img-upload-preview-container">
+                <img src="../assets/images/gathering.jpg" id="galPhotoPreview" class="img-upload-preview-thumb" style="width:80px; height:55px;" alt="Preview" onerror="this.src='../assets/images/gathering.jpg'">
+                <div class="img-upload-info">
+                  <div class="img-upload-title">Select Picture File</div>
+                  <div class="img-upload-subtitle">Auto-compressed JPG/PNG</div>
+                  <div id="galCompressionBadge"></div>
+                  <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('galPhotoFileInput').click()"><i class="fas fa-camera"></i> Choose</button>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('galFormImage', 'galPhotoPreview', 'galCompressionBadge', 'assets/images/gathering.jpg')"><i class="fas fa-undo"></i> Reset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addGalleryModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitGalleryForm()"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Article -->
+  <div class="admin-modal-backdrop" id="addArticleModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="articleModalTitle"><i class="fas fa-feather-alt"></i> Publish Article</div>
+        <button class="modal-close-btn" onclick="closeModal('addArticleModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="articleForm" onsubmit="event.preventDefault(); submitArticleForm();">
+          <input type="hidden" id="artFormId">
+          <div class="form-group">
+            <label class="form-label">Article Title</label>
+            <input type="text" class="form-input" id="artFormTitle" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Author Name</label>
+              <input type="text" class="form-input" id="artFormAuthor" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Author Role / Class</label>
+              <input type="text" class="form-input" id="artFormAuthorRole" placeholder="e.g. Student Council">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="artFormCat">
+                <option value="Culture & Arts">Culture & Arts</option>
+                <option value="Technology & History">Technology & History</option>
+                <option value="Heritage & Craft">Heritage & Craft</option>
+                <option value="Science & Research">Science & Research</option>
+                <option value="Literature & Poetry">Literature & Poetry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="artFormStatus">
+                <option value="Published">Published</option>
+                <option value="Under Review">Under Review</option>
+              </select>
+            </div>
+            <div class="form-group col-span-full">
+              <label class="form-label">Author Photo</label>
+              <input type="hidden" id="artFormPhoto" value="assets/images/logo.png">
+              <input type="file" id="artPhotoFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'artFormPhoto', 'artPhotoPreview', 'artCompressionBadge', {maxWidth:400, maxHeight:400, folder:'staff', filename:'author'})">
+              <div class="img-upload-widget" onclick="document.getElementById('artPhotoFileInput').click()">
+                <div class="img-upload-preview-container">
+                  <img src="../assets/images/logo.png" id="artPhotoPreview" class="img-upload-preview-thumb avatar" alt="Author" onerror="this.src='../assets/images/logo.png'">
+                  <div class="img-upload-info">
+                    <div class="img-upload-title">Author Portrait</div>
+                    <div class="img-upload-subtitle">Auto-compressed JPG/PNG</div>
+                    <div id="artCompressionBadge"></div>
+                    <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('artPhotoFileInput').click()"><i class="fas fa-upload"></i> Choose</button>
+                      <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('artFormPhoto', 'artPhotoPreview', 'artCompressionBadge', 'assets/images/logo.png')"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-span-full">
+              <label class="form-label">Short Summary</label>
+              <textarea class="form-textarea" id="artFormExcerpt" rows="2" required></textarea>
+            </div>
+            <div class="form-group col-span-full">
+              <label class="form-label">Article Content</label>
+              <textarea class="form-textarea" id="artFormContent" rows="5" required></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addArticleModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitArticleForm()"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add VIP Visitor -->
+  <div class="admin-modal-backdrop" id="addVisitorModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="visitorModalTitle"><i class="fas fa-award"></i> VIP Visitor Remarks</div>
+        <button class="modal-close-btn" onclick="closeModal('addVisitorModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="visitorForm" onsubmit="event.preventDefault(); submitVisitorForm();">
+          <input type="hidden" id="visFormId">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Visitor Name</label>
+              <input type="text" class="form-input" id="visFormName" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Designation & Org</label>
+              <input type="text" class="form-input" id="visFormDesig" placeholder="e.g. Vice Chancellor, UG" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="visFormCat">
+                <option value="Academic">Academic</option>
+                <option value="Government">Government</option>
+                <option value="International">International</option>
+                <option value="Media">Media</option>
+                <option value="Community">Community</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Visit Date</label>
+              <input type="date" class="form-input" id="visFormDate" required>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Visitor Portrait</label>
+              <input type="hidden" id="visFormPhoto" value="assets/images/logo.png">
+              <input type="file" id="visPhotoFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'visFormPhoto', 'visPhotoPreview', 'visCompressionBadge', {maxWidth:500, maxHeight:500, folder:'visitors', filename:'visitor'})">
+              <div class="img-upload-widget" onclick="document.getElementById('visPhotoFileInput').click()">
+                <div class="img-upload-preview-container">
+                  <img src="../assets/images/logo.png" id="visPhotoPreview" class="img-upload-preview-thumb avatar" alt="Preview" onerror="this.src='../assets/images/logo.png'">
+                  <div class="img-upload-info">
+                    <div class="img-upload-title">Visitor Photo</div>
+                    <div class="img-upload-subtitle">Auto-compressed JPG/PNG</div>
+                    <div id="visCompressionBadge"></div>
+                    <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('visPhotoFileInput').click()"><i class="fas fa-portrait"></i> Choose</button>
+                      <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('visFormPhoto', 'visPhotoPreview', 'visCompressionBadge', 'assets/images/logo.png')"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-span-full">
+              <label class="form-label">Testimonial Quote</label>
+              <textarea class="form-textarea" id="visFormComment" rows="3" required></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addVisitorModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitVisitorForm()"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Course -->
+  <div class="admin-modal-backdrop" id="addCourseModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="courseModalTitle"><i class="fas fa-book"></i> Course / Educational Program</div>
+        <button class="modal-close-btn" onclick="closeModal('addCourseModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="courseForm" onsubmit="event.preventDefault(); submitCourseForm();">
+          <input type="hidden" id="crsFormId">
+          <div class="form-group">
+            <label class="form-label">Course Title</label>
+            <input type="text" class="form-input" id="crsFormTitle" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="crsFormCat">
+                <option value="Vocational">Vocational</option>
+                <option value="Academic">Academic</option>
+                <option value="Languages">Languages</option>
+                <option value="Information Technology">Information Technology</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Shift</label>
+              <select class="form-select" id="crsFormShift">
+                <option value="Morning">Morning</option>
+                <option value="Evening">Evening</option>
+                <option value="Morning / Evening">Morning / Evening</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Duration</label>
+              <input type="text" class="form-input" id="crsFormDuration" placeholder="e.g. 6 Months">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Instructor</label>
+              <input type="text" class="form-input" id="crsFormInstructor">
+            </div>
+            <div class="form-group col-span-full">
+              <label class="form-label">Course Description</label>
+              <textarea class="form-textarea" id="crsFormDesc" rows="3" required></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addCourseModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitCourseForm()"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Shift Timetable -->
+  <div class="admin-modal-backdrop" id="editShiftModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="shiftModalTitle"><i class="fas fa-clock"></i> Edit Shift Timetable</div>
+        <button class="modal-close-btn" onclick="closeModal('editShiftModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="shiftForm" onsubmit="event.preventDefault(); submitShiftForm();">
+          <input type="hidden" id="shiftFormId">
+          <div class="form-group">
+            <label class="form-label">Shift / Group Name</label>
+            <input type="text" class="form-input" id="shiftFormGroup" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Shift Timings</label>
+              <input type="text" class="form-input" id="shiftFormTiming" placeholder="09:00 AM - 01:00 PM" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sub-timing / Note (optional)</label>
+              <input type="text" class="form-input" id="shiftFormSubTiming" placeholder="Madrasa: 09:00 AM - 12:00 PM">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Classes & Activities</label>
+            <textarea class="form-textarea" id="shiftFormClasses" rows="3" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('editShiftModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitShiftForm()"><i class="fas fa-save"></i> Save Schedule</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Partner -->
+  <div class="admin-modal-backdrop" id="addPartnerModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="partnerModalTitle"><i class="fas fa-handshake"></i> Partner Organization</div>
+        <button class="modal-close-btn" onclick="closeModal('addPartnerModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="partnerForm" onsubmit="event.preventDefault(); submitPartnerForm();">
+          <input type="hidden" id="partnerFormId">
+          <div class="form-group">
+            <label class="form-label">Organization Name</label>
+            <input type="text" class="form-input" id="partnerFormName" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">FontAwesome Icon Class</label>
+              <input type="text" class="form-input" id="partnerFormIcon" placeholder="fas fa-landmark" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Website URL (optional)</label>
+              <input type="text" class="form-input" id="partnerFormLink" placeholder="https://example.org">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addPartnerModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitPartnerForm()"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit User -->
+  <div class="admin-modal-backdrop" id="addUserModal">
+    <div class="admin-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="userModalTitle"><i class="fas fa-user-shield"></i> Administrator Account</div>
+        <button class="modal-close-btn" onclick="closeModal('addUserModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="userForm" onsubmit="event.preventDefault(); submitUserForm();">
+          <input type="hidden" id="userFormId">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Username</label>
+              <input type="text" class="form-input" id="userFormUsername" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-input" id="userFormPassword" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" id="userFormFullName" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Role</label>
+              <select class="form-select" id="userFormRole">
+                <option value="Super Admin">Super Admin</option>
+                <option value="Editor">Editor</option>
+                <option value="Admissions Officer">Admissions Officer</option>
+              </select>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" id="userFormEmail" required>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Avatar</label>
+              <input type="hidden" id="userFormAvatar" value="assets/images/logo.png">
+              <input type="file" id="userAvatarFileInput" accept="image/*" style="display:none" onchange="triggerImageCompression(this, 'userFormAvatar', 'userAvatarPreview', 'userCompressionBadge', {maxWidth:400, maxHeight:400, folder:'avatars', filename:'avatar'})">
+              <div class="img-upload-widget" onclick="document.getElementById('userAvatarFileInput').click()">
+                <div class="img-upload-preview-container">
+                  <img src="../assets/images/logo.png" id="userAvatarPreview" class="img-upload-preview-thumb avatar" alt="Avatar" onerror="this.src='../assets/images/logo.png'">
+                  <div class="img-upload-info">
+                    <div class="img-upload-title">Avatar Image</div>
+                    <div class="img-upload-subtitle">Auto-compressed JPG/PNG</div>
+                    <div id="userCompressionBadge"></div>
+                    <div class="img-upload-btn-group" onclick="event.stopPropagation()">
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('userAvatarFileInput').click()"><i class="fas fa-user-circle"></i> Choose</button>
+                      <button type="button" class="btn btn-outline btn-sm" onclick="resetImageField('userFormAvatar', 'userAvatarPreview', 'userCompressionBadge', 'assets/images/logo.png')"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('addUserModal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="submitUserForm()"><i class="fas fa-save"></i> Save User</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/db.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "dhoria-academy-gwadar",
+  "version": "1.0.0",
+  "description": "Website & Admin Panel for Dhoria Academy Gwadar",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "server": "node server/server.js"
+  },
+  "keywords": [
+    "school",
+    "academy",
+    "gwadar",
+    "admin-panel",
+    "education"
+  ],
+  "author": "Kabeer Ahmed",
+  "license": "ISC"
+}

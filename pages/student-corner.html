@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Student Corner at Dhoria Academy Gwadar - Interactive quiz, article upload, and free course programs.">
+    <title>Student Corner | Dhoria Academy Gwadar</title>
+    <!-- Use FontAwesome from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styles_v13.css">
+    <script>(function(){const t=localStorage.getItem('dhoria-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+
+<body>
+
+    
+
+    <!-- Header Top Bar (PCTVI Visual Feature) -->
+    <div class="header-top-bar">
+        <div class="header-top-left">
+            <span><i class="fa fa-phone"></i> <a href="tel:+923315396518">0331 5396518</a></span>
+            <span><i class="fa fa-envelope"></i> <a href="mailto:kabeer50930@gmail.com">kabeer50930@gmail.com</a></span>
+        </div>
+        <ul class="header-top-right">
+            <li><a href="events.html"><i class="fa fa-images"></i> Gallery</a></li>
+            <li><a href="student-corner.html"><i class="fa fa-graduation-cap"></i> Student Corner</a></li>
+            <li><a href="student-articles.html"><i class="fa fa-book"></i> Articles</a></li>
+            <li><a href="admissions.html" class="header-top-apply-btn">Apply Now</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="../index.html" class="brand">
+            <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy Logo" class="nav-logo">
+            <div class="brand-text">
+                <span class="dhoria-text">Dhoria</span>
+                <span class="academy-text">Academy Gwadar</span>
+            </div>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html" >About Us</a></li>
+            <li><a href="academics.html" >Academics</a></li>
+            <li><a href="events.html" >Events &amp; Gallery</a></li>
+            <li><a href="student-corner.html" class="active">Student Corner</a></li>
+            <li><a href="visitors.html" >Visitors</a></li>
+            <li><a href="staff.html" >Staff</a></li>
+            <li><a href="admissions.html" >Admissions</a></li>
+            <li><a href="contact.html" >Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Articles Callout Banner in Student Corner -->
+    <div style="max-width: 1200px; margin: 3rem auto -1rem; padding: 0 1rem;">
+        <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #ffffff; padding: 2rem; border-radius: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; box-shadow: var(--shadow-lg);">
+            <div style="text-align: left;">
+                <h3 style="font-size: 1.5rem; margin: 0 0 0.5rem 0; font-family: var(--font-heading); color: #ffffff;"><i class="fas fa-book-open" style="margin-right: 10px;"></i> Read Published Student Articles</h3>
+                <p style="color: rgba(255, 255, 255, 0.9); margin: 0; font-size: 0.98rem; max-width: 700px;">Explore research papers, creative write-ups, and the historical Campus Band magazine published by the students of Dhoria Academy.</p>
+            </div>
+            <a href="student-articles.html" class="btn btn-secondary" style="background: #ffffff; color: var(--primary); border: none; padding: 0.75rem 1.75rem; font-size: 1rem; font-weight: 700; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px;">
+                Open Articles <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Pillar Course Details -->
+    <section class="section reveal">
+        <div class="text-center">
+            <h2 class="section-title">Free Specialized Courses</h2>
+            <p class="section-subtitle">Dhoria Academy offers high-quality, completely free educational streams tailored to the job market of Gwadar.</p>
+        </div>
+        <div class="grid-3">
+            <!-- English Language -->
+            <div class="card" style="box-shadow: var(--shadow-md);">
+                <div class="card-banner-wrapper">
+                    <img loading="lazy" src="../assets/images/weebly/_6761352_orig.jpg" alt="English Language Mastery Classes" class="card-banner-img">
+                    <div class="card-banner-overlay">
+                        <span class="card-banner-badge badge-english">English Program</span>
+                    </div>
+                </div>
+                <h3 class="card-title">English Language Mastery</h3>
+                <p class="card-desc" style="margin-bottom: 1.5rem;">
+                    Our professional English curriculum is designed to systematically take students from absolute beginner grammar to confident professional fluency.
+                </p>
+                <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem;">Level Outlines:</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                        <li><i class="fas fa-caret-right" style="color: var(--primary); margin-right: 5px;"></i> <strong>Beginners:</strong> 4 Months (4 Tests)</li>
+                        <li><i class="fas fa-caret-right" style="color: var(--primary); margin-right: 5px;"></i> <strong>Level 1:</strong> 5 Months (6 Tests)</li>
+                        <li><i class="fas fa-caret-right" style="color: var(--primary); margin-right: 5px;"></i> <strong>Level 2:</strong> 5 Months (6 Tests)</li>
+                        <li><i class="fas fa-caret-right" style="color: var(--primary); margin-right: 5px;"></i> <strong>Level 3 & 4:</strong> 6 Months (10 Tests)</li>
+                        <li><i class="fas fa-caret-right" style="color: var(--primary); margin-right: 5px;"></i> <strong>Advance Level:</strong> 6 Months (10 Tests)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Computer Sciences -->
+            <div class="card" style="box-shadow: var(--shadow-md);">
+                <div class="card-banner-wrapper">
+                    <img loading="lazy" src="../assets/images/weebly/6761352_orig.jpg" alt="Computer Science and IT Lab" class="card-banner-img">
+                    <div class="card-banner-overlay">
+                        <span class="card-banner-badge badge-computer">Computer Lab</span>
+                    </div>
+                </div>
+                <h3 class="card-title">Computer Science & IT</h3>
+                <p class="card-desc" style="margin-bottom: 1.5rem;">
+                    Equipping students with practical operating systems, spreadsheet automation, database skills, and modern responsive webpage design.
+                </p>
+                <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem;">Course Outlines:</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                        <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 5px;"></i> <strong>Beginners:</strong> MS-Windows, MS-Word, MS-Excel (2 Months)</li>
+                        <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 5px;"></i> <strong>Advance Automation:</strong> Advanced Excel & Databases (2 Months)</li>
+                        <li><i class="fas fa-caret-right" style="color: var(--accent); margin-right: 5px;"></i> <strong>Webpage Design:</strong> HTML5, CSS3, & Modern Tools (3 Months)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Embroidery Section -->
+            <div class="card" style="box-shadow: var(--shadow-md);">
+                <div class="card-banner-wrapper">
+                    <img loading="lazy" src="../assets/images/weebly/4526567_orig.jpg" alt="Balochi Embroidery & Vocational Training" class="card-banner-img">
+                    <div class="card-banner-overlay">
+                        <span class="card-banner-badge badge-embroidery">Vocational Shift</span>
+                    </div>
+                </div>
+                <h3 class="card-title">Embroidery & Stitching</h3>
+                <p class="card-desc" style="margin-bottom: 1.5rem;">
+                    Focused morning shift vocational training for local women to master classical Balochi embroidery, tailoring, and handicraft skills.
+                </p>
+                <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem;">Program Outlines:</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                        <li><i class="fas fa-caret-right" style="color: var(--secondary); margin-right: 5px;"></i> <strong>Tailoring:</strong> Pattern Cutting & Stitching (3 Months, 3 Tests)</li>
+                        <li><i class="fas fa-caret-right" style="color: var(--secondary); margin-right: 5px;"></i> <strong>Handicraft:</strong> Balochi Needlework & Embroidery (3 Months, 3 Tests)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Section: Quiz & Article Submission -->
+    <section class="section bg-alt reveal" id="interactive">
+        <div class="two-col" style="align-items: stretch;">
+            <!-- Vocabulary Power Quiz -->
+            <div class="card" style="box-shadow: var(--shadow-md); justify-content: space-between;">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+                        <i class="fas fa-bolt" style="color: var(--secondary); font-size: 1.5rem;"></i>
+                        <h3 class="card-title" style="margin: 0;">Vocabulary Power</h3>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        Test your language skills! Choose the best option that relates to the word below.
+                    </p>
+                    <div style="background: var(--bg-light); border: 1.5px solid var(--border-color); padding: 1.5rem; border-radius: 1rem; margin-bottom: 1.5rem; text-align: center;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 5px;">Word of the Week</span>
+                        <h4 style="font-size: 2.2rem; font-weight: 800; color: var(--text-dark); margin: 0; font-family: var(--font-heading);">CONGESTION</h4>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="quiz-options">
+                        <button class="btn btn-outline" style="width: 100%; text-align: left; padding: 1rem 1.5rem; border-radius: 10px; border-color: var(--border-color); color: var(--text-dark); display: flex; justify-content: space-between; align-items: center;" onclick="checkVocabulary('Power', this)">
+                            <span><strong>A.</strong> Power</span>
+                            <i class="fas fa-circle-notch style-icon" style="opacity: 0.2;"></i>
+                        </button>
+                        <button class="btn btn-outline" style="width: 100%; text-align: left; padding: 1rem 1.5rem; border-radius: 10px; border-color: var(--border-color); color: var(--text-dark); display: flex; justify-content: space-between; align-items: center;" onclick="checkVocabulary('Marketing', this)">
+                            <span><strong>B.</strong> Marketing</span>
+                            <i class="fas fa-circle-notch style-icon" style="opacity: 0.2;"></i>
+                        </button>
+                        <button class="btn btn-outline" style="width: 100%; text-align: left; padding: 1rem 1.5rem; border-radius: 10px; border-color: var(--border-color); color: var(--text-dark); display: flex; justify-content: space-between; align-items: center;" onclick="checkVocabulary('Simplicity', this)">
+                            <span><strong>C.</strong> Simplicity</span>
+                            <i class="fas fa-circle-notch style-icon" style="opacity: 0.2;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-feedback" style="margin-top: 1.5rem; padding: 1rem; border-radius: 10px; font-weight: 600; display: none; text-align: center;">
+                </div>
+            </div>
+
+            <!-- Upload Your Article Form -->
+            <div class="card" style="box-shadow: var(--shadow-md);">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+                    <i class="fas fa-paper-plane" style="color: var(--primary); font-size: 1.5rem;"></i>
+                    <h3 class="card-title" style="margin: 0;">Upload Your Article</h3>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    A way to express your ideas, thoughts, and share valuable research with other students in Gwadar.
+                </p>
+
+                <form id="articleUploadForm" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 0.9rem; font-weight: 600;">Full Name *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="articleAuthor" class="form-control" placeholder="First & Last Name" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 0.9rem; font-weight: 600;">Email Address *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="articleEmail" class="form-control" placeholder="yourname@gmail.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 0.9rem; font-weight: 600;">Article Title *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-heading"></i>
+                            <input type="text" id="articleTitle" class="form-control" placeholder="Enter title of your article" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 0.9rem; font-weight: 600;">Upload Document (Word, PDF, Text) *</label>
+                        <div class="file-upload-box-interactive" id="articleFileDropZone" style="padding: 1.25rem 1rem;">
+                            <i class="fas fa-file-arrow-up" id="articleIcon" style="font-size: 1.5rem;"></i>
+                            <span style="display: block; font-size: 0.85rem; font-weight: 600; margin-top: 2px;" id="file-label">Choose file to upload</span>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);" id="file-help">Click or drag & drop</span>
+                            <input type="file" id="articleFile" accept=".txt,.pdf,.doc,.docx" required style="display: none;">
+                            <div class="progress-container" id="articleProgressContainer" style="margin-top: 8px;">
+                                <div class="progress-bar-fill" id="articleProgressBar"></div>
+                            </div>
+                            <div id="articlePreviewContainer" style="width: 100%; display: none;"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="padding: 0.85rem; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        Submit Article <i class="fas fa-circle-check"></i>
+                    </button>
+                </form>
+
+                <div id="upload-feedback" style="display: none; text-align: center; padding: 2rem 1rem; height: 100%; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
+                    <i class="fas fa-circle-check" style="font-size: 4rem; color: var(--accent);"></i>
+                    <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--text-dark);">Thank You, Author!</h4>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 320px;">Your research article has been submitted. It will be reviewed by Mr. Hassan Ali and published in the Articles page shortly.</p>
+                    <button class="btn btn-outline" onclick="resetArticleForm()">Upload Another</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="../index.html" class="brand"
+                    style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy Logo"
+                        style="height: 40px; border-radius: 50%;">
+                    <div class="brand-text">
+                        <span class="dhoria-text" style="color: var(--secondary);">Dhoria</span>
+                        <span class="academy-text" style="color: #fff;">Academy Gwadar</span>
+                    </div>
+                </a>
+                <p>Empowering the next generation of global leaders through modern, holistic education.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="student-corner.html">Student Corner</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Fish Harbor Road, Near Mir Ghous Bakhsh Bizenjo Football Stadium, Gwadar, Pakistan</p>
+                
+                <p><i class="fas fa-mobile-alt"></i> +92 331 5396518 / +92 322 2185069</p>
+                <p><i class="fas fa-envelope"></i> kabeer50930@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Dhoria Academy Gwadar. All Rights Reserved. Designed by Kabeer Ahmed.</p>
+        </div>
+    </footer>
+
+    <!-- Global Submission Loader Overlay -->
+    <div class="submission-loader-overlay" id="submissionLoader">
+        <div class="submission-loader-content">
+            <div class="spinner-container" id="spinnerContainer">
+                <div class="outer-spinner"></div>
+                <i class="fas fa-paper-plane inner-spinner-icon" id="spinnerIcon"></i>
+            </div>
+            <i class="fas fa-check-circle submission-success-icon" id="successIcon"></i>
+            <h4 class="submission-loader-title" id="loaderTitle">Submitting Article</h4>
+            <p class="submission-loader-desc" id="loaderDesc">Please wait while we secure your data and upload attachments...</p>
+            <button type="button" class="btn btn-primary" id="loaderCloseBtn" style="display: none; margin-top: 1rem; padding: 0.6rem 2rem;">Close Window</button>
+        </div>
+    </div>
+
+    <script src="../assets/js/db.js"></script>
+    <script src="../assets/js/site-sync.js"></script>
+    <script src="../assets/js/main_v28.js"></script>
+    <script>
+        // Vocabulary Quiz Logic
+        function checkVocabulary(option, button) {
+            const feedback = document.getElementById('quiz-feedback');
+            const options = document.querySelectorAll('#quiz-options button');
+            
+            options.forEach(btn => {
+                btn.disabled = true;
+                btn.style.borderColor = 'var(--border-color)';
+                btn.querySelector('.style-icon').className = 'fas fa-circle-notch style-icon';
+            });
+            
+            if (option === 'Simplicity') {
+                button.style.borderColor = 'var(--accent)';
+                button.querySelector('.style-icon').className = 'fas fa-circle-check style-icon';
+                button.querySelector('.style-icon').style.color = 'var(--accent)';
+                button.querySelector('.style-icon').style.opacity = '1';
+                
+                feedback.style.display = 'block';
+                feedback.style.background = 'rgba(16, 185, 129, 0.1)';
+                feedback.style.color = 'var(--accent)';
+                feedback.innerHTML = '<i class="fas fa-party-horn"></i> Correct! Simplicity is indeed a beautiful antidote to congestion (clutter)! Well done!';
+            } else {
+                button.style.borderColor = '#EF4444';
+                button.querySelector('.style-icon').className = 'fas fa-circle-xmark style-icon';
+                button.querySelector('.style-icon').style.color = '#EF4444';
+                button.querySelector('.style-icon').style.opacity = '1';
+                
+                feedback.style.display = 'block';
+                feedback.style.background = 'rgba(239, 68, 68, 0.1)';
+                feedback.style.color = '#EF4444';
+                feedback.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Incorrect. Try again! (Hint: Simplicity decreases congestion!)';
+                
+                setTimeout(() => {
+                    options.forEach(btn => {
+                        btn.disabled = false;
+                        btn.style.borderColor = 'var(--border-color)';
+                        btn.querySelector('.style-icon').className = 'fas fa-circle-notch style-icon';
+                        btn.querySelector('.style-icon').style.color = 'inherit';
+                        btn.querySelector('.style-icon').style.opacity = '0.2';
+                    });
+                    feedback.style.display = 'none';
+                }, 2500);
+            }
+        }
+
+    </script>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+</body>
+
+</html>
+

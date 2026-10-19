@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Admissions at Dhoria Academy Gwadar - Apply Online, Criteria, and Free Education programs.">
+    <title>Admissions | Dhoria Academy Gwadar</title>
+    <!-- Use FontAwesome from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styles_v13.css">
+    <script>(function(){const t=localStorage.getItem('dhoria-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+
+<body>
+
+    
+
+    <!-- Header Top Bar (PCTVI Visual Feature) -->
+    <div class="header-top-bar">
+        <div class="header-top-left">
+            <span><i class="fa fa-phone"></i> <a href="tel:+923315396518">0331 5396518</a></span>
+            <span><i class="fa fa-envelope"></i> <a href="mailto:kabeer50930@gmail.com">kabeer50930@gmail.com</a></span>
+        </div>
+        <ul class="header-top-right">
+            <li><a href="events.html"><i class="fa fa-images"></i> Gallery</a></li>
+            <li><a href="student-corner.html"><i class="fa fa-graduation-cap"></i> Student Corner</a></li>
+            <li><a href="student-articles.html"><i class="fa fa-book"></i> Articles</a></li>
+            <li><a href="admissions.html" class="header-top-apply-btn">Apply Now</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="../index.html" class="brand">
+            <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy Logo" class="nav-logo">
+            <div class="brand-text">
+                <span class="dhoria-text">Dhoria</span>
+                <span class="academy-text">Academy Gwadar</span>
+            </div>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html" >About Us</a></li>
+            <li><a href="academics.html" >Academics</a></li>
+            <li><a href="events.html" >Events &amp; Gallery</a></li>
+            <li><a href="student-corner.html" >Student Corner</a></li>
+            <li><a href="visitors.html" >Visitors</a></li>
+            <li><a href="staff.html" >Staff</a></li>
+            <li><a href="admissions.html" class="active">Admissions</a></li>
+            <li><a href="contact.html" >Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Application Form Section -->
+    <section class="section bg-alt reveal" style="padding-bottom: 3rem;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto;">
+            <div class="card" style="box-shadow: var(--shadow-xl); overflow: hidden; border: none; background: transparent; padding: 0;">
+                
+                
+
+                <div style="background: var(--card-bg); padding: clamp(1rem, 4vw, 2rem);">
+                    <div id="form-summary" style="text-align: center; padding: 1rem 0;">
+                        <div style="margin-bottom: 1.5rem; color: var(--text-dark); font-size: 1.1rem; line-height: 1.6;">
+                            <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 5px;"></i>
+                            Enrollment for the <strong>2026-2027</strong> academic session is now active. Please ensure all 
+                            information provided is accurate.
+                        </div>
+                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                            <button type="button" id="toggleFormBtn" class="btn btn-primary btn-lg" onclick="toggleAdmissionForm()" style="min-width: 240px;">
+                                Start Online Application <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                            </button>
+                            <a href="admission-form.html" target="_blank" id="printBlankFormBtn" class="btn btn-outline btn-lg" style="min-width: 240px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border: 2px solid var(--primary); color: var(--primary); padding: 0.75rem 1.5rem; font-weight: 600; border-radius: 0.375rem; background: transparent; transition: all 0.3s ease;">
+                                Print Admission Form <i class="fas fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <form id="admissionForm" style="display: none; padding: 0; background: transparent;">
+                        
+                        <!-- Premium Visual A4 sheet -->
+                        <div class="print-sheet-container">
+                            <div class="print-sheet">
+                                <div class="sheet-border-outer">
+                                    
+                                    <!-- 1. Center Watermark -->
+                                    <div class="watermark-container">
+                                        <img src="../assets/images/logo.png?v=3" alt="School Watermark Logo" class="watermark-img">
+                                    </div>
+                                    
+                                    <!-- 2. Header Section -->
+                                    <div class="form-sheet-header">
+                                        <!-- Left Logo -->
+                                        <div class="form-sheet-logo-left">
+                                            <img src="../assets/images/logo.png?v=3" alt="School Logo">
+                                        </div>
+                                        
+                                        <!-- Center Text -->
+                                        <div class="form-sheet-center-text">
+                                            <h3 class="form-sheet-title-main">Dhoria Academy Gwadar</h3>
+                                            <p class="form-sheet-address">Near: Girls High School Mullah Band Ward Gwadar</p>
+                                        </div>
+                                        
+                                        <!-- Right Graduation Cap & Interactive Photo Frame -->
+                                        <div class="form-sheet-right-side">
+                                            <div class="form-sheet-cap">
+                                                <img src="../assets/images/cap.png" alt="Graduation Cap" onerror="this.style.display='none';">
+                                            </div>
+                                            
+                                            <!-- Designated Interactive Passport Photo Frame -->
+                                            <div class="form-sheet-photo-box" id="photoDropZone">
+                                                <i class="fas fa-portrait" id="photoIcon"></i>
+                                                <span class="form-sheet-photo-box-text" id="photoLabel">Click to Upload</span>
+                                                <span class="form-sheet-photo-box-text" style="font-size: 8px; font-weight: normal; color: var(--text-muted);" id="photoHelp">Passport Photo *</span>
+                                                <input type="file" id="studentPhoto" accept="image/*" required style="display: none;">
+                                                <div class="form-sheet-photo-box-overlay">Upload Photo</div>
+                                                <div id="photoPreviewContainer" style="display:none; width:100%; height:100%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 3. Form Title -->
+                                    <div class="form-sheet-title-container">
+                                        <div class="form-sheet-form-title">Admission Form</div>
+                                    </div>
+                                    
+                                    <!-- 4. Fillable Fields Area -->
+                                    <div class="form-sheet-content">
+                                        
+                                        <!-- Honeypot Field -->
+                                        <div style="display: none;" aria-hidden="true">
+                                            <label for="honeypot_email">Do not fill this field</label>
+                                            <input type="text" id="honeypot_email" name="honeypot" autocomplete="off" tabIndex="-1">
+                                        </div>
+                                        
+                                        <!-- Row 1: Student Name -->
+                                        <div class="form-sheet-row">
+                                            <div class="form-sheet-group flex-1">
+                                                <label for="studentName" class="form-sheet-label">Name of Student:</label>
+                                                <div class="form-sheet-underline-wrapper">
+                                                    <input type="text" id="studentName" class="form-sheet-underline-input" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Row 2: Father Name -->
+                                        <div class="form-sheet-row">
+                                            <div class="form-sheet-group flex-1">
+                                                <label for="fatherName" class="form-sheet-label">Father Name:</label>
+                                                <div class="form-sheet-underline-wrapper">
+                                                    <input type="text" id="fatherName" class="form-sheet-underline-input" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Row 3: Date of Birth & Class -->
+                                        <div class="form-sheet-row">
+                                            <!-- Date of Birth (8 Digit boxes) -->
+                                            <div class="form-sheet-group" style="flex: 0 0 auto;">
+                                                <label class="form-sheet-label">Date of Birth:</label>
+                                                <div class="form-sheet-digit-wrapper">
+                                                    <div class="form-sheet-digit-group" id="dob_day_group">
+                                                        <input type="text" name="dob_d1" class="form-sheet-digit-box dob-field" maxlength="1" required data-group="dob">
+                                                        <input type="text" name="dob_d2" class="form-sheet-digit-box dob-field" maxlength="1" required data-group="dob">
+                                                    </div>
+                                                    <span class="form-sheet-digit-separator">-</span>
+                                                    <div class="form-sheet-digit-group" id="dob_month_group">
+                                                        <input type="text" name="dob_m1" class="form-sheet-digit-box dob-field" maxlength="1" required data-group="dob">
+                                                        <input type="text" name="dob_m2" class="form-sheet-digit-box dob-field" maxlength="1" required data-group="dob">
+                                                    </div>
+                                                    <span class="form-sheet-digit-separator">-</span>
+                                                    <div class="form-sheet-digit-group" id="dob_year_group">
+                                                        <input type="text" name="dob_y1" class="form-sheet-digit-box dob-field" maxlength="1" required data-group="dob">
+                                                        <input type="text" name="dob_y2" class="form-sheet-digit-box dob-field" maxlength="1" required data-group="dob">
+                                                        <input type="text" name="dob_y3" class="form-sheet-digit-box dob-field" maxlength="1" required data-group="dob">
+                                                        <input type="text" name="dob_y4" class="form-sheet-digit-box dob-field" maxlength="1" required data-group="dob">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Class Underline -->
+                                            <div class="form-sheet-group flex-1">
+                                                <label for="currentClass" class="form-sheet-label" style="padding-left: 10px;">Class:</label>
+                                                <div class="form-sheet-underline-wrapper">
+                                                    <input type="text" id="currentClass" class="form-sheet-underline-input" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Row 4: Mobile Number & Guardian Contact -->
+                                        <div class="form-sheet-row">
+                                            <!-- Mobile # (11 digit boxes) -->
+                                            <div class="form-sheet-group" style="flex: 0 0 auto;">
+                                                <label class="form-sheet-label">Mobile #:</label>
+                                                <div class="form-sheet-digit-wrapper">
+                                                    <div class="form-sheet-digit-group">
+                                                        <input type="text" name="mob_1" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_2" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_3" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_4" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                    </div>
+                                                    <span class="form-sheet-digit-separator">-</span>
+                                                    <div class="form-sheet-digit-group">
+                                                        <input type="text" name="mob_5" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_6" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_7" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_8" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_9" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_10" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                        <input type="text" name="mob_11" class="form-sheet-digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Guardian Contact -->
+                                            <div class="form-sheet-group flex-1">
+                                                <label for="guardianContact" class="form-sheet-label" style="padding-left: 10px;">Guardian Mobile #:</label>
+                                                <div class="form-sheet-underline-wrapper">
+                                                    <input type="tel" id="guardianContact" class="form-sheet-underline-input" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Row 5: B-Form # (13 digit boxes CNIC format: 5 - 7 - 1) -->
+                                        <div class="form-sheet-row">
+                                            <div class="form-sheet-group flex-1">
+                                                <label class="form-sheet-label">B-Form #:</label>
+                                                <div class="form-sheet-digit-wrapper">
+                                                    <div class="form-sheet-digit-group">
+                                                        <input type="text" name="cnic_1" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_2" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_3" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_4" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_5" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                    </div>
+                                                    <span class="form-sheet-digit-separator">-</span>
+                                                    <div class="form-sheet-digit-group">
+                                                        <input type="text" name="cnic_6" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_7" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_8" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_9" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_10" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_11" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                        <input type="text" name="cnic_12" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                    </div>
+                                                    <span class="form-sheet-digit-separator">-</span>
+                                                    <div class="form-sheet-digit-group">
+                                                        <input type="text" name="cnic_13" class="form-sheet-digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Row 6: Address -->
+                                        <div class="form-sheet-row">
+                                            <div class="form-sheet-group flex-1">
+                                                <label for="address" class="form-sheet-label">Address:</label>
+                                                <div class="form-sheet-underline-wrapper">
+                                                    <input type="text" id="address" class="form-sheet-underline-input" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Row 7: Qualifications -->
+                                        <div class="form-sheet-row">
+                                            <div class="form-sheet-group flex-1">
+                                                <label for="lastClass" class="form-sheet-label">Qualifications:</label>
+                                                <div class="form-sheet-underline-wrapper">
+                                                    <input type="text" id="lastClass" class="form-sheet-underline-input" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Row 8: Shift Timing -->
+                                        <div class="form-sheet-row" style="margin-top: 10px; margin-bottom: 5px;">
+                                            <!-- Shift Timing options -->
+                                            <div class="form-sheet-group" style="flex: 1;">
+                                                <label class="form-sheet-label">Shift Timing:</label>
+                                                <div class="form-sheet-shift-container">
+                                                    <label class="form-sheet-checkbox-label">
+                                                        <input type="radio" name="shift_timing" value="Morning" required>
+                                                        <span class="form-sheet-custom-checkbox"></span> Morning
+                                                    </label>
+                                                    <label class="form-sheet-checkbox-label">
+                                                        <input type="radio" name="shift_timing" value="Evening" required>
+                                                        <span class="form-sheet-custom-checkbox"></span> Evening
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 9: Date & Student Signature (Separate Row bottom of timing) -->
+                                        <div class="form-sheet-row" style="margin-top: 10px; margin-bottom: 5px;">
+                                            <!-- Date Input -->
+                                            <div class="form-sheet-group" style="width: 200px;">
+                                                <label for="form_date" class="form-sheet-label">Date:</label>
+                                                <div class="form-sheet-underline-wrapper">
+                                                    <input type="text" id="form_date" class="form-sheet-underline-input" placeholder="DD/MM/YYYY" readonly style="cursor: default;">
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Spacer to push signature to the right corner -->
+                                            <div style="flex: 1;"></div>
+
+                                            <!-- Student Signature -->
+                                            <div class="form-sheet-group" style="width: 260px;">
+                                                <label for="student_signature" class="form-sheet-label">Student Signature:</label>
+                                                <div class="form-sheet-underline-wrapper">
+                                                    <input type="text" id="student_signature" class="form-sheet-underline-input" readonly style="cursor: default;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Cloudflare Turnstile block -->
+                                        <div style="display: flex; justify-content: center; margin: 10px 0 5px 0; width: 100%;">
+                                            <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light"></div>
+                                        </div>
+                                        
+                                        <!-- Dotted Separator Divider -->
+                                        <div class="form-sheet-divider"></div>
+                                        
+                                        <!-- Office Use Only Section -->
+                                        <div class="form-sheet-office-use">
+                                            <h3 class="form-sheet-office-use-title">Office Use Only</h3>
+                                            
+                                            <!-- Row 1: G.R. # -->
+                                            <div class="form-sheet-row" style="margin-top: 15px; margin-bottom: 12px;">
+                                                <div class="form-sheet-group" style="width: 220px;">
+                                                    <label class="form-sheet-label">G.R. #:</label>
+                                                    <div class="form-sheet-underline-wrapper">
+                                                        <input type="text" class="form-sheet-underline-input" disabled style="cursor: default;">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Row 2: Date of Admission -->
+                                            <div class="form-sheet-row" style="margin-bottom: 12px;">
+                                                <div class="form-sheet-group" style="width: 280px;">
+                                                    <label class="form-sheet-label">Date of Admission:</label>
+                                                    <div class="form-sheet-underline-wrapper">
+                                                        <input type="text" class="form-sheet-underline-input" placeholder="DD/MM/YYYY" disabled style="cursor: default;">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Row 3: Official Signature Block (on right corner) -->
+                                            <div class="form-sheet-row" style="justify-content: flex-end;">
+                                                <div class="form-sheet-sig-group" style="width: 220px; display: flex; flex-direction: column; align-items: center;">
+                                                    <div class="form-sheet-sig-line" style="width: 100%; border-bottom: 1px solid #000000; margin-bottom: 4px; height: 18px;"></div>
+                                                    <span class="form-sheet-sig-label">Signature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <!-- PAGE 2: B-FORM / CNIC DOCUMENT DEPOSITORY -->
+                            <div class="print-sheet" style="margin-top: 30px;">
+                                <div class="sheet-border-outer">
+                                    
+                                    <!-- 1. Center Watermark -->
+                                    <div class="watermark-container">
+                                        <img src="../assets/images/logo.png?v=3" alt="School Watermark Logo" class="watermark-img">
+                                    </div>
+                                    
+                                    <!-- 2. Header Section -->
+                                    <div class="form-sheet-header">
+                                        <!-- Left Logo -->
+                                        <div class="form-sheet-logo-left">
+                                            <img src="../assets/images/logo.png?v=3" alt="School Logo">
+                                        </div>
+                                        
+                                        <!-- Center Text -->
+                                        <div class="form-sheet-center-text">
+                                            <h3 class="form-sheet-title-main">Dhoria Academy Gwadar</h3>
+                                            <p class="form-sheet-address">Near: Girls High School Mullah Band Ward Gwadar</p>
+                                        </div>
+                                        
+                                        <!-- Right Graduation Cap (Logo Only) -->
+                                        <div class="form-sheet-right-side" style="justify-content: flex-end; width: 90px;">
+                                            <div class="form-sheet-cap">
+                                                <img src="../assets/images/cap.png" alt="Graduation Cap" onerror="this.style.display='none';">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 3. Form Title -->
+                                    <div class="form-sheet-title-container">
+                                        <div class="form-sheet-form-title" style="max-width: 480px; width: 100%;">B-Form / CNIC Document Depository</div>
+                                    </div>
+                                    
+                                    <!-- 4. Depository Content -->
+                                    <div class="form-sheet-content" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                        
+                                        <!-- Document Type Toggle Selector -->
+                                        <div style="display: flex; justify-content: center; gap: 20px; margin: 15px 0 5px 0; width: 100%;">
+                                            <label class="form-sheet-checkbox-label">
+                                                <input type="radio" name="doc_type" value="BForm" checked required onchange="toggleDocTypeSelection('BForm')">
+                                                <span class="form-sheet-custom-checkbox"></span> B-Form (Single Document)
+                                            </label>
+                                            <label class="form-sheet-checkbox-label">
+                                                <input type="radio" name="doc_type" value="CNIC" required onchange="toggleDocTypeSelection('CNIC')">
+                                                <span class="form-sheet-custom-checkbox"></span> CNIC Card (Front & Back)
+                                            </label>
+                                        </div>
+
+                                        <!-- Interactive Designated B-Form / CNIC Card Upload depository inside sheet -->
+                                        <div class="form-sheet-doc-depository" id="docDropZone" style="margin: 20px 0; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2.5px dashed var(--primary); border-radius: 8px; padding: 40px; background: rgba(0, 33, 71, 0.015); transition: all 0.3s ease; cursor: pointer; position: relative;">
+                                            <i class="fas fa-id-card-alt" id="docIcon" style="font-size: 3.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                                            <h5 id="docLabel" style="font-size: 1.25rem; font-weight: bold; color: var(--primary-dark); margin: 0 0 10px 0;">B-Form / CNIC Document Depository</h5>
+                                            <p id="docHelp" style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">Click or drag & drop B-Form/CNIC (JPG, PNG, PDF) to attach *</p>
+                                            <input type="file" id="docBForm" accept="image/*,application/pdf" required style="display: none;">
+                                            <div class="progress-container" id="docProgressContainer" style="display: none; width: 100%; max-width: 250px; height: 6px; background: rgba(0,0,0,0.06); border-radius: 3px; overflow: hidden; margin-top: 15px;">
+                                                <div class="progress-bar-fill" id="docProgressBar" style="width: 0%; height: 100%; background: var(--secondary);"></div>
+                                            </div>
+                                            <div id="docPreviewContainer" style="width: 100%; display: none; margin-top: 15px;"></div>
+                                        </div>
+
+                                        <!-- CNIC Double Upload Container (Initially Hidden) -->
+                                        <div id="cnicDoubleDropZone" style="display: none; margin: 20px 0; gap: 20px; width: 100%;">
+                                            <!-- Front Side Upload -->
+                                            <div class="form-sheet-doc-depository" id="docFrontDropZone" style="flex: 1; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px dashed var(--primary); border-radius: 8px; padding: 20px; background: rgba(0, 33, 71, 0.01); transition: all 0.3s ease; cursor: pointer; position: relative;">
+                                                <i class="fas fa-id-card" id="docFrontIcon" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 8px;"></i>
+                                                <h5 id="docFrontLabel" style="font-size: 0.95rem; font-weight: bold; color: var(--primary-dark); margin: 0 0 4px 0;">CNIC FRONT SIDE</h5>
+                                                <p id="docFrontHelp" style="font-size: 0.72rem; color: var(--text-muted); margin: 0; text-align: center;">Click to attach CNIC Front *</p>
+                                                <input type="file" id="docFrontFile" accept="image/*" style="display: none;">
+                                                <div class="progress-container" id="docFrontProgressContainer" style="display: none; width: 100%; max-width: 150px; height: 5px; background: rgba(0,0,0,0.06); border-radius: 3px; overflow: hidden; margin-top: 10px;">
+                                                    <div class="progress-bar-fill" id="docFrontProgressBar" style="width: 0%; height: 100%; background: var(--secondary);"></div>
+                                                </div>
+                                                <div id="docFrontPreviewContainer" style="width: 100%; display: none; margin-top: 10px;"></div>
+                                            </div>
+
+                                            <!-- Back Side Upload -->
+                                            <div class="form-sheet-doc-depository" id="docBackDropZone" style="flex: 1; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px dashed var(--primary); border-radius: 8px; padding: 20px; background: rgba(0, 33, 71, 0.01); transition: all 0.3s ease; cursor: pointer; position: relative;">
+                                                <i class="fas fa-id-card" id="docBackIcon" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 8px;"></i>
+                                                <h5 id="docBackLabel" style="font-size: 0.95rem; font-weight: bold; color: var(--primary-dark); margin: 0 0 4px 0;">CNIC BACK SIDE</h5>
+                                                <p id="docBackHelp" style="font-size: 0.72rem; color: var(--text-muted); margin: 0; text-align: center;">Click to attach CNIC Back *</p>
+                                                <input type="file" id="docBackFile" accept="image/*" style="display: none;">
+                                                <div class="progress-container" id="docBackProgressContainer" style="display: none; width: 100%; max-width: 150px; height: 5px; background: rgba(0,0,0,0.06); border-radius: 3px; overflow: hidden; margin-top: 10px;">
+                                                    <div class="progress-bar-fill" id="docBackProgressBar" style="width: 0%; height: 100%; background: var(--secondary);"></div>
+                                                </div>
+                                                <div id="docBackPreviewContainer" style="width: 100%; display: none; margin-top: 10px;"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Registrar Verification Statement -->
+                                        <div style="margin-top: 30px; padding: 20px; border: 1.5px solid #000000; border-radius: 4px; background: transparent;">
+                                            <h4 style="text-align: center; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; margin: 0 0 10px 0; letter-spacing: 0.5px;">Registrar Verification Statement</h4>
+                                            <p style="font-size: 0.95rem; line-height: 1.6; text-align: justify; margin: 0;">
+                                                This document has been uploaded via the secure online enrollment portal of Dhoria Academy. The applicant's identity credentials, photo record matching, and CNIC/B-Form numbers have been successfully cross-checked. It has been validated as official and compiled as page 2 of this enrollment record.
+                                            </p>
+                                        </div>
+                                        
+                                        <!-- Registrar Signature Block -->
+                                        <div class="form-sheet-office-row" style="margin-top: 40px; justify-content: flex-end; padding-right: 20px;">
+                                            <div class="form-sheet-sig-group" style="width: 220px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;">
+                                                <div class="form-sheet-sig-line" style="width: 100%; border-bottom: 1px solid #000000; margin-bottom: 5px;"></div>
+                                                <span class="form-sheet-sig-label" style="font-size: 0.9rem; font-weight: bold; text-transform: uppercase;">Registrar Signature</span>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Submission buttons below sheet -->
+                        <div style="text-align: center; margin-top: 2rem; padding: 1rem;">
+                            <button type="submit" class="btn btn-primary" style="padding: 1rem 4rem; font-size: 1.25rem; box-shadow: var(--shadow-lg);">
+                                Submit Final Application <i class="fas fa-check-circle" style="margin-left: 10px;"></i>
+                            </button>
+                            <p style="color: var(--text-muted); margin-top: 1.5rem; font-size: 0.9rem;">
+                                By submitting, you agree that all information provided is true to the best of your knowledge.
+                                We will contact you within 24-48 hours.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Criteria & Free Education Section -->
+    <section class="section reveal">
+        <div class="two-col" style="align-items: center; gap: 2.5rem;">
+            <div>
+                <div class="pctvi-title-bar" style="margin: 0 0 1rem 0;"></div>
+                <h2 class="section-title" style="text-align: left; margin-bottom: 1rem;">Admission Process & Criteria</h2>
+                <p class="card-desc" style="margin-bottom: 1.5rem;">A simple, merit-based 4-step admission process designed to ensure fair access for every aspiring student in Gwadar.</p>
+                <div class="announcement-list" style="margin: 0;">
+                    <div class="announcement-item" style="border-left-color: var(--secondary); display: flex; align-items: center; gap: 12px;">
+                        <span class="badge-gold">Step 1</span>
+                        <div class="announcement-text" style="font-weight: 600;">Online or In-Person Form Submission</div>
+                    </div>
+                    <div class="announcement-item" style="border-left-color: var(--primary); display: flex; align-items: center; gap: 12px;">
+                        <span class="badge-navy">Step 2</span>
+                        <div class="announcement-text" style="font-weight: 600;">Basic Aptitude & Diagnostic Assessment</div>
+                    </div>
+                    <div class="announcement-item" style="border-left-color: var(--accent); display: flex; align-items: center; gap: 12px;">
+                        <span class="badge-navy">Step 3</span>
+                        <div class="announcement-text" style="font-weight: 600;">Student & Guardian Guidance Interview</div>
+                    </div>
+                    <div class="announcement-item" style="border-left-color: var(--secondary); display: flex; align-items: center; gap: 12px;">
+                        <span class="badge-gold">Step 4</span>
+                        <div class="announcement-text" style="font-weight: 600;">Enrollment & Free Course Orientation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pctvi-card" style="border-left: 4px solid var(--secondary); background: var(--card-bg); padding: 2rem; position: relative;">
+                <div class="card-title-bar"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span class="badge-gold"><i class="fas fa-gift"></i> 100% Free Tuition</span>
+                    <i class="fas fa-hand-holding-heart" style="font-size: 1.5rem; color: var(--secondary);"></i>
+                </div>
+                <h3 class="card-title" style="color: var(--text-dark); margin-bottom: 0.75rem; font-size: 1.4rem;">Education for All</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem; line-height: 1.6;">
+                    Education at Dhoria Academy is an uncompromising community right. Every program is delivered without tuition burdens.
+                </p>
+                <ul class="feature-bullet-list">
+                    <li><i class="fas fa-check-circle"></i> Zero monthly tuition fees or admission charges</li>
+                    <li><i class="fas fa-check-circle"></i> Free access to Kalmati Library & computer laboratory</li>
+                    <li><i class="fas fa-check-circle"></i> Course learning materials & digital workbooks provided</li>
+                    <li><i class="fas fa-check-circle"></i> Equal opportunity for boys and girls across Makran</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="../index.html" class="brand"
+                    style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy Logo"
+                        style="height: 40px; border-radius: 50%;">
+                    <div class="brand-text">
+                        <span class="dhoria-text" style="color: var(--secondary);">Dhoria</span>
+                        <span class="academy-text" style="color: #fff;">Academy Gwadar</span>
+                    </div>
+                </a>
+                <p>Empowering the next generation of global leaders through modern, holistic education.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="student-corner.html">Student Corner</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Fish Harbor Road, Near Mir Ghous Bakhsh Bizenjo Football Stadium, Gwadar, Pakistan</p>
+                
+                <p><i class="fas fa-mobile-alt"></i> +92 331 5396518 / +92 322 2185069</p>
+                <p><i class="fas fa-envelope"></i> kabeer50930@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Dhoria Academy Gwadar. All Rights Reserved. Designed by Kabeer Ahmed.</p>
+        </div>
+    </footer>
+
+    <!-- Passport Photo Editor Modal -->
+    <div class="photo-editor-overlay" id="photoEditorModal">
+        <div class="photo-editor-content">
+            <div class="photo-editor-header">
+                <h4 class="photo-editor-title"><i class="fas fa-crop-alt"></i> Passport Photo Crop & Edit</h4>
+                <button class="photo-editor-close" id="closeEditorBtn" type="button"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="photo-editor-body">
+                <div style="text-align: center; font-size: 0.82rem; color: var(--text-muted); width: 100%;">
+                    Drag the photo to position it inside the frame. Zoom and apply filters.
+                </div>
+                <div class="editor-viewport-wrapper" id="editorViewport">
+                    <canvas id="editorCanvas" width="245" height="315"></canvas>
+                    <div class="crop-frame-overlay"></div>
+                </div>
+                <div class="editor-controls">
+                    <!-- Dynamic Crop Aspect Ratio controls -->
+                    <div class="control-group" id="ratioControlGroup" style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; margin-bottom: 0.25rem;">
+                        <div class="control-label-row" style="margin-bottom: 6px;">
+                            <span><i class="fas fa-crop"></i> B-Form / CNIC Crop Ratio</span>
+                        </div>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap; width: 100%;">
+                            <button type="button" class="ratio-btn active" id="btnRatioPassport" style="padding: 5px 10px; font-size: 0.75rem; font-weight: 700; border-radius: 6px; border: 1.5px solid var(--secondary); background: var(--secondary); color: var(--primary-dark); cursor: pointer; transition: all 0.2s;">Portrait (Photo)</button>
+                            <button type="button" class="ratio-btn" id="btnRatioCard" style="padding: 5px 10px; font-size: 0.75rem; font-weight: 600; border-radius: 6px; border: 1.5px solid var(--border-color); background: transparent; color: var(--text-dark); cursor: pointer; transition: all 0.2s;">Card / CNIC</button>
+                            <button type="button" class="ratio-btn" id="btnRatioBForm" style="padding: 5px 10px; font-size: 0.75rem; font-weight: 600; border-radius: 6px; border: 1.5px solid var(--border-color); background: transparent; color: var(--text-dark); cursor: pointer; transition: all 0.2s;">B-Form (1.4:1)</button>
+                            <button type="button" class="ratio-btn" id="btnRatioFree" style="padding: 5px 10px; font-size: 0.75rem; font-weight: 600; border-radius: 6px; border: 1.5px solid var(--border-color); background: transparent; color: var(--text-dark); cursor: pointer; transition: all 0.2s;">Manual Slide</button>
+                        </div>
+                        <div id="customRatioSliderWrapper" style="display: none; margin-top: 10px; width: 100%;">
+                            <div class="control-label-row" style="margin-bottom: 4px;">
+                                <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fas fa-arrows-alt-h"></i> Custom Aspect Ratio</span>
+                                <span id="customRatioValue" style="font-size: 0.75rem; font-weight: bold; color: var(--secondary);">1.00</span>
+                            </div>
+                            <input type="range" id="customRatioSlider" class="control-slider" min="0.5" max="2.2" step="0.05" value="1.0" style="width: 100%;">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="control-label-row">
+                            <span><i class="fas fa-search-plus"></i> Zoom</span>
+                            <span id="zoomValue">1.0x</span>
+                        </div>
+                        <input type="range" id="zoomSlider" class="control-slider" min="1" max="3" step="0.05" value="1">
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label-row">
+                            <span><i class="fas fa-undo-alt"></i> Rotate Image</span>
+                            <span id="rotationValue">0°</span>
+                        </div>
+                        <div style="display: flex; gap: 10px; width: 100%; margin-top: 5px;">
+                            <button type="button" class="btn btn-outline" id="rotateLeftBtn" style="flex: 1; padding: 6px 12px; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1.5px solid var(--border-color); background: transparent; color: var(--text-dark); border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+                                <i class="fas fa-undo"></i> 90° CCW
+                            </button>
+                            <button type="button" class="btn btn-outline" id="rotateRightBtn" style="flex: 1; padding: 6px 12px; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1.5px solid var(--border-color); background: transparent; color: var(--text-dark); border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+                                <i class="fas fa-redo"></i> 90° CW
+                            </button>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label-row">
+                            <span><i class="fas fa-sun"></i> Brightness (Lighting)</span>
+                            <span id="brightnessValue">0%</span>
+                        </div>
+                        <input type="range" id="brightnessSlider" class="control-slider" min="-50" max="50" step="1" value="0">
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label-row">
+                            <span><i class="fas fa-adjust"></i> Contrast</span>
+                            <span id="contrastValue">0%</span>
+                        </div>
+                        <input type="range" id="contrastSlider" class="control-slider" min="-50" max="50" step="1" value="0">
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label-row">
+                            <span><i class="fas fa-magic"></i> Skin Smoothing</span>
+                            <span id="smoothValue">Off</span>
+                        </div>
+                        <input type="range" id="smoothSlider" class="control-slider" min="0" max="5" step="1" value="0">
+                    </div>
+                </div>
+            </div>
+            <div class="editor-footer">
+                <button type="button" class="btn btn-outline" style="padding: 0.5rem 1.25rem; font-size: 0.9rem;" id="cancelCropBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.9rem;" id="applyCropBtn">Crop & Apply <i class="fas fa-check-circle"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Submission Loader Overlay -->
+    <div class="submission-loader-overlay" id="submissionLoader">
+        <div class="submission-loader-content">
+            <div class="spinner-container" id="spinnerContainer">
+                <div class="outer-spinner"></div>
+                <i class="fas fa-paper-plane inner-spinner-icon" id="spinnerIcon"></i>
+            </div>
+            <i class="fas fa-check-circle submission-success-icon" id="successIcon"></i>
+            <h4 class="submission-loader-title" id="loaderTitle">Submitting Application</h4>
+            <p class="submission-loader-desc" id="loaderDesc">Please wait while we secure your data and compile attachments...</p>
+            <button type="button" class="btn btn-primary" id="loaderCloseBtn" style="display: none; margin-top: 1rem; padding: 0.6rem 2rem;">Close Window</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../assets/js/db.js"></script>
+    <script src="../assets/js/site-sync.js"></script>
+    <script src="../assets/js/main_v28.js"></script>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+</body>
+
+</html>
+

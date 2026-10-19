@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal Login | Dhoria Academy Gwadar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>
+    body.login-page {
+      background: radial-gradient(circle at top right, #1e293b, #090e1a 80%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      color: #fff;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 450px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--adm-radius-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #2563eb, #38bdf8, #f59e0b);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .login-logo {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      margin-bottom: 0.75rem;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px;
+      border: 2px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .login-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .login-subtitle {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 0.3rem;
+    }
+
+    .form-group-login {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group-login label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 0.4rem;
+    }
+
+    .input-with-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-with-icon .input-icon-left {
+      position: absolute;
+      left: 14px;
+      color: #64748b;
+      pointer-events: none;
+      font-size: 0.95rem;
+    }
+
+    .input-with-icon input {
+      width: 100%;
+      padding: 0.75rem 2.75rem 0.75rem 2.6rem;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--adm-radius-md);
+      color: #fff;
+      font-size: 0.92rem;
+      outline: none;
+      transition: var(--adm-transition);
+    }
+
+    .input-with-icon input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+    }
+
+    .toggle-pass-btn {
+      position: absolute;
+      right: 12px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      padding: 4px 6px;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .toggle-pass-btn:hover {
+      color: #38bdf8;
+    }
+
+    .login-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      font-size: 0.82rem;
+    }
+
+    .remember-check {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+
+    .btn-login-submit {
+      width: 100%;
+      padding: 0.85rem;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: var(--adm-radius-md);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--adm-transition);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);
+    }
+
+    .btn-login-submit:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.6);
+    }
+
+    .btn-quick-login {
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      border-radius: var(--adm-radius-md);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--adm-transition);
+    }
+
+    .btn-quick-login:hover {
+      background: #10b981;
+      color: #fff;
+      border-color: #10b981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    }
+
+    .demo-credentials-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: var(--adm-radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      text-align: center;
+    }
+
+    .demo-credentials-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .demo-btn-group {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .btn-demo-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--adm-radius-full);
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--adm-transition);
+    }
+
+    .btn-demo-pill:hover {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+
+    .back-to-site {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .back-to-site a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--adm-transition);
+    }
+
+    .back-to-site a:hover {
+      color: #38bdf8;
+    }
+
+    #loginErrorAlert {
+      display: none;
+      background: rgba(239, 68, 68, 0.18);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 0.75rem;
+      border-radius: var(--adm-radius-md);
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="login-page">
+
+  <div class="login-container">
+    <div class="login-header">
+      <img src="../assets/images/logo.png?v=3" alt="Dhoria Academy" class="login-logo">
+      <h1 class="login-title">Administrator Portal</h1>
+      <p class="login-subtitle">Dhoria Academy Gwadar — Master Control Panel</p>
+    </div>
+
+    <div id="loginErrorAlert">
+      <i class="fas fa-exclamation-circle"></i> <span id="loginErrorText">Invalid username or password.</span>
+    </div>
+
+    <form id="adminLoginForm">
+      <div class="form-group-login">
+        <label for="usernameInput">Administrator Username</label>
+        <div class="input-with-icon">
+          <i class="fas fa-user-shield input-icon-left"></i>
+          <input type="text" id="usernameInput" value="admin" placeholder="Username" required autofocus>
+        </div>
+      </div>
+
+      <div class="form-group-login">
+        <label for="passwordInput">Secure Password</label>
+        <div class="input-with-icon">
+          <i class="fas fa-lock input-icon-left"></i>
+          <input type="password" id="passwordInput" value="admin123" placeholder="Password" required>
+          <button type="button" class="toggle-pass-btn" id="togglePasswordBtn" title="Show/Hide Password">
+            <i class="fas fa-eye" id="togglePasswordIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="login-actions">
+        <label class="remember-check">
+          <input type="checkbox" id="rememberMe" checked> Remember session
+        </label>
+        <span style="color: #38bdf8; font-size: 0.78rem;">Default: <code>admin</code> / <code>admin123</code></span>
+      </div>
+
+      <button type="submit" class="btn-login-submit" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> Sign In to Admin Panel
+      </button>
+
+      <button type="button" class="btn-quick-login" onclick="oneClickLogin('admin', 'admin123')">
+        <i class="fas fa-bolt"></i> 1-Click Instant Login (Super Admin)
+      </button>
+    </form>
+
+    <div class="demo-credentials-box">
+      <div class="demo-credentials-title"><i class="fas fa-key"></i> Quick Accounts</div>
+      <div class="demo-btn-group">
+        <button type="button" class="btn-demo-pill" onclick="fillCredentials('admin', 'admin123')">
+          <i class="fas fa-crown"></i> Super Admin (admin123)
+        </button>
+        <button type="button" class="btn-demo-pill" onclick="fillCredentials('editor', 'editor123')">
+          <i class="fas fa-pen-nib"></i> Editor (editor123)
+        </button>
+      </div>
+    </div>
+
+    <div class="back-to-site">
+      <a href="../index.html"><i class="fas fa-arrow-left"></i> Return to Public Website</a>
+    </div>
+  </div>
+
+  <script src="../assets/js/db.js"></script>
+  <script>
+    // Toggle Password Visibility (Eye icon)
+    const togglePassBtn = document.getElementById('togglePasswordBtn');
+    const passInput = document.getElementById('passwordInput');
+    const passIcon = document.getElementById('togglePasswordIcon');
+
+    if (togglePassBtn && passInput) {
+      togglePassBtn.addEventListener('click', function() {
+        if (passInput.type === 'password') {
+          passInput.type = 'text';
+          passIcon.className = 'fas fa-eye-slash';
+        } else {
+          passInput.type = 'password';
+          passIcon.className = 'fas fa-eye';
+        }
+      });
+    }
+
+    // Fill Credentials
+    function fillCredentials(user, pass) {
+      document.getElementById('usernameInput').value = user;
+      document.getElementById('passwordInput').value = pass;
+    }
+
+    // 1-Click Direct Login Helper
+    function oneClickLogin(user, pass) {
+      fillCredentials(user, pass);
+      document.getElementById('adminLoginForm').dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+
+    // Check if already authenticated
+    (function() {
+      const token = localStorage.getItem('dhoria_admin_token') || sessionStorage.getItem('dhoria_admin_token');
+      if (token) {
+        window.location.href = 'index.html';
+      }
+    })();
+
+    // Handle Form Submit
+    document.getElementById('adminLoginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('usernameInput').value.trim();
+      const password = document.getElementById('passwordInput').value.trim();
+      const remember = document.getElementById('rememberMe').checked;
+      const errorBox = document.getElementById('loginErrorAlert');
+      const errorText = document.getElementById('loginErrorText');
+      const loginBtn = document.getElementById('loginBtn');
+
+      errorBox.style.display = 'none';
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+
+      try {
+        let authenticatedUser = null;
+
+        // 1. Direct built-in credential match (Fail-safe guarantee)
+        if (username.toLowerCase() === 'admin' && password === 'admin123') {
+          authenticatedUser = {
+            id: 'usr-1',
+            username: 'admin',
+            fullName: 'Super Administrator',
+            role: 'Super Admin',
+            email: 'admin@dhoriaacademy.org',
+            avatar: 'assets/images/logo.png'
+          };
+        } else if (username.toLowerCase() === 'editor' && password === 'editor123') {
+          authenticatedUser = {
+            id: 'usr-2',
+            username: 'editor',
+            fullName: 'Content Editor',
+            role: 'Editor',
+            email: 'editor@dhoriaacademy.org',
+            avatar: 'assets/images/logo.png'
+          };
+        }
+
+        // 2. Check DhoriaDB user list
+        if (!authenticatedUser && typeof DhoriaDB !== 'undefined') {
+          const users = DhoriaDB.get('users') || [];
+          const matched = users.find(u => 
+            u.username.toLowerCase() === username.toLowerCase() && 
+            u.password === password && 
+            u.status !== 'Inactive'
+          );
+          if (matched) {
+            authenticatedUser = {
+              id: matched.id,
+              username: matched.username,
+              fullName: matched.fullName || matched.username,
+              role: matched.role || 'Admin',
+              email: matched.email || '',
+              avatar: matched.avatar || 'assets/images/logo.png'
+            };
+          }
+        }
+
+        // 3. Try backend API endpoint if available
+        if (!authenticatedUser && window.fetch) {
+          try {
+            const res = await fetch('/api/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password })
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.success && data.user) {
+                authenticatedUser = data.user;
+              }
+            }
+          } catch(apiErr) {}
+        }
+
+        // If authenticated
+        if (authenticatedUser) {
+          const token = 'tok_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6);
+
+          if (remember) {
+            localStorage.setItem('dhoria_admin_token', token);
+            localStorage.setItem('dhoria_admin_user', JSON.stringify(authenticatedUser));
+          } else {
+            sessionStorage.setItem('dhoria_admin_token', token);
+            sessionStorage.setItem('dhoria_admin_user', JSON.stringify(authenticatedUser));
+          }
+
+          if (typeof DhoriaDB !== 'undefined' && DhoriaDB.logActivity) {
+            DhoriaDB.logActivity('Admin Login', `User ${authenticatedUser.username} logged in`, authenticatedUser.username);
+          }
+
+          loginBtn.innerHTML = '<i class="fas fa-check"></i> Welcome! Redirecting...';
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 300);
+          return;
+        }
+
+        throw new Error('Invalid username or password. Default is: admin / admin123');
+      } catch (err) {
+        errorText.textContent = err.message || 'Authentication failed.';
+        errorBox.style.display = 'block';
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In to Admin Panel';
+      }
+    });
+  </script>
+</body>
+</html>

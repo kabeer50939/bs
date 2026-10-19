@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official printed admission form for Dhoria Academy Gwadar. High fidelity, print-ready layout.">
+    <title>Admission Form - Dhoria Academy Gwadar</title>
+    <!-- Use FontAwesome for icons in browser controls -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Cloudflare Turnstile API script for spam prevention -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    
+    <style>
+        /* ==========================================================================
+           1. RESET & CORE DESK VIEW STYLES
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #f8fafc 0%, #e2e8f0 100%);
+            font-family: "Georgia", "Times New Roman", serif;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* ==========================================================================
+           2. INTERACTIVE BROWSER CONTROLS (HIDDEN IN PRINT)
+           ========================================================================== */
+        .control-bar {
+            width: 100%;
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            z-index: 100;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .brand-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fff;
+            padding: 2px;
+        }
+
+        .brand-title {
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .instructions-tips {
+            font-size: 12px;
+            color: #94a3b8;
+            max-width: 500px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .instructions-tips strong {
+            color: #38bdf8;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            font-size: 13.5px;
+            font-weight: 600;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-success {
+            background: #059669;
+            color: #ffffff;
+        }
+
+        .btn-success:hover {
+            background: #047857;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid #475569;
+        }
+
+        .btn-outline:hover {
+            background: #1e293b;
+            color: #f8fafc;
+        }
+
+        /* ==========================================================================
+           3. PRINT CONTAINER / PAPER PREVIEW STYLE (A4 SHEET)
+           ========================================================================== */
+        .print-sheet-container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .print-sheet {
+            background: #ffffff;
+            width: 210mm;
+            height: 297mm;
+            padding: 12mm 15mm;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            box-sizing: border-box;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Formal Double Border inside the sheet */
+        .sheet-border-outer {
+            border: 3px double #000000;
+            padding: 10mm;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        /* Watermark layer */
+        .watermark-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 480px;
+            height: 480px;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .watermark-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ==========================================================================
+           4. HEADER SECTION STYLES
+           ========================================================================== */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-logo-left {
+            width: 90px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .school-logo-img {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+        }
+
+        .header-center-text {
+            flex: 1;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .school-title {
+            font-size: 25px;
+            font-weight: 800;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .school-address {
+            font-size: 11.5px;
+            margin: 0;
+            font-weight: 600;
+            color: #222222;
+        }
+
+        .header-right-side {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cap-container {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cap-img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .cap-svg-fallback {
+            width: 52px;
+            height: 52px;
+            fill: #000000;
+        }
+
+        .photo-box {
+            width: 90px;
+            height: 110px;
+            border: 1.5px solid #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            box-sizing: border-box;
+        }
+
+        .photo-box-text {
+            font-size: 11px;
+            font-weight: bold;
+            color: #333333;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* ==========================================================================
+           5. FORM TITLE
+           ========================================================================== */
+        .form-title-container {
+            text-align: center;
+            margin: 5px 0 15px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: inline-block;
+            color: #000000;
+            text-align: center;
+            width: 100%;
+        }
+
+
+        /* ==========================================================================
+           6. FORM CONTENT & FIELD FIELDS
+           ========================================================================== */
+        .form-content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 12px;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .flex-1 { flex: 1; }
+        .flex-2 { flex: 2; }
+        .flex-3 { flex: 3; }
+
+        .field-label {
+            font-size: 13.5px;
+            font-weight: bold;
+            color: #000000;
+            white-space: nowrap;
+            padding-right: 5px;
+            padding-bottom: 1px;
+        }
+
+        .underline-input-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .underline-input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #000000;
+            background: transparent;
+            font-family: "Georgia", serif;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 1px 3px 0px 3px;
+            outline: none;
+            color: #000000;
+        }
+
+        .underline-input:focus {
+            background: rgba(37, 99, 235, 0.03);
+            border-bottom-width: 1.5px;
+        }
+
+        /* ==========================================================================
+           7. BOXED DIGIT GRIDS (DOB, MOBILE, B-FORM)
+           ========================================================================== */
+        .digit-box-wrapper {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .digit-group {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .digit-box {
+            width: 21px;
+            height: 21px;
+            border: 1px solid #000000;
+            border-right: none;
+            text-align: center;
+            font-family: "Georgia", serif;
+            font-size: 13.5px;
+            font-weight: bold;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .digit-box:last-of-type {
+            border-right: 1px solid #000000;
+        }
+
+        .digit-box:focus {
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .box-separator {
+            font-size: 13.5px;
+            font-weight: bold;
+            margin: 0 4px;
+            color: #000000;
+        }
+
+        /* ==========================================================================
+           8. SHIFT TIMING & CHECKBOXES
+           ========================================================================== */
+        .shift-timing-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .print-checkbox-label {
+            display: inline-flex;
+            align-items: center;
+            font-size: 13px;
+            font-weight: bold;
+            color: #000000;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .print-checkbox-label input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .custom-checkbox {
+            width: 14px;
+            height: 14px;
+            border: 1px solid #000000;
+            display: inline-block;
+            margin-right: 6px;
+            position: relative;
+            box-sizing: border-box;
+            background: transparent;
+        }
+
+        .print-checkbox-label input:checked ~ .custom-checkbox::after {
+            content: "X";
+            font-family: "Georgia", serif;
+            font-size: 10px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000000;
+        }
+
+        /* ==========================================================================
+           9. DIVIDERS & OFFICE USE ONLY
+           ========================================================================== */
+        .form-divider {
+            border-top: 1.5px dotted #000000;
+            margin: 10px 0;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .office-use-section {
+            margin-top: 15px;
+            position: relative;
+            z-index: 10;
+            background: transparent;
+            width: 100%;
+        }
+
+        .office-use-title {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px auto 15px auto;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            width: 100%;
+        }
+
+
+        .office-fields-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+        }
+
+        .office-sig-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 160px;
+        }
+
+        .sig-line {
+            width: 100%;
+            border-bottom: 1px solid #000000;
+            margin-bottom: 4px;
+            height: 20px;
+        }
+
+        .sig-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Validation UI Alert */
+        .error-field {
+            border-bottom-color: #dc2626 !important;
+            background: rgba(220, 38, 38, 0.05) !important;
+        }
+
+        .digit-box.error-field {
+            border-color: #dc2626 !important;
+        }
+
+        /* ==========================================================================
+           11. SUBMISSION MODAL STYLES
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .modal-close:hover {
+            color: #0f172a;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-desc {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-opt-btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #f8fafc;
+            color: #0f172a;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .modal-opt-btn:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            color: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+        }
+
+        .modal-opt-btn i {
+            font-size: 18px;
+        }
+
+        .modal-opt-gmail {
+            border-color: #fca5a5;
+        }
+        .modal-opt-gmail:hover {
+            border-color: #ef4444;
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .modal-opt-auto {
+            border-color: #a7f3d0;
+            background: #ecfdf5;
+        }
+        .modal-opt-auto:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+            color: #047857;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.15);
+        }
+
+        /* ==========================================================================
+           12. LOADING & SUCCESS OVERLAY STYLES
+           ========================================================================== */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 2000;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .loader-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .loader-card {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #334155;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #334155;
+            border-top: 5px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: #10b981;
+            display: none;
+            animation: scaleUp 0.3s ease-out forwards;
+        }
+
+        @keyframes scaleUp {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .loader-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .loader-desc {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           10. PRINT SPECIFIC STYLES
+           ========================================================================== */
+        @media print {
+            body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .control-bar {
+                display: none !important;
+            }
+
+            .print-sheet-container {
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 210mm !important;
+                height: 297mm !important;
+            }
+
+            .print-sheet {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 12mm 15mm !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                border: none !important;
+                background: #ffffff !important;
+            }
+
+            .sheet-border-outer {
+                border: 3px double #000000 !important;
+                padding: 10mm !important;
+            }
+
+            /* Ensure watermark shows elegantly when printing */
+            .watermark-container {
+                opacity: 0.04 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print, .cf-turnstile {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+       BROWSER FLOATING CONTROL PANEL (HIDDEN IN PRINT)
+       ========================================================================== -->
+    <div class="control-bar">
+        <div class="brand-info">
+            <img src="../assets/images/logo.png" alt="Dhoria Academy Logo" class="brand-logo" onerror="this.src='logo.png';">
+            <span class="brand-title">Dhoria Academy Gwadar - Printed Form UI</span>
+        </div>
+        
+        <div class="instructions-tips">
+            <i class="fa fa-info-circle" style="color: #38bdf8; margin-right: 5px;"></i>
+            <strong>Print Tips:</strong> 1. Press <strong>Print Form</strong>. 2. Set margins to <strong>"None" or "Default"</strong>. 3. Enable <strong>"Background graphics"</strong> to view the watermark correctly.
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-outline" onclick="window.close()">
+                <i class="fa fa-times"></i> Close
+            </button>
+            <button class="btn btn-primary" onclick="window.print()">
+                <i class="fa fa-print"></i> Print Form
+            </button>
+            <button class="btn btn-success" onclick="validateAndSubmit()">
+                <i class="fa fa-check"></i> Submit Data
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       MAIN A4 FORM CONTAINER
+       ========================================================================== -->
+    <div class="print-sheet-container">
+        <div class="print-sheet">
+            <div class="sheet-border-outer">
+
+                <!-- 1. Center Watermark -->
+                <div class="watermark-container">
+                    <img src="../assets/images/logo.png" alt="School Watermark Logo" class="watermark-img" onerror="this.src='watermark.png';">
+                </div>
+
+                <!-- 2. Header Section -->
+                <div class="header-section">
+                    <!-- Left Logo -->
+                    <div class="header-logo-left">
+                        <img src="../assets/images/logo.png" alt="School Logo" class="school-logo-img" onerror="this.src='logo.png';">
+                    </div>
+                    
+                    <!-- Center Details -->
+                    <div class="header-center-text">
+                        <h1 class="school-title">Dhoria Academy Gwadar</h1>
+                        <p class="school-address">Near: Girls High School Mullah Band Ward Gwadar</p>
+                    </div>
+                    
+                    <!-- Right Graduation Cap & Photo Box -->
+                    <div class="header-right-side">
+                        <div class="cap-container">
+                            <img src="../assets/images/cap.png" alt="Graduation Cap" class="cap-img" onerror="this.style.display='none'; document.getElementById('cap-svg').style.display='block';">
+                            <!-- High Quality SVG Cap Fallback -->
+                            <svg id="cap-svg" class="cap-svg-fallback" viewBox="0 0 64 64" style="display:none;">
+                                <path d="M32 8 L2 24 L32 40 L56 27 L56 46 L60 46 L60 24 Z" />
+                                <path d="M12 29.5 L12 44 C 12 48, 20 52, 32 52 C 44 52, 52 48, 52 44 L52 29.5 L32 40.2 Z" />
+                            </svg>
+                        </div>
+                        
+                        <div class="photo-box">
+                            <div class="photo-box-text">Photo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Form Header Title -->
+                <div class="form-title-container">
+                    <div class="form-title">Admission Form</div>
+                </div>
+
+                <!-- 4. Fillable Fields Wrapper -->
+                <form id="admissionForm" class="form-content-area" onsubmit="event.preventDefault();">
+                    <!-- Honeypot Field (Traps spam bots, invisible to humans) -->
+                    <div class="no-print" style="display: none;" aria-hidden="true">
+                        <label for="honeypot_email">Do not fill this field if you are human</label>
+                        <input type="text" id="honeypot_email" name="honeypot_email" autocomplete="off" tabIndex="-1">
+                    </div>
+                    
+                    <!-- Row 1: Name of Student -->
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="student_name" class="field-label">Name of Student:</label>
+                            <div class="underline-input-wrapper">
+                                <input type="text" id="student_name" name="student_name" class="underline-input" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Father Name -->
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="father_name" class="field-label">Father Name:</label>
+                            <div class="underline-input-wrapper">
+                                <input type="text" id="father_name" name="father_name" class="underline-input" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Date of Birth & Class -->
+                    <div class="form-row">
+                        <!-- DOB (8 boxes) -->
+                        <div class="form-group" style="flex: 0 0 auto;">
+                            <span class="field-label">Date of Birth:</span>
+                            <div class="digit-box-wrapper">
+                                <!-- Day -->
+                                <div class="digit-group" id="dob_day_group">
+                                    <input type="text" name="dob_d1" class="digit-box dob-field" maxlength="1" required data-group="dob">
+                                    <input type="text" name="dob_d2" class="digit-box dob-field" maxlength="1" required data-group="dob">
+                                </div>
+                                <span class="box-separator">-</span>
+                                <!-- Month -->
+                                <div class="digit-group" id="dob_month_group">
+                                    <input type="text" name="dob_m1" class="digit-box dob-field" maxlength="1" required data-group="dob">
+                                    <input type="text" name="dob_m2" class="digit-box dob-field" maxlength="1" required data-group="dob">
+                                </div>
+                                <span class="box-separator">-</span>
+                                <!-- Year -->
+                                <div class="digit-group" id="dob_year_group">
+                                    <input type="text" name="dob_y1" class="digit-box dob-field" maxlength="1" required data-group="dob">
+                                    <input type="text" name="dob_y2" class="digit-box dob-field" maxlength="1" required data-group="dob">
+                                    <input type="text" name="dob_y3" class="digit-box dob-field" maxlength="1" required data-group="dob">
+                                    <input type="text" name="dob_y4" class="digit-box dob-field" maxlength="1" required data-group="dob">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Class (flexible underline) -->
+                        <div class="form-group flex-1">
+                            <label for="class_name" class="field-label" style="padding-left: 10px;">Class:</label>
+                            <div class="underline-input-wrapper">
+                                <input type="text" id="class_name" name="class_name" class="underline-input" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Mobile # & Guardian Mobile # -->
+                    <div class="form-row">
+                        <!-- Mobile # (11 digit boxes) -->
+                        <div class="form-group" style="flex: 0 0 auto;">
+                            <span class="field-label">Mobile #:</span>
+                            <div class="digit-box-wrapper">
+                                <div class="digit-group" id="mobile_code_group">
+                                    <input type="text" name="mob_1" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_2" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_3" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_4" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                </div>
+                                <span class="box-separator">-</span>
+                                <div class="digit-group" id="mobile_num_group">
+                                    <input type="text" name="mob_5" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_6" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_7" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_8" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_9" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_10" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                    <input type="text" name="mob_11" class="digit-box mobile-field" maxlength="1" required data-group="mobile">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Guardian Mobile # -->
+                        <div class="form-group flex-1">
+                            <label for="guardian_mobile" class="field-label" style="padding-left: 10px;">Guardian Mobile #:</label>
+                            <div class="underline-input-wrapper">
+                                <input type="text" id="guardian_mobile" name="guardian_mobile" class="underline-input" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: B-Form # (Split into CNIC structure 5 - 7 - 1) -->
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <span class="field-label">B-Form #:</span>
+                            <div class="digit-box-wrapper">
+                                <!-- First 5 digits -->
+                                <div class="digit-group">
+                                    <input type="text" name="cnic_1" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_2" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_3" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_4" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_5" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                </div>
+                                <span class="box-separator">-</span>
+                                <!-- Middle 7 digits -->
+                                <div class="digit-group">
+                                    <input type="text" name="cnic_6" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_7" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_8" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_9" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_10" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_11" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                    <input type="text" name="cnic_12" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                </div>
+                                <span class="box-separator">-</span>
+                                <!-- Last 1 digit -->
+                                <div class="digit-group">
+                                    <input type="text" name="cnic_13" class="digit-box cnic-field" maxlength="1" required data-group="cnic">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 6: Address -->
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="address" class="field-label">Address:</label>
+                            <div class="underline-input-wrapper">
+                                <input type="text" id="address" name="address" class="underline-input" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 7: Qualifications -->
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="qualifications" class="field-label">Qualifications:</label>
+                            <div class="underline-input-wrapper">
+                                <input type="text" id="qualifications" name="qualifications" class="underline-input" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 8: Shift Timing -->
+                    <div class="form-row" style="margin-top: 15px; margin-bottom: 5px;">
+                        <!-- Shift Timing options -->
+                        <div class="form-group" style="flex: 1;">
+                            <span class="field-label">Shift Timing:</span>
+                            <div class="shift-timing-container">
+                                <label class="print-checkbox-label">
+                                    <input type="radio" name="shift_timing" value="Morning" required>
+                                    <span class="custom-checkbox"></span> Morning
+                                </label>
+                                <label class="print-checkbox-label">
+                                    <input type="radio" name="shift_timing" value="Evening" required>
+                                    <span class="custom-checkbox"></span> Evening
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 9: Date & Student Signature (Separate Row bottom of timing) -->
+                    <div class="form-row" style="margin-top: 15px; margin-bottom: 5px;">
+                        <!-- Date Input -->
+                        <div class="form-group" style="width: 220px;">
+                            <span class="field-label">Date:</span>
+                            <div class="underline-input-wrapper">
+                                <input type="text" id="form_date" name="form_date" class="underline-input" placeholder="DD/MM/YYYY">
+                            </div>
+                        </div>
+                        
+                        <!-- Spacer to push signature to the right corner -->
+                        <div style="flex: 1;"></div>
+
+                        <!-- Student Signature -->
+                        <div class="form-group" style="width: 280px;">
+                            <label for="student_signature" class="field-label">Student Signature:</label>
+                            <div class="underline-input-wrapper">
+                                <input type="text" id="student_signature" name="student_signature" class="underline-input" readonly style="cursor: default;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cloudflare Turnstile Verification Widget (no-print hides it in printed PDF) -->
+                    <div class="no-print" style="display: flex; justify-content: center; margin: 15px 0 5px 0; width: 100%; position: relative; z-index: 10;">
+                        <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light"></div>
+                    </div>
+
+                    <!-- 5. Dotted Separator Divider -->
+                    <div class="form-divider"></div>
+
+                    <!-- 6. Office Use Only Section -->
+                    <div class="office-use-section">
+                        <h3 class="office-use-title">Office Use Only</h3>
+                        
+                        <!-- Row 1: G.R. # -->
+                        <div class="form-row" style="margin-top: 15px; margin-bottom: 12px;">
+                            <div class="form-group" style="width: 220px;">
+                                <span class="field-label">G.R. #:</span>
+                                <div class="underline-input-wrapper">
+                                    <input type="text" name="gr_number" class="underline-input">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Row 2: Date of Admission -->
+                        <div class="form-row" style="margin-bottom: 12px;">
+                            <div class="form-group" style="width: 280px;">
+                                <span class="field-label">Date of Admission:</span>
+                                <div class="underline-input-wrapper">
+                                    <input type="text" name="date_of_admission" class="underline-input" placeholder="DD/MM/YYYY">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Row 3: Registrar Signature (bottom right corner) -->
+                        <div class="form-row" style="justify-content: flex-end;">
+                            <div class="office-sig-group" style="width: 220px; display: flex; flex-direction: column; align-items: center;">
+                                <div class="sig-line" style="width: 100%; border-bottom: 1px solid #000000; margin-bottom: 4px; height: 18px;"></div>
+                                <span class="sig-label">Signature</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       JAVASCRIPT FOR UX INTERACTIONS & DIGIT BOXES
+       ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Automatically set today's date in the Date field
+            const dateField = document.getElementById('form_date');
+            if (dateField) {
+                const today = new Date();
+                const dd = String(today.getDate()).padStart(2, '0');
+                const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+                const yyyy = today.getFullYear();
+                dateField.value = `${dd}/${mm}/${yyyy}`;
+            }
+
+            // Generate a unique client/device ID for rate limiting
+            if (!localStorage.getItem('da_client_token')) {
+                localStorage.setItem('da_client_token', 'client_' + Math.random().toString(36).substring(2) + Date.now().toString(36));
+            }
+
+            // Implement premium auto-tabbing for digit box groups
+            setupDigitAutoTabbing('dob');
+            setupDigitAutoTabbing('mobile');
+            setupDigitAutoTabbing('cnic');
+        });
+
+        /**
+         * Setup automatic tabbing between digit inputs in a specific group
+         * @param {string} groupName The data-group attribute value of the inputs
+         */
+        function setupDigitAutoTabbing(groupName) {
+            const boxes = Array.from(document.querySelectorAll(`input[data-group="${groupName}"]`));
+            
+            boxes.forEach((box, index) => {
+                // Ensure only digits can be typed
+                box.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    
+                    // Filter non-digits
+                    if (!/^\d*$/.test(val)) {
+                        e.target.value = val.replace(/\D/g, '');
+                        return;
+                    }
+
+                    // Remove validation error outline if present
+                    box.classList.remove('error-field');
+
+                    // If a digit is entered, automatically focus the next box
+                    if (val.length === 1) {
+                        const nextBox = boxes[index + 1];
+                        if (nextBox) {
+                            nextBox.focus();
+                        }
+                    }
+                });
+
+                // Handle keyboard navigations (Backspace, ArrowLeft, ArrowRight)
+                box.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && box.value.length === 0) {
+                        // Move back to previous box and clear it
+                        const prevBox = boxes[index - 1];
+                        if (prevBox) {
+                            prevBox.focus();
+                            prevBox.value = '';
+                        }
+                    } else if (e.key === 'ArrowRight') {
+                        const nextBox = boxes[index + 1];
+                        if (nextBox) {
+                            nextBox.focus();
+                        }
+                    } else if (e.key === 'ArrowLeft') {
+                        const prevBox = boxes[index - 1];
+                        if (prevBox) {
+                            prevBox.focus();
+                        }
+                    }
+                });
+
+                // Clear on click for better editing flow
+                box.addEventListener('focus', () => {
+                    box.select();
+                });
+            });
+        }
+
+        /**
+         * Validation and Form Submission logic
+         */
+        function validateAndSubmit() {
+            const form = document.getElementById('admissionForm');
+            let isValid = true;
+            
+            // Clear prior validation markers
+            const errorFields = document.querySelectorAll('.error-field');
+            errorFields.forEach(f => f.classList.remove('error-field'));
+
+            // 1. Validate simple inputs
+            const textFields = form.querySelectorAll('input[required]:not([data-group])');
+            textFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('error-field');
+                    isValid = false;
+                }
+            });
+
+            // 2. Validate digit box groups
+            const digitGroups = ['dob', 'mobile', 'cnic'];
+            digitGroups.forEach(group => {
+                const boxes = form.querySelectorAll(`input[data-group="${group}"]`);
+                let groupValid = true;
+                
+                boxes.forEach(box => {
+                    if (!box.value.trim()) {
+                        box.classList.add('error-field');
+                        groupValid = false;
+                        isValid = false;
+                    }
+                });
+            });
+
+            // 3. Validate Shift timing radio buttons
+            const shiftRadios = form.querySelectorAll('input[name="shift_timing"]');
+            let shiftSelected = false;
+            shiftRadios.forEach(radio => {
+                if (radio.checked) shiftSelected = true;
+            });
+            
+            if (!shiftSelected) {
+                isValid = false;
+                const shiftContainer = document.querySelector('.shift-timing-container');
+                shiftContainer.style.outline = '1px solid #dc2626';
+                shiftContainer.style.padding = '4px 8px';
+                setTimeout(() => {
+                    shiftContainer.style.outline = 'none';
+                    shiftContainer.style.padding = '0';
+                }, 3000);
+            }
+
+            if (!isValid) {
+                alert('Please complete all highlighted required fields on the form.');
+                return;
+            }
+
+            // 4. Validate CAPTCHA check
+            const turnstileToken = typeof turnstile !== 'undefined' ? turnstile.getResponse() : '';
+            if (turnstileToken === "") {
+                alert('Please complete the security check (CAPTCHA) located above the Office Use Only section.');
+                return;
+            }
+
+            // If valid, compile data
+            const dob = Array.from(form.querySelectorAll('input[data-group="dob"]')).map(b => b.value).join('');
+            const mobile = Array.from(form.querySelectorAll('input[data-group="mobile"]')).map(b => b.value).join('');
+            const cnic = Array.from(form.querySelectorAll('input[data-group="cnic"]')).map(b => b.value).join('');
+            
+            // Format B-Form / CNIC nicely
+            const cnicFormatted = cnic.slice(0,5) + '-' + cnic.slice(5,12) + '-' + cnic.slice(12);
+
+            const formData = {
+                studentName: document.getElementById('student_name').value,
+                fatherName: document.getElementById('father_name').value,
+                dateOfBirth: dob.slice(0,2) + '/' + dob.slice(2,4) + '/' + dob.slice(4),
+                className: document.getElementById('class_name').value,
+                mobileNumber: mobile,
+                bFormNumber: cnicFormatted,
+                guardianMobile: document.getElementById('guardian_mobile').value,
+                address: document.getElementById('address').value,
+                qualifications: document.getElementById('qualifications').value,
+                shiftTiming: form.querySelector('input[name="shift_timing"]:checked').value,
+                submissionDate: document.getElementById('form_date').value
+            };
+
+            console.log('Submitted Data:', formData);
+            
+            // Format email details
+            const recipient = 'kabeer50930@gmail.com';
+            const subject = `New Admission Application: ${formData.studentName} (${formData.className})`;
+            
+            computedEmailText = `==================================================\n` +
+                                `DHORIA ACADEMY GWADAR - NEW ADMISSION APPLICATION\n` +
+                                `==================================================\n\n` +
+                                `Student Name:    ${formData.studentName.toUpperCase()}\n` +
+                                `Father Name:     ${formData.fatherName.toUpperCase()}\n` +
+                                `Date of Birth:   ${formData.dateOfBirth}\n` +
+                                `Class:           ${formData.className.toUpperCase()}\n` +
+                                `B-Form / CNIC:   ${formData.bFormNumber}\n` +
+                                `Mobile Number:   ${formData.mobileNumber}\n` +
+                                `Guardian Mobile: ${formData.guardianMobile}\n` +
+                                `Address:         ${formData.address.toUpperCase()}\n` +
+                                `Qualifications:  ${formData.qualifications.toUpperCase()}\n` +
+                                `Shift Timing:    ${formData.shiftTiming}\n` +
+                                `Submission Date: ${formData.submissionDate}\n\n` +
+                                `--------------------------------------------------\n` +
+                                `This application was prepared digitally via the Dhoria Academy Admission Form UI.\n` +
+                                `Please retain a copy for your records.`;
+
+            // Prepare links
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(computedEmailText)}`;
+            const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(computedEmailText)}`;
+
+            document.getElementById('gmailSendBtn').href = gmailUrl;
+            document.getElementById('mailAppSendBtn').href = mailtoUrl;
+
+            // Trigger Email Modal
+            document.getElementById('submissionModal').classList.add('active');
+        }
+
+        // Email Submission & Clipboard Utility Functions
+        let computedEmailText = '';
+
+        function closeSubmissionModal() {
+            document.getElementById('submissionModal').classList.remove('active');
+        }
+
+        function copyDetailsToClipboard() {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(computedEmailText)
+                    .then(() => {
+                        alert('Admission details copied to clipboard successfully!');
+                        closeSubmissionModal();
+                    })
+                    .catch(err => {
+                        alert('Could not copy text: ' + err);
+                    });
+            } else {
+                // Fallback for older browsers
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = computedEmailText;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Admission details copied to clipboard successfully!');
+                } catch (err) {
+                    alert('Could not copy text: ' + err);
+                }
+                document.body.removeChild(tempTextArea);
+                closeSubmissionModal();
+            }
+        }
+
+        // Background Direct Email Submission via FormSubmit
+        function showLoaderOverlay(title, desc) {
+            document.getElementById('loaderTitle').innerText = title;
+            document.getElementById('loaderDesc').innerText = desc;
+            document.getElementById('loaderSpinner').style.display = 'block';
+            document.getElementById('loaderSuccessIcon').style.display = 'none';
+            document.getElementById('loaderCloseBtn').style.display = 'none';
+            document.getElementById('loaderOverlay').classList.add('active');
+        }
+
+        function showSuccessLoader(title, desc) {
+            document.getElementById('loaderTitle').innerText = title;
+            document.getElementById('loaderDesc').innerHTML = desc;
+            document.getElementById('loaderSpinner').style.display = 'none';
+            const successIcon = document.getElementById('loaderSuccessIcon');
+            successIcon.style.display = 'block';
+            document.getElementById('loaderCloseBtn').style.display = 'inline-flex';
+        }
+
+        function showErrorLoader(title, desc) {
+            document.getElementById('loaderTitle').innerText = title;
+            document.getElementById('loaderDesc').innerText = desc;
+            document.getElementById('loaderSpinner').style.display = 'none';
+            document.getElementById('loaderSuccessIcon').style.display = 'none';
+            document.getElementById('loaderCloseBtn').style.display = 'inline-flex';
+        }
+
+        function closeLoaderOverlay() {
+            document.getElementById('loaderOverlay').classList.remove('active');
+        }
+
+        // ─── GOOGLE APPS SCRIPT URL ───────────────────────────────────────
+        // Paste your Apps Script Web App URL here after deploying:
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYuTK2Oigauk-_nswFtA7sCSI7jjTXj0mbK1g1UOX5DSig3zT4-3FRJyTWYJm_EwTuBA/exec';
+        // ─────────────────────────────────────────────────────────────────
+
+        function sendBackgroundSubmission() {
+            // 1. Check local spam throttling cooldown (3 minutes)
+            const lastSubmissionTime = localStorage.getItem('da_last_submission_time');
+            const cooldownPeriod = 180000; // 3 minutes in milliseconds
+            if (lastSubmissionTime && (Date.now() - lastSubmissionTime < cooldownPeriod)) {
+                const remainingTime = Math.ceil((cooldownPeriod - (Date.now() - lastSubmissionTime)) / 1000);
+                alert(`⚠️ Local Cooldown Active!\n\nPlease wait ${remainingTime} seconds before submitting another application to prevent spam.`);
+                return;
+            }
+
+            // Check if Apps Script URL has been configured
+            if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+                alert('⚠️ Setup Required!\n\nPlease follow the Google Apps Script setup steps shown in the control bar to enable direct email delivery.\n\nFor now, use the "Send via Gmail (Web View)" option to send manually.');
+                document.getElementById('submissionModal').classList.add('active');
+                return;
+            }
+
+            const form = document.getElementById('admissionForm');
+            
+            // 2. Fetch security parameters
+            const turnstileToken = typeof turnstile !== 'undefined' ? turnstile.getResponse() : '';
+            const honeypotVal = document.getElementById('honeypot_email') ? document.getElementById('honeypot_email').value : '';
+            const clientTokenVal = localStorage.getItem('da_client_token') || '';
+
+            if (!turnstileToken) {
+                alert("⚠️ Captcha check expired or not verified. Please solve the security CAPTCHA at the bottom of the form before submitting.");
+                closeSubmissionModal();
+                return;
+            }
+
+            const dob = Array.from(document.querySelectorAll('input[data-group="dob"]')).map(b => b.value).join('');
+            const mobile = Array.from(document.querySelectorAll('input[data-group="mobile"]')).map(b => b.value).join('');
+            const cnic = Array.from(document.querySelectorAll('input[data-group="cnic"]')).map(b => b.value).join('');
+            const cnicFormatted = cnic.slice(0,5) + '-' + cnic.slice(5,12) + '-' + cnic.slice(12);
+
+            const studentName = document.getElementById('student_name').value;
+            const className   = document.getElementById('class_name').value;
+
+            // 3. Compile full payload with security tokens
+            const payload = {
+                "Student Name"           : studentName,
+                "Father Name"            : document.getElementById('father_name').value,
+                "Date of Birth"          : dob.slice(0,2) + '/' + dob.slice(2,4) + '/' + dob.slice(4),
+                "Class"                  : className,
+                "B-Form / CNIC Number"   : cnicFormatted,
+                "Mobile Number"          : mobile,
+                "Guardian Mobile Number" : document.getElementById('guardian_mobile').value,
+                "Address"                : document.getElementById('address').value,
+                "Qualifications"         : document.getElementById('qualifications').value,
+                "Shift Timing"           : document.querySelector('input[name="shift_timing"]:checked').value,
+                "Submission Date"        : document.getElementById('form_date').value,
+                "turnstileToken"         : turnstileToken,
+                "honeypot"               : honeypotVal,
+                "clientToken"            : clientTokenVal
+            };
+
+            closeSubmissionModal();
+            showLoaderOverlay('Sending Submission…', 'Verifying security token and transmitting student records...');
+
+            fetch(APPS_SCRIPT_URL, {
+                method : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body   : JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (json.success) {
+                    // Set successful cooldown timestamp
+                    localStorage.setItem('da_last_submission_time', Date.now().toString());
+
+                    showSuccessLoader(
+                        'Application Sent!',
+                        `<strong>${studentName}</strong>'s admission application has been delivered directly to <strong>kabeer50930@gmail.com</strong>.<br><br>
+                        <span style="font-size:12px;color:#94a3b8;">The school will contact you within 1-2 working days.</span>`
+                    );
+                    form.reset();
+                    
+                    // Reset Turnstile captcha widget for next form load
+                    if (typeof turnstile !== 'undefined') {
+                        turnstile.reset();
+                    }
+
+                    const today = new Date();
+                    document.getElementById('form_date').value =
+                        String(today.getDate()).padStart(2,'0') + '/' +
+                        String(today.getMonth()+1).padStart(2,'0') + '/' +
+                        today.getFullYear();
+                } else {
+                    // Error message from server (e.g. duplicate B-Form, verification error, rate limit)
+                    throw new Error(json.error || json.message || 'Unknown server error');
+                }
+            })
+            .catch(err => {
+                console.error('Send Error:', err);
+                
+                // Reset Turnstile on error so user can re-try with a fresh token
+                if (typeof turnstile !== 'undefined') {
+                    turnstile.reset();
+                }
+
+                showErrorLoader(
+                    'Submission Failed',
+                    err.message || 'There was a connection issue. Please use the "Send via Gmail" button instead.'
+                );
+            });
+        }
+    </script>
+
+    <!-- ==========================================================================
+       EMAIL SUBMISSION MODAL (HIDDEN BY DEFAULT)
+       ========================================================================== -->
+    <div id="submissionModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <span class="modal-title"><i class="fa fa-paper-plane" style="color: #2563eb; margin-right: 5px;"></i> Send Submission via Email</span>
+                <button class="modal-close" onclick="closeSubmissionModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">
+                    The admission form is validated! Please choose an option below to send the pre-filled student details to **kabeer50930@gmail.com**:
+                </p>
+                <div class="modal-options">
+                    <button class="modal-opt-btn modal-opt-auto" onclick="sendBackgroundSubmission()">
+                        <i class="fa fa-paper-plane" style="color: #10b981; font-size: 18px;"></i>
+                        <div>
+                            <div style="font-size: 14.5px; color: #10b981;">Send Automatically (Recommended)</div>
+                            <div style="font-size: 11px; font-weight: normal; color: #64748b; margin-top: 2px;">Direct secure background delivery to kabeer50930@gmail.com</div>
+                        </div>
+                    </button>
+                    <a id="gmailSendBtn" href="#" target="_blank" class="modal-opt-btn modal-opt-gmail" onclick="closeSubmissionModal()">
+                        <i class="fab fa-gmail" style="color: #ea4335; font-size: 18px;"></i>
+                        <div>
+                            <div style="font-size: 14.5px;">Send via Gmail (Web View)</div>
+                            <div style="font-size: 11px; font-weight: normal; color: #64748b; margin-top: 2px;">Opens Gmail in a web tab with draft pre-filled</div>
+                        </div>
+                    </a>
+                    <a id="mailAppSendBtn" href="#" class="modal-opt-btn" onclick="closeSubmissionModal()">
+                        <i class="fa fa-envelope" style="color: #3b82f6; font-size: 18px;"></i>
+                        <div>
+                            <div style="font-size: 14.5px;">Send via Default Mail App</div>
+                            <div style="font-size: 11px; font-weight: normal; color: #64748b; margin-top: 2px;">Launches your system's default program (Outlook, etc.)</div>
+                        </div>
+                    </a>
+                    <button class="modal-opt-btn" onclick="copyDetailsToClipboard()">
+                        <i class="fa fa-copy" style="color: #10b981; font-size: 18px;"></i>
+                        <div>
+                            <div style="font-size: 14.5px;">Copy Form Text to Clipboard</div>
+                            <div style="font-size: 11px; font-weight: normal; color: #64748b; margin-top: 2px;">Copies full text to paste into any email or WhatsApp</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       BACKGROUND SENDING LOADER & SUCCESS OVERLAY
+       ========================================================================== -->
+    <div id="loaderOverlay" class="loader-overlay">
+        <div class="loader-card">
+            <!-- Spinner -->
+            <div id="loaderSpinner" class="spinner"></div>
+            <!-- Success Icon -->
+            <i id="loaderSuccessIcon" class="fa fa-check-circle success-icon"></i>
+            
+            <div id="loaderTitle" class="loader-title">Sending Submission...</div>
+            <p id="loaderDesc" class="loader-desc">
+                Please wait while we secure your data and transfer it to the Dhoria Academy Gmail inbox.
+            </p>
+            
+            <button id="loaderCloseBtn" class="btn btn-primary" style="display: none; margin-top: 10px; width: 120px; justify-content: center;" onclick="closeLoaderOverlay()">
+                Close
+            </button>
+        </div>
+    </div>
+    <script src="../assets/js/db.js"></script>
+    <script src="../assets/js/site-sync.js"></script>
+</body>
+</html>

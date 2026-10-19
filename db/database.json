@@ -1,0 +1,921 @@
+{
+  "settings": {
+    "siteName": "Dhoria Academy Gwadar",
+    "siteTagline": "The Place of Learning — Empowering Minds & Building the Future",
+    "establishedYear": "2006",
+    "primaryPhone": "0331 5396518",
+    "secondaryPhone": "0322 2185069",
+    "officialEmail": "kabeer50930@gmail.com",
+    "address": "Fish Harbor Road, Near Mir Ghous Bakhsh Bizenjo Football Stadium, Gwadar, Balochistan, Pakistan",
+    "workingHours": "Morning Shift: 09:00 AM - 01:00 PM | Evening Shift: 03:00 PM - 09:00 PM",
+    "logoUrl": "assets/images/logo.webp?v=3",
+    "principalName": "Mr. Hassan Ali",
+    "principalTitle": "Director & Founder",
+    "principalMessage": "Welcome to Dhoria Academy Gwadar. For two decades, we have provided tuition-free education, vocational empowerment, and cultural literacy to the youth and women of Gwadar.",
+    "emergencyBanner": {
+      "enabled": true,
+      "badge": "Admissions Open",
+      "text": "Admissions are currently OPEN for Morning Vocational & Evening Academic Shifts!",
+      "link": "pages/admissions.html",
+      "linkText": "Apply Now &rarr;"
+    },
+    "maintenance": {
+      "globalEnabled": false,
+      "title": "Test Maintenance Header",
+      "message": "Test Maintenance Message for Testing",
+      "estimatedTime": "Estimated completion: 30 Minutes",
+      "contactPhone": "0331 5396518",
+      "contactEmail": "kabeer50930@gmail.com",
+      "lockedPages": {
+        "about": false,
+        "academics": false,
+        "admissions": false,
+        "events": false,
+        "staff": false,
+        "visitors": false,
+        "studentCorner": false,
+        "studentArticles": false,
+        "contact": false
+      },
+      "lockedSections": {
+        "heroSlider": false,
+        "announcements": false,
+        "partners": false
+      }
+    },
+    "admissionSettings": {
+      "admissionsOpen": false,
+      "currentSession": "Academic Session 2026-2027",
+      "applicationDeadline": "2026-10-31",
+      "feePolicy": "100% Free Education & Skill Training (No Tuition Fee)",
+      "morningShift": "09:00 AM - 01:00 PM (Women's Vocational & Madrasa)",
+      "eveningShift": "03:00 PM - 09:00 PM (Girls & Boys Academic & IT)",
+      "maxApplicationsPerDevice": 5
+    },
+    "socialLinks": {
+      "whatsapp": "+923315396518",
+      "facebook": "https://facebook.com/dhoriaacademy",
+      "instagram": "https://instagram.com/dhoriaacademy",
+      "youtube": "https://youtube.com/@dhoriaacademy"
+    },
+    "seo": {
+      "metaTitle": "Dhoria Academy Gwadar | Empowering Education in Balochistan",
+      "metaDescription": "Welcome to Dhoria Academy Gwadar - Empowering minds and building the future.",
+      "keywords": "Dhoria Academy, Gwadar School, Free Education Gwadar, Balochistan Education, Balochi Embroidery, English Learning Gwadar"
+    },
+    "defaultTheme": "light",
+    "siteLogoUrl": "assets/images/logo.webp?v=3"
+  },
+  "heroSlides": [
+    {
+      "id": "slide-1",
+      "badge": "Welcome to Dhoria Academy",
+      "title": "THE PLACE OF <br><span>LEARNING.</span>",
+      "description": "Welcome to Dhoria Academy Gwadar. The place of learning and empowering your skills and career for the future.",
+      "imageUrl": "assets/images/hero.webp",
+      "primaryBtnText": "Apply Now",
+      "primaryBtnLink": "pages/admissions.html",
+      "secondaryBtnText": "Explore Campus",
+      "secondaryBtnLink": "#explore",
+      "active": true,
+      "order": 1
+    },
+    {
+      "id": "slide-2",
+      "badge": "Co-Curricular Activities",
+      "title": "DEVELOPING <br><span>CREATIVE MINDS.</span>",
+      "description": "Our students expressing talents and leadership confidence through co-curricular drama and presentations.",
+      "imageUrl": "assets/images/weebly/mainpage-3.jpg",
+      "primaryBtnText": "Our Faculty",
+      "primaryBtnLink": "pages/about.html#team",
+      "secondaryBtnText": "Student Corner",
+      "secondaryBtnLink": "pages/student-corner.html",
+      "active": true,
+      "order": 2
+    },
+    {
+      "id": "slide-3",
+      "badge": "Academic Standards",
+      "title": "RECOGNIZED <br><span>EXCELLENCE.</span>",
+      "description": "We believe in transparency, regular evaluations, and recognizing student academic milestones.",
+      "imageUrl": "assets/images/weebly/mainpage-4.jpg",
+      "primaryBtnText": "View Programs",
+      "primaryBtnLink": "pages/academics.html",
+      "secondaryBtnText": "Join Dhoria",
+      "secondaryBtnLink": "pages/admissions.html",
+      "active": true,
+      "order": 3
+    },
+    {
+      "id": "slide-4",
+      "badge": "Women's Vocational Center",
+      "title": "TRADITIONAL <br><span>BALOCHI EMBROIDERY.</span>",
+      "description": "Preserving traditional regional needlework and tailoring skills to promote economic self-reliance for local women.",
+      "imageUrl": "assets/images/weebly/mainpage-5.jpg",
+      "primaryBtnText": "Vocational Details",
+      "primaryBtnLink": "pages/student-corner.html",
+      "secondaryBtnText": "Apply Now",
+      "secondaryBtnLink": "pages/admissions.html",
+      "active": true,
+      "order": 4
+    },
+    {
+      "id": "slide-5",
+      "badge": "Vocational Training",
+      "title": "EMPOWERING <br><span>LOCAL WOMEN.</span>",
+      "description": "Morning shift embroidery, tailoring, and sewing classes aimed at female skill acquisition and empowerment.",
+      "imageUrl": "assets/images/weebly/mainpage-6.jpg",
+      "primaryBtnText": "Shift Schedule",
+      "primaryBtnLink": "pages/academics.html",
+      "secondaryBtnText": "Student Corner",
+      "secondaryBtnLink": "pages/student-corner.html",
+      "active": true,
+      "order": 5
+    },
+    {
+      "id": "slide-6",
+      "badge": "Modern Classroom Technology",
+      "title": "VISUAL & DIGITAL <br><span>LEARNING.</span>",
+      "description": "Utilizing multimedia aids, digital presentations, and visual materials to optimize our students' comprehension.",
+      "imageUrl": "assets/images/weebly/mainpage-7.jpg",
+      "primaryBtnText": "Our Syllabus",
+      "primaryBtnLink": "pages/academics.html",
+      "secondaryBtnText": "Student Corner",
+      "secondaryBtnLink": "pages/student-corner.html",
+      "active": true,
+      "order": 6
+    },
+    {
+      "id": "slide-7",
+      "badge": "Public Speaking & Leadership",
+      "title": "MONTHLY SPEECH <br><span>PROGRAMS.</span>",
+      "description": "Enabling bilingual debate matches, speech events, and creative expression forums to foster confidence.",
+      "imageUrl": "assets/images/weebly/mainpage-9.jpg",
+      "primaryBtnText": "Gallery",
+      "primaryBtnLink": "pages/student-corner.html",
+      "secondaryBtnText": "Our Legacy",
+      "secondaryBtnLink": "pages/about.html",
+      "active": true,
+      "order": 7
+    },
+    {
+      "id": "slide-8",
+      "badge": "Distinguished Visitors",
+      "title": "COMMUNITY & NATIONAL <br><span>INSPIRATION.</span>",
+      "description": "Prominent figures, national legends, and educationists regularly visit our campus to encourage our learners.",
+      "imageUrl": "assets/images/weebly/mainpage-10.jpg",
+      "primaryBtnText": "View Guestbook",
+      "primaryBtnLink": "pages/visitors.html",
+      "secondaryBtnText": "Learn History",
+      "secondaryBtnLink": "pages/about.html",
+      "active": true,
+      "order": 8
+    },
+    {
+      "id": "slide-9",
+      "badge": "Rigorous Evaluation",
+      "title": "REGULAR ENGLISH <br><span>TESTS.</span>",
+      "description": "Maintaining a structured curriculum verified by standard examinations to track student progress.",
+      "imageUrl": "assets/images/weebly/mainpage-11.jpg",
+      "primaryBtnText": "Curriculum",
+      "primaryBtnLink": "pages/academics.html",
+      "secondaryBtnText": "Join Course",
+      "secondaryBtnLink": "pages/admissions.html",
+      "active": true,
+      "order": 9
+    },
+    {
+      "id": "slide-10",
+      "badge": "Dedicated Instructors",
+      "title": "VOLUNTARY <br><span>COMMUNITY TEACHERS.</span>",
+      "description": "Run entirely by altruistic educationists offering free quality guidance to Gwadar's next generation.",
+      "imageUrl": "assets/images/weebly/mainpage-12.jpg",
+      "primaryBtnText": "Meet Faculty",
+      "primaryBtnLink": "pages/about.html#team",
+      "secondaryBtnText": "Our Mission",
+      "secondaryBtnLink": "pages/about.html",
+      "active": true,
+      "order": 10
+    },
+    {
+      "id": "slide-11",
+      "badge": "Altruistic Faculty",
+      "title": "A SUPPORTIVE <br><span>TEAM ENVIRONMENT.</span>",
+      "description": "Educators united under the banner of free learning, creating a friendly and highly motivated academy.",
+      "imageUrl": "assets/images/weebly/mainpage-13.jpg",
+      "primaryBtnText": "Our Staff",
+      "primaryBtnLink": "pages/staff.html",
+      "secondaryBtnText": "Contact Us",
+      "secondaryBtnLink": "pages/contact.html",
+      "active": true,
+      "order": 11
+    },
+    {
+      "id": "slide-12",
+      "badge": "Kalmati Memorial Library",
+      "title": "OCEAN OF <br><span>KNOWLEDGE.</span>",
+      "description": "Housing classic Balochi literature, academic reference texts, and silent study zones open for all.",
+      "imageUrl": "assets/images/weebly/mainpage-14.jpg",
+      "primaryBtnText": "Search Books",
+      "primaryBtnLink": "pages/academics.html#library",
+      "secondaryBtnText": "Our Donor",
+      "secondaryBtnLink": "pages/about.html",
+      "active": true,
+      "order": 12
+    }
+  ],
+  "announcements": [
+    {
+      "title": "nnn",
+      "category": "Milestone",
+      "date": "0022-12-11",
+      "excerpt": "",
+      "linkUrl": "",
+      "linkText": "",
+      "pinned": true,
+      "active": true,
+      "id": "ann-mubdlm0y-3gop"
+    },
+    {
+      "id": "ann-1",
+      "title": "Celebrating our 20th Anniversary (2006–2026)",
+      "date": "May 22, 2026",
+      "excerpt": "Celebrating our 20th Anniversary (2006–2026) of educational and community service in Gwadar.",
+      "category": "Milestone",
+      "linkUrl": "pages/about.html",
+      "linkText": "Our Legacy",
+      "pinned": true,
+      "active": true
+    },
+    {
+      "id": "ann-2",
+      "title": "Mir Abdul Ghafoor Kalmati Library adds new digital catalog",
+      "date": "May 10, 2026",
+      "excerpt": "Mir Abdul Ghafoor Kalmati Library adds a new digital catalog and English grammar learning materials.",
+      "category": "Library",
+      "linkUrl": "pages/about.html",
+      "linkText": "Library Info",
+      "pinned": false,
+      "active": true
+    },
+    {
+      "id": "ann-3",
+      "title": "Morning shift Balochi Embroidery & sewing registration open",
+      "date": "April 28, 2026",
+      "excerpt": "Morning shift Balochi Embroidery and sewing registration details released for local women.",
+      "category": "Admissions",
+      "linkUrl": "pages/admissions.html",
+      "linkText": "Apply Now",
+      "pinned": true,
+      "active": true
+    }
+  ],
+  "shifts": [
+    {
+      "id": "shift-women",
+      "timing": "09:00 AM - 01:00 PM",
+      "subTiming": "Madrasa: 09:00 AM - 12:00 PM",
+      "group": "Women's Program",
+      "classes": "Balochi Embroidery & Tailoring Training, and Islamic Madrasa Facilities (Morning Shift)",
+      "active": true
+    },
+    {
+      "id": "shift-girls",
+      "timing": "03:00 PM - 05:00 PM",
+      "subTiming": "",
+      "group": "Girls' Programs",
+      "classes": "Computer Education, English Language, and Library Facilities",
+      "active": true
+    },
+    {
+      "id": "shift-boys",
+      "timing": "05:30 PM - 09:00 PM",
+      "subTiming": "",
+      "group": "Boys' Programs",
+      "classes": "Balochi Language, English Language, Computer Classes, and Library Facilities",
+      "active": true
+    }
+  ],
+  "courses": [
+    {
+      "id": "crs-1",
+      "title": "Balochi Traditional Embroidery & Tailoring",
+      "category": "Vocational",
+      "shift": "Morning",
+      "duration": "6 Months",
+      "instructor": "Senior Craftswomen Guild",
+      "fee": "100% Free",
+      "enrollmentStatus": "Open",
+      "description": "Preserving classical Balochi needlework, tailoring, and garment finishing."
+    },
+    {
+      "id": "crs-2",
+      "title": "English Language Mastery & Grammar",
+      "category": "Languages",
+      "shift": "Evening",
+      "duration": "4 Months",
+      "instructor": "Mr. Hassan Ali",
+      "fee": "100% Free",
+      "enrollmentStatus": "Open",
+      "description": "Structured English proficiency and communication course for students and youth."
+    },
+    {
+      "id": "crs-3",
+      "title": "Computer Science & IT Office Automation",
+      "category": "Information Technology",
+      "shift": "Evening",
+      "duration": "3 Months",
+      "instructor": "IT Lab Faculty",
+      "fee": "100% Free",
+      "enrollmentStatus": "Open",
+      "description": "Foundational computing, office tools, and internet literacy."
+    }
+  ],
+  "staff": [
+    {
+      "id": "stf-2",
+      "name": "Mr. Hassan Ali",
+      "role": "Director & Founder",
+      "category": "Leadership",
+      "photoUrl": "assets/images/staff/staff-mubkfiif.jpg",
+      "email": "kabeer50930@gmail.com",
+      "phone": "0331 5396518",
+      "bio": "Founding visionary who voluntarily runs Dhoria Academy free of cost since 2006.",
+      "order": 2,
+      "active": true,
+      "qualification": ""
+    }
+  ],
+  "visitors": [
+    {
+      "id": "vis-1",
+      "name": "Dr. Manzoor Ahmed",
+      "designation": "Vice Chancellor, University of Gwadar",
+      "badge": "Academic",
+      "date": "February 2026",
+      "comment": "Dhoria Academy represents the true grassroots spirit of Gwadar. Providing voluntary, tuition-free education for two decades is a monumental feat of public service that deserves our deepest gratitude.",
+      "active": true
+    },
+    {
+      "id": "vis-2",
+      "name": "Moeen Khan",
+      "designation": "Former Pakistan National Cricket Captain & Legend",
+      "badge": "National Legend",
+      "date": "Visit Archive",
+      "comment": "Deeply inspired by the discipline, dedication of the volunteer faculty, and the enthusiasm of young students learning in Gwadar.",
+      "active": true
+    },
+    {
+      "id": "vis-3",
+      "name": "Capt. Tariq Mehmood PN",
+      "designation": "Commander, Pakistan Navy Coastal Command",
+      "badge": "Official",
+      "date": "November 2025",
+      "comment": "Highly impressed by the discipline and dedication of the volunteer educators who provide free quality education to the coastal youth.",
+      "active": true
+    },
+    {
+      "id": "vis-4",
+      "name": "Jan Achakzai",
+      "designation": "Distinguished Columnist & Political Analyst",
+      "badge": "Prominent Visitor",
+      "date": "August 2025",
+      "comment": "An extraordinary sanctuary of knowledge in the heart of Gwadar. Mr. Hassan Ali and the Kalmati family have crafted a model school for community-driven progress.",
+      "active": true
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-1",
+      "title": "Jashn-e-Sahil Festival (Festival of the Coast)",
+      "category": "Cultural Festival",
+      "date": "Annual",
+      "location": "East Bay & Campus Grounds, Gwadar",
+      "description": "5 consecutive years of organizing boat racing, chair racing, Kati races, Lewa dance, theatrical drama, and athletic celebrations.",
+      "imageUrl": "assets/images/weebly/4308649.jpg",
+      "status": "Completed",
+      "featured": true
+    },
+    {
+      "id": "evt-2",
+      "title": "20th Anniversary Celebration (2006-2026)",
+      "category": "Milestone Ceremony",
+      "date": "May 2026",
+      "location": "Main Auditorium, Gwadar",
+      "description": "Celebrating two decades of free education and community empowerment in Gwadar.",
+      "imageUrl": "assets/images/gathering.jpg",
+      "status": "Upcoming",
+      "featured": true
+    }
+  ],
+  "articles": [],
+  "partners": [
+    {
+      "id": "prt-1",
+      "name": "Gwadar District Administration",
+      "iconClass": "fas fa-landmark",
+      "link": "#",
+      "active": true
+    },
+    {
+      "id": "prt-2",
+      "name": "University of Gwadar",
+      "iconClass": "fas fa-university",
+      "link": "https://ug.edu.pk",
+      "active": true
+    },
+    {
+      "id": "prt-3",
+      "name": "Mir Abdul Ghafoor Kalmati Foundation",
+      "iconClass": "fas fa-hand-holding-heart",
+      "link": "#",
+      "active": true
+    },
+    {
+      "id": "prt-4",
+      "name": "Gwadar Port Authority",
+      "iconClass": "fas fa-ship",
+      "link": "http://gpa.gov.pk",
+      "active": true
+    },
+    {
+      "id": "prt-5",
+      "name": "Gwadar Youth Council",
+      "iconClass": "fas fa-users",
+      "link": "#",
+      "active": true
+    },
+    {
+      "id": "prt-6",
+      "name": "Balochi Cultural Society",
+      "iconClass": "fas fa-book",
+      "link": "#",
+      "active": true
+    }
+  ],
+  "admissions": [
+    {
+      "id": "ADM-2026-003",
+      "studentName": "Kabeer Ahmed",
+      "fatherName": "Lal Bakhsh",
+      "dob": "2002-01-01",
+      "className": "Class 4th",
+      "shiftTiming": "Evening",
+      "bform": "83747373737338",
+      "mobile": "03327579515",
+      "guardianMobile": "",
+      "address": "48MG+MQ9",
+      "qualification": "",
+      "photoUrl": "assets/images/students/student-mubbksto.jpg",
+      "status": "Approved",
+      "submissionDate": "2026-09-21",
+      "notes": "Walk-in admission entered by admin (admin)"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-1",
+      "senderName": "Zubair Ahmed",
+      "email": "zubair.gwadar@gmail.com",
+      "phone": "0333-1234567",
+      "subject": "Inquiry about Morning Shift Computer Classes",
+      "message": "Assalam-o-Alaikum, I want to inquire if the morning computer classes are open for new admissions next month? Please let me know the required documents.",
+      "timestamp": "2026-09-20T10:15:00Z",
+      "status": "Read"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr-1",
+      "username": "admin",
+      "password": "admin123",
+      "fullName": "Administrator",
+      "email": "kabeer50930@gmail.com",
+      "role": "Super Admin",
+      "avatar": "assets/images/logo.webp",
+      "status": "Active",
+      "createdAt": "2026-01-01"
+    },
+    {
+      "id": "usr-2",
+      "username": "editor",
+      "password": "editor123",
+      "fullName": "Content Editor",
+      "email": "editor@dhoriaacademy.org",
+      "role": "Editor",
+      "avatar": "assets/images/logo.webp",
+      "status": "Active",
+      "createdAt": "2026-02-15"
+    }
+  ],
+  "activityLog": [
+    {
+      "id": "log-1791867135516",
+      "user": "admin",
+      "action": "Deleted from admissions",
+      "details": "Record ID: ADM-2026-001",
+      "timestamp": "2026-10-13T04:52:15.516Z"
+    },
+    {
+      "id": "log-1791867131758",
+      "user": "admin",
+      "action": "Deleted from admissions",
+      "details": "Record ID: ADM-2026-002",
+      "timestamp": "2026-10-13T04:52:11.758Z"
+    },
+    {
+      "id": "log-1791867098729",
+      "user": "admin",
+      "action": "Admin Login",
+      "details": "User admin logged in",
+      "timestamp": "2026-10-13T04:51:38.729Z"
+    },
+    {
+      "id": "log-1790022912697",
+      "user": "admin",
+      "action": "Deleted from articles",
+      "details": "Record ID: art-3",
+      "timestamp": "2026-09-21T20:35:12.697Z"
+    },
+    {
+      "id": "log-1790022909431",
+      "user": "admin",
+      "action": "Deleted from articles",
+      "details": "Record ID: art-2",
+      "timestamp": "2026-09-21T20:35:09.431Z"
+    },
+    {
+      "id": "log-1790022904315",
+      "user": "admin",
+      "action": "Deleted from articles",
+      "details": "Record ID: art-1",
+      "timestamp": "2026-09-21T20:35:04.315Z"
+    },
+    {
+      "id": "log-1790022870485",
+      "user": "admin",
+      "action": "Updated in articles",
+      "details": "Record ID: art-1",
+      "timestamp": "2026-09-21T20:34:30.485Z"
+    },
+    {
+      "id": "log-1790016518707",
+      "user": "admin",
+      "action": "Updated in articles",
+      "details": "Record ID: art-1",
+      "timestamp": "2026-09-21T18:48:38.707Z"
+    },
+    {
+      "id": "log-1790016461608",
+      "user": "admin",
+      "action": "Updated in admissions",
+      "details": "Record ID: ADM-2026-003",
+      "timestamp": "2026-09-21T18:47:41.608Z"
+    },
+    {
+      "id": "log-1790015092578",
+      "user": "admin",
+      "action": "Created in gallery",
+      "details": "Record ID: gal-mubkrp0i-ggm8",
+      "timestamp": "2026-09-21T18:24:52.578Z"
+    },
+    {
+      "id": "log-1790015023570",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T18:23:43.570Z"
+    },
+    {
+      "id": "log-1790015022104",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T18:23:42.104Z"
+    },
+    {
+      "id": "log-1790014621616",
+      "user": "admin",
+      "action": "Deleted from staff",
+      "details": "Record ID: stf-3",
+      "timestamp": "2026-09-21T18:17:01.616Z"
+    },
+    {
+      "id": "log-1790014617650",
+      "user": "admin",
+      "action": "Deleted from staff",
+      "details": "Record ID: stf-1",
+      "timestamp": "2026-09-21T18:16:57.650Z"
+    },
+    {
+      "id": "log-1790014614750",
+      "user": "admin",
+      "action": "Deleted from staff",
+      "details": "Record ID: stf-4",
+      "timestamp": "2026-09-21T18:16:54.750Z"
+    },
+    {
+      "id": "log-1790014526493",
+      "user": "admin",
+      "action": "Updated in staff",
+      "details": "Record ID: stf-2",
+      "timestamp": "2026-09-21T18:15:26.493Z"
+    },
+    {
+      "id": "log-1790009606985",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:53:26.985Z"
+    },
+    {
+      "id": "log-1790009601619",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:53:21.619Z"
+    },
+    {
+      "id": "log-1790009597415",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:53:17.415Z"
+    },
+    {
+      "id": "log-1790009596017",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:53:16.017Z"
+    },
+    {
+      "id": "log-1790009594717",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:53:14.717Z"
+    },
+    {
+      "id": "log-1790009582670",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:53:02.670Z"
+    },
+    {
+      "id": "log-1790009573070",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:52:53.070Z"
+    },
+    {
+      "id": "log-1790009544641",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:52:24.641Z"
+    },
+    {
+      "id": "log-1790009541086",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:52:21.086Z"
+    },
+    {
+      "id": "log-1790009532952",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:52:12.952Z"
+    },
+    {
+      "id": "log-1790007928554",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:25:28.554Z"
+    },
+    {
+      "id": "log-1790007917467",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:25:17.467Z"
+    },
+    {
+      "id": "log-1790007703309",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:21:43.309Z"
+    },
+    {
+      "id": "log-1790007701818",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:21:41.818Z"
+    },
+    {
+      "id": "log-1790007683356",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:21:23.356Z"
+    },
+    {
+      "id": "log-1790007678861",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:21:18.861Z"
+    },
+    {
+      "id": "log-1790007676519",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T16:21:16.519Z"
+    },
+    {
+      "id": "log-1790005932625",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:52:12.625Z"
+    },
+    {
+      "id": "log-1790005931002",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:52:11.002Z"
+    },
+    {
+      "id": "log-1790005927587",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:52:07.587Z"
+    },
+    {
+      "id": "log-1790005926317",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:52:06.317Z"
+    },
+    {
+      "id": "log-1790005925194",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:52:05.194Z"
+    },
+    {
+      "id": "log-1790005924002",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:52:04.002Z"
+    },
+    {
+      "id": "log-1790005915386",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:51:55.386Z"
+    },
+    {
+      "id": "log-1790005883998",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:51:23.998Z"
+    },
+    {
+      "id": "log-1790005882179",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:51:22.179Z"
+    },
+    {
+      "id": "log-1790005880792",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:51:20.792Z"
+    },
+    {
+      "id": "log-1790003134767",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T15:05:34.767Z"
+    },
+    {
+      "id": "log-1790003051458",
+      "user": "admin",
+      "action": "Created in announcements",
+      "details": "Record ID: ann-mubdlm0y-3gop",
+      "timestamp": "2026-09-21T15:04:11.458Z"
+    },
+    {
+      "id": "log-1790003007857",
+      "user": "admin",
+      "action": "Updated in messages",
+      "details": "Record ID: msg-1",
+      "timestamp": "2026-09-21T15:03:27.857Z"
+    },
+    {
+      "id": "log-1789999954962",
+      "user": "admin",
+      "action": "Updated in articles",
+      "details": "Record ID: art-1",
+      "timestamp": "2026-09-21T14:12:34.962Z"
+    },
+    {
+      "id": "log-1789999719186",
+      "user": "Portal",
+      "action": "New Admission Submission",
+      "details": "Student: Kabeer Ahmed (ADM-2026-003)",
+      "timestamp": "2026-09-21T14:08:39.186Z"
+    },
+    {
+      "id": "log-1789997025045",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T13:23:45.045Z"
+    },
+    {
+      "id": "log-1789996994880",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T13:23:14.880Z"
+    },
+    {
+      "id": "log-1789996969387",
+      "user": "admin",
+      "action": "Settings Updated",
+      "details": "Website and Contact settings updated",
+      "timestamp": "2026-09-21T13:22:49.387Z"
+    },
+    {
+      "id": "log-1",
+      "user": "admin",
+      "action": "Database Synchronized",
+      "details": "Public website and Admin Panel linked to unified database with maintenance controls.",
+      "timestamp": "2026-09-21T13:15:00Z"
+    }
+  ],
+  "gallery": [
+    {
+      "title": "Past Student Of Dhoria Academy",
+      "category": "Celebrations",
+      "imageUrl": "assets/images/gallery/gallery-mubkr5or.jpg",
+      "id": "gal-mubkrp0i-ggm8"
+    },
+    {
+      "id": "gal-1",
+      "title": "New Year Celebration",
+      "category": "Campus",
+      "imageUrl": "assets/images/weebly/4308649.jpg"
+    },
+    {
+      "id": "gal-2",
+      "title": "Performance Stage",
+      "category": "Culture",
+      "imageUrl": "assets/images/weebly/3061265.jpg"
+    },
+    {
+      "id": "gal-3",
+      "title": "Chair Racing Awards",
+      "category": "Sports",
+      "imageUrl": "assets/images/weebly/1936016.jpg"
+    },
+    {
+      "id": "gal-4",
+      "title": "Kati Race Winners",
+      "category": "Sports",
+      "imageUrl": "assets/images/weebly/2759261.jpg"
+    },
+    {
+      "id": "gal-5",
+      "title": "Oceanic Sports Award",
+      "category": "Sports",
+      "imageUrl": "assets/images/weebly/2046611.jpg"
+    },
+    {
+      "id": "gal-6",
+      "title": "Jashn-e-Sahil Winning Boat",
+      "category": "Culture",
+      "imageUrl": "assets/images/weebly/7775440.jpg"
+    }
+  ]
+}
